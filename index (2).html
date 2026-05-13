@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Legitude — Your School's Finances, Finally Clear</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root{--navy:#0D1B2A;--navy-mid:#162235;--navy-light:#1E3050;--amber:#E8A020;--amber-light:#F5C050;--amber-dark:#C07010;--white:#FFFFFF;--off-white:#F8F6F1;--text-muted:#8899AA;--text-body:#3D4F60;--border:rgba(13,27,42,0.1)}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--off-white);color:var(--navy);overflow-x:hidden}
+h1,h2,h3{font-family:'Playfair Display',serif}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.2rem 5%;background:rgba(248,246,241,0.93);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);transition:all .3s}
+.nav-logo{display:flex;align-items:center;gap:10px}
+.logo-mark{width:36px;height:36px;background:var(--navy);border-radius:8px;display:flex;align-items:center;justify-content:center}
+.logo-mark svg{width:22px;height:22px}
+.logo-name{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:900;color:var(--navy);letter-spacing:-.02em}
+.logo-name span{color:var(--amber)}
+.nav-links{display:flex;align-items:center;gap:2rem;list-style:none}
+.nav-links a{text-decoration:none;color:var(--text-body);font-size:.9rem;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:var(--navy)}
+.nav-cta{background:var(--navy);color:var(--white)!important;padding:.6rem 1.4rem;border-radius:6px;font-weight:600!important;transition:background .2s!important}
+.nav-cta:hover{background:var(--amber)!important;color:var(--navy)!important}
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:8rem 5% 5rem;gap:4rem;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-200px;right:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(232,160,32,.08) 0%,transparent 70%);pointer-events:none}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(232,160,32,.12);border:1px solid rgba(232,160,32,.3);color:var(--amber-dark);padding:.4rem 1rem;border-radius:100px;font-size:.8rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;margin-bottom:1.5rem}
+.hero-tag::before{content:'';width:6px;height:6px;background:var(--amber);border-radius:50%}
+.hero h1{font-size:clamp(2.5rem,4vw,3.8rem);line-height:1.1;color:var(--navy);margin-bottom:1.5rem;letter-spacing:-.03em}
+.hero h1 em{font-style:italic;color:var(--amber)}
+.hero p{font-size:1.1rem;line-height:1.8;color:var(--text-body);max-width:480px;margin-bottom:2.5rem}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-primary{background:var(--navy);color:var(--white);padding:.9rem 2rem;border-radius:8px;font-weight:600;font-size:.95rem;border:none;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+.btn-primary:hover{background:var(--amber);color:var(--navy);transform:translateY(-1px)}
+.btn-secondary{background:transparent;color:var(--navy);padding:.9rem 2rem;border-radius:8px;font-weight:600;font-size:.95rem;border:1.5px solid var(--navy);cursor:pointer;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center}
+.btn-secondary:hover{background:var(--navy);color:var(--white)}
+.hero-visual{position:relative;display:flex;align-items:center;justify-content:center}
+.dashboard-card{background:var(--white);border-radius:16px;box-shadow:0 24px 80px rgba(13,27,42,.15);overflow:hidden;width:100%;max-width:460px;animation:float 6s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.dashboard-header{background:var(--navy);padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between}
+.dashboard-header-title{color:var(--white);font-size:.85rem;font-weight:500;opacity:.7}
+.dashboard-dots{display:flex;gap:6px}
+.dashboard-dots span{width:10px;height:10px;border-radius:50%}
+.dashboard-body{padding:1.5rem}
+.stats-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1.2rem}
+.stat-card{padding:1rem;border-radius:10px}
+.stat-card.collected{background:rgba(13,27,42,.05)}
+.stat-card.outstanding{background:rgba(232,160,32,.08)}
+.stat-label{font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);margin-bottom:4px}
+.stat-value{font-size:1.4rem;font-weight:700;color:var(--navy);font-family:'Playfair Display',serif}
+.stat-sub{font-size:.7rem;color:var(--text-muted);margin-top:2px}
+.progress-section{margin-bottom:1.2rem}
+.progress-label{display:flex;justify-content:space-between;font-size:.8rem;font-weight:500;margin-bottom:8px;color:var(--text-body)}
+.progress-bar{height:8px;background:rgba(13,27,42,.08);border-radius:100px;overflow:hidden}
+.progress-fill{height:100%;border-radius:100px;background:linear-gradient(90deg,var(--navy),var(--amber));width:78%}
+.recent-label{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);margin-bottom:10px}
+.payment-row{display:flex;align-items:center;justify-content:space-between;padding:.7rem 0;border-bottom:1px solid rgba(13,27,42,.06)}
+.payment-row:last-child{border-bottom:none}
+.payment-avatar{width:32px;height:32px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;color:var(--white);font-size:.7rem;font-weight:700;flex-shrink:0}
+.payment-info{flex:1;padding:0 10px}
+.payment-name{font-size:.85rem;font-weight:600;color:var(--navy)}
+.payment-class{font-size:.7rem;color:var(--text-muted)}
+.payment-amount{font-size:.9rem;font-weight:700;color:var(--navy)}
+.floating-badge{position:absolute;background:var(--white);border-radius:12px;padding:10px 14px;box-shadow:0 8px 30px rgba(13,27,42,.12);display:flex;align-items:center;gap:10px;font-size:.78rem;font-weight:600;white-space:nowrap}
+.floating-badge.top{top:-20px;right:-20px;animation:float 5s ease-in-out infinite 1s}
+.floating-badge.bottom{bottom:-20px;left:-20px;animation:float 5s ease-in-out infinite 2s}
+.badge-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px}
+.problem{background:var(--navy);padding:6rem 5%;text-align:center}
+.section-tag{display:inline-block;font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);margin-bottom:1rem}
+.problem h2{font-size:clamp(1.8rem,3vw,2.8rem);color:var(--white);max-width:700px;margin:0 auto 1.5rem;line-height:1.2}
+.problem>p{color:rgba(255,255,255,.6);max-width:560px;margin:0 auto 4rem;line-height:1.7;font-size:1rem}
+.problem-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:900px;margin:0 auto}
+.problem-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:2rem;text-align:left;transition:border-color .2s}
+.problem-card:hover{border-color:rgba(232,160,32,.3)}
+.problem-icon{width:44px;height:44px;background:rgba(232,160,32,.1);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--amber);font-size:1.1rem;margin-bottom:1.2rem}
+.problem-card h3{font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:700;color:var(--white);margin-bottom:.6rem}
+.problem-card p{font-size:.88rem;line-height:1.6;color:rgba(255,255,255,.5)}
+.features{padding:7rem 5%;background:var(--off-white)}
+.section-header{max-width:600px;margin:0 auto 5rem;text-align:center}
+.section-header h2{font-size:clamp(1.8rem,3vw,2.6rem);color:var(--navy);margin-bottom:1rem;line-height:1.2}
+.section-header p{color:var(--text-body);line-height:1.7;font-size:1rem}
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:1100px;margin:0 auto}
+.feature-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:2rem;transition:all .3s}
+.feature-card:hover{border-color:var(--amber);transform:translateY(-4px);box-shadow:0 12px 40px rgba(13,27,42,.08)}
+.feature-card .f-icon{width:48px;height:48px;background:rgba(13,27,42,.05);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:var(--navy);margin-bottom:1.2rem}
+.feature-card h3{font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:.6rem}
+.feature-card p{font-size:.88rem;line-height:1.65;color:var(--text-body)}
+.roles{background:var(--white);padding:7rem 5%}
+.roles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;max-width:1100px;margin:0 auto}
+.role-card{border-radius:16px;padding:2.5rem;position:relative;overflow:hidden}
+.role-card.bursar{background:var(--off-white);border:1px solid var(--border)}
+.role-card.director{background:var(--navy);color:var(--white)}
+.role-card.admin{background:var(--off-white);border:1px solid var(--border)}
+.role-pill{display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 12px;border-radius:100px;margin-bottom:1.5rem}
+.bursar .role-pill{background:rgba(13,27,42,.08);color:var(--navy)}
+.director .role-pill{background:rgba(232,160,32,.2);color:var(--amber)}
+.admin .role-pill{background:rgba(13,27,42,.08);color:var(--navy)}
+.role-card h3{font-size:1.5rem;margin-bottom:.8rem;line-height:1.2}
+.director h3{color:var(--white)}
+.role-card>p{font-size:.88rem;line-height:1.65;margin-bottom:1.8rem}
+.director>p{color:rgba(255,255,255,.65)}
+.role-features{list-style:none}
+.role-features li{display:flex;align-items:flex-start;gap:10px;font-size:.85rem;margin-bottom:.7rem;line-height:1.4}
+.director .role-features li{color:rgba(255,255,255,.8)}
+.check-icon{width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.6rem;flex-shrink:0;margin-top:1px}
+.bursar .check-icon,.admin .check-icon{background:rgba(13,27,42,.1);color:var(--navy)}
+.director .check-icon{background:rgba(232,160,32,.2);color:var(--amber)}
+.pricing{background:var(--off-white);padding:7rem 5%}
+.pricing-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;max-width:800px;margin:0 auto}
+.pricing-card{border-radius:16px;padding:2.5rem;position:relative}
+.pricing-card.basic{background:var(--white);border:1px solid var(--border)}
+.pricing-card.pro{background:var(--navy);color:var(--white)}
+.pricing-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--amber);color:var(--navy);font-size:.7rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:4px 14px;border-radius:100px}
+.plan-name{font-family:'DM Sans',sans-serif;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--text-muted);margin-bottom:.5rem}
+.pro .plan-name{color:rgba(255,255,255,.5)}
+.plan-price{font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:900;color:var(--navy);line-height:1;margin-bottom:.3rem}
+.pro .plan-price{color:var(--amber)}
+.plan-per{font-size:.85rem;color:var(--text-muted);margin-bottom:.4rem}
+.pro .plan-per{color:rgba(255,255,255,.5)}
+.plan-desc{font-size:.85rem;color:var(--text-body);margin-bottom:2rem;line-height:1.5}
+.pro .plan-desc{color:rgba(255,255,255,.6)}
+.plan-features{list-style:none;margin-bottom:2rem}
+.plan-features li{display:flex;align-items:center;gap:10px;font-size:.88rem;padding:.5rem 0;border-bottom:1px solid rgba(13,27,42,.05);color:var(--text-body)}
+.pro .plan-features li{color:rgba(255,255,255,.75);border-bottom-color:rgba(255,255,255,.06)}
+.plan-features li i{color:var(--amber);font-size:.75rem}
+.pricing-note{text-align:center;font-size:.85rem;color:var(--text-muted);margin-top:2rem}
+.cta{background:var(--navy);padding:7rem 5%;text-align:center;position:relative;overflow:hidden}
+.cta::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(232,160,32,.08) 0%,transparent 70%);pointer-events:none}
+.cta h2{font-size:clamp(2rem,4vw,3.2rem);color:var(--white);max-width:650px;margin:0 auto 1.2rem;line-height:1.15}
+.cta h2 em{color:var(--amber);font-style:italic}
+.cta>p{color:rgba(255,255,255,.6);max-width:500px;margin:0 auto 3rem;line-height:1.7}
+.btn-amber{background:var(--amber);color:var(--navy);padding:.9rem 2.2rem;border-radius:8px;font-weight:700;font-size:.95rem;border:none;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+.btn-amber:hover{background:var(--amber-light);transform:translateY(-1px)}
+.contact-form{max-width:480px;margin:0 auto;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:2rem;position:relative;z-index:1}
+.form-group{margin-bottom:1rem}
+.form-group label{display:block;font-size:.8rem;font-weight:600;color:rgba(255,255,255,.6);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.06em}
+.form-group input,.form-group select{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:.8rem 1rem;font-size:.9rem;color:var(--white);font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s}
+.form-group input:focus,.form-group select:focus{border-color:var(--amber)}
+.form-group input::placeholder{color:rgba(255,255,255,.25)}
+.form-group select option{background:var(--navy);color:var(--white)}
+footer{background:#080F17;padding:4rem 5% 2rem;color:rgba(255,255,255,.4)}
+.footer-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:3rem;gap:2rem}
+.footer-tagline{font-size:.85rem;line-height:1.6;max-width:260px;margin-top:.8rem}
+.footer-links h4{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.6);margin-bottom:1rem}
+.footer-links ul{list-style:none}
+.footer-links li{margin-bottom:.6rem}
+.footer-links a{text-decoration:none;font-size:.88rem;color:rgba(255,255,255,.35);transition:color .2s}
+.footer-links a:hover{color:var(--amber)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.06);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;font-size:.8rem}
+@media(max-width:768px){.hero{grid-template-columns:1fr;padding-top:6rem}.hero-visual{display:none}.problem-grid,.features-grid,.roles-grid,.pricing-grid{grid-template-columns:1fr}.nav-links{display:none}.footer-top{flex-direction:column}}
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <div class="nav-logo">
+    <div class="logo-mark">
+      <svg viewBox="0 0 22 22" fill="none"><path d="M4 4L4 18L18 18" stroke="#E8A020" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 12L10 7L14 11L18 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <span class="logo-name">Legit<span>ude</span></span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#features">Features</a></li>
+    <li><a href="#roles">Who It's For</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#contact" class="nav-cta">Request a Demo</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-tag">Built for Nigerian Private Schools</div>
+    <h1>Your school's finances,<br><em>finally clear.</em></h1>
+    <p>Legitude replaces the physical journal with a simple digital system. The bursar records payments the same way she always has — Legitude makes sure the director can see everything, in real time.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-primary">Request Early Access <i class="fa-solid fa-arrow-right"></i></a>
+      <a href="#features" class="btn-secondary">See How It Works</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div style="position:relative">
+      <div class="dashboard-card">
+        <div class="dashboard-header">
+          <div class="dashboard-dots">
+            <span style="background:#E24B4A"></span>
+            <span style="background:#E8A020"></span>
+            <span style="background:#3B6D11"></span>
+          </div>
+          <div class="dashboard-header-title">Director Dashboard</div>
+          <div style="font-size:.75rem;color:rgba(255,255,255,.4)">Second Term · 2024/25</div>
+        </div>
+        <div class="dashboard-body">
+          <div class="stats-row">
+            <div class="stat-card collected">
+              <div class="stat-label">Collected</div>
+              <div class="stat-value">₦3.8M</div>
+              <div class="stat-sub">This term</div>
+            </div>
+            <div class="stat-card outstanding">
+              <div class="stat-label">Outstanding</div>
+              <div class="stat-value">₦640K</div>
+              <div class="stat-sub">19 students</div>
+            </div>
+          </div>
+          <div class="progress-section">
+            <div class="progress-label"><span>Collection Rate</span><span style="font-weight:700">78%</span></div>
+            <div class="progress-bar"><div class="progress-fill"></div></div>
+          </div>
+          <div class="recent-label">Recent Payments</div>
+          <div class="payment-row">
+            <div class="payment-avatar">EO</div>
+            <div class="payment-info"><div class="payment-name">Emeka Obi</div><div class="payment-class">JSS2 · Bank Transfer</div></div>
+            <div class="payment-amount">₦45,000</div>
+          </div>
+          <div class="payment-row">
+            <div class="payment-avatar" style="background:var(--amber);color:var(--navy)">AF</div>
+            <div class="payment-info"><div class="payment-name">Amaka Festus</div><div class="payment-class">SS1 · Cash</div></div>
+            <div class="payment-amount">₦52,000</div>
+          </div>
+          <div class="payment-row">
+            <div class="payment-avatar" style="background:#162235">TI</div>
+            <div class="payment-info"><div class="payment-name">Tunde Ibrahim</div><div class="payment-class">SS3 · Bank Transfer</div></div>
+            <div class="payment-amount">₦38,500</div>
+          </div>
+        </div>
+      </div>
+      <div class="floating-badge top">
+        <div class="badge-icon" style="background:rgba(59,109,17,.1);color:#3B6D11"><i class="fa-solid fa-check"></i></div>
+        <div><div style="font-size:.65rem;color:var(--text-muted);font-weight:400">Payment recorded</div><div style="color:var(--navy)">₦45,000 · JSS2</div></div>
+      </div>
+      <div class="floating-badge bottom">
+        <div class="badge-icon" style="background:rgba(232,160,32,.1);color:var(--amber)"><i class="fa-solid fa-file-export"></i></div>
+        <div><div style="font-size:.65rem;color:var(--text-muted);font-weight:400">Data exported</div><div style="color:var(--navy)">Saved to flash drive</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="problem">
+  <div class="section-tag">The Problem</div>
+  <h2>The journal isn't working anymore</h2>
+  <p>Nigerian private school bursars are doing their best with physical books and WhatsApp screenshots. But directors are flying blind — and mistakes are costing schools money every term.</p>
+  <div class="problem-grid">
+    <div class="problem-card">
+      <div class="problem-icon"><i class="fa-solid fa-eye-slash"></i></div>
+      <h3>No visibility for directors</h3>
+      <p>The director has to ask the bursar and wait. By the time he gets a number, it's already outdated.</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+      <h3>Defaulters slip through</h3>
+      <p>Tracking who hasn't paid across hundreds of students in a physical book takes hours — and things still get missed.</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon"><i class="fa-solid fa-receipt"></i></div>
+      <h3>Receipt disputes</h3>
+      <p>Parents claim they paid. The bursar can't find the record. Nobody has proof. It becomes a conversation nobody wants.</p>
+    </div>
+  </div>
+</section>
+
+<section class="features" id="features">
+  <div class="section-header">
+    <div class="section-tag" style="color:var(--amber-dark)">Features</div>
+    <h2>Everything you need.<br>Nothing you don't.</h2>
+    <p>Finance-only focus. No attendance tracking, no report cards, no virtual classrooms. Just school fee management done properly — built around how Nigerian schools actually work.</p>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="f-icon"><i class="fa-solid fa-book-open"></i></div>
+      <h3>Journal-style payment recording</h3>
+      <p>The bursar records payments the same way she always has. Student, amount, fee type, payment method. No retraining required.</p>
+    </div>
+    <div class="feature-card">
+      <div class="f-icon"><i class="fa-solid fa-chart-pie"></i></div>
+      <h3>Director dashboard</h3>
+      <p>The director sees how much has been collected, what's outstanding, and who hasn't paid — updated every time a payment is recorded.</p>
+    </div>
+    <div class="feature-card">
+      <div class="f-icon"><i class="fa-solid fa-users-slash"></i></div>
+      <h3>Defaulter tracking</h3>
+      <p>Instantly see which students owe fees, how much, and for which fee type. No manual cross-checking at end of term.</p>
+    </div>
+    <div class="feature-card">
+      <div class="f-icon"><i class="fa-solid fa-layer-group"></i></div>
+      <h3>Class-based fee structures</h3>
+      <p>Different fees for different classes. School fees, book fees, uniform fees — each handled separately with the right logic per item.</p>
+    </div>
+    <div class="feature-card">
+      <div class="f-icon"><i class="fa-solid fa-floppy-disk"></i></div>
+      <h3>Flash drive data export</h3>
+      <p>Export all payment records to CSV at any time. Save to a flash drive, keep a backup, share with anyone. Your data is always yours.</p>
+    </div>
+    <div class="feature-card">
+      <div class="f-icon"><i class="fa-solid fa-wifi-slash"></i></div>
+      <h3>Works offline</h3>
+      <p>No internet? No problem. Legitude runs on any school laptop without needing a constant connection. Built for Nigerian reality.</p>
+    </div>
+  </div>
+</section>
+
+<section class="roles" id="roles">
+  <div class="section-header">
+    <div class="section-tag" style="color:var(--amber-dark)">Who It's For</div>
+    <h2>Built for your whole team</h2>
+    <p>Three roles, each with exactly the view they need — no more, no less.</p>
+  </div>
+  <div class="roles-grid">
+    <div class="role-card bursar">
+      <div class="role-pill">Bursar</div>
+      <h3>Daily operations</h3>
+      <p>Records payments, tracks collections, manages the digital ledger — just like the physical journal, just faster and searchable.</p>
+      <ul class="role-features">
+        <li><div class="check-icon"><i class="fa-solid fa-check"></i></div>Quick payment entry per student</li>
+        <li><div class="check-icon"><i class="fa-solid fa-check"></i></div>Multiple payment methods per transaction</li>
+        <li><div class="check-icon"><i class="fa-solid fa-check"></i></div>Daily and term-end summaries</li>
+        <li><div class="check-icon"><i class="fa-solid fa-check"></i></div>Instant defaulter list generation</li>
+      </ul>
+    </div>
+    <div class="role-card director">
+      <div class="role-pill">Director / Proprietor</div>
+      <h3>Financial clarity</h3>
+      <p>See exactly how much money the school has collected at any point — without having to ask anyone or wait for a report.</p>
+      <ul class="role-features">
+        <li><div class="check-icon"><i class="fa-solid fa-check"></i></div>Real-time collection dashboard</li>
+        <li><div class="check-icon"><i class="fa-solid fa-check"></i></div>Outstanding fees by class and student</li>
+        <li><div class="check-icon"><i class="fa-solid fa-check"></i></div>Term-over-term visibility</li>
+        <li><div class="check-icon"><i class="fa-solid fa-check"></i></div>Exportable financial reports</li>
+      </ul>
+    </div>
+    <div class="role-card admin">
+      <div class="role-pill">Admin</div>
+      <h3>School setup</h3>
+      <p>Sets up students, classes, and fee structures for each term and session. Keeps the system organised from day one.</p>
+      <ul class="role-features">
+        <li><div class="check-icon"><i class="fa-solid fa-check"></i></div>Student enrolment and class assignment</li>
+        <li><div class="check-icon"><i class="fa-solid fa-check"></i></div>Fee configuration per class</li>
+        <li><div class="check-icon"><i class="fa-solid fa-check"></i></div>Term and session management</li>
+        <li><div class="check-icon"><i class="fa-solid fa-check"></i></div>New session setup with carry-forward</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="pricing" id="pricing">
+  <div class="section-header">
+    <div class="section-tag" style="color:var(--amber-dark)">Pricing</div>
+    <h2>Simple. Per student. Per term.</h2>
+    <p>No setup fees. No hidden charges. No transaction cuts. You pay based on how many students are in the system — billed per term.</p>
+  </div>
+  <div class="pricing-grid">
+    <div class="pricing-card basic">
+      <div class="plan-name">Basic</div>
+      <div class="plan-price">₦500</div>
+      <div class="plan-per">per student · per term</div>
+      <div class="plan-desc">For smaller schools that need clean, reliable fee tracking without complexity.</div>
+      <ul class="plan-features">
+        <li><i class="fa-solid fa-check"></i>Up to 150 students</li>
+        <li><i class="fa-solid fa-check"></i>Bursar + Director roles</li>
+        <li><i class="fa-solid fa-check"></i>Payment recording & defaulter tracking</li>
+        <li><i class="fa-solid fa-check"></i>Flash drive data export</li>
+        <li><i class="fa-solid fa-check"></i>Works fully offline</li>
+      </ul>
+      <a href="#contact" class="btn-secondary" style="display:block;text-align:center;width:100%;justify-content:center">Get Started</a>
+    </div>
+    <div class="pricing-card pro">
+      <div class="pricing-badge">Most Popular</div>
+      <div class="plan-name">Pro</div>
+      <div class="plan-price">₦1,000</div>
+      <div class="plan-per">per student · per term</div>
+      <div class="plan-desc">For schools that want full visibility — all roles, advanced reports, and priority support.</div>
+      <ul class="plan-features">
+        <li><i class="fa-solid fa-check"></i>Unlimited students</li>
+        <li><i class="fa-solid fa-check"></i>All three roles (Bursar, Admin, Director)</li>
+        <li><i class="fa-solid fa-check"></i>Advanced director dashboard</li>
+        <li><i class="fa-solid fa-check"></i>Term-over-term analytics</li>
+        <li><i class="fa-solid fa-check"></i>Flash drive export + printed summaries</li>
+        <li><i class="fa-solid fa-check"></i>Priority WhatsApp support</li>
+      </ul>
+      <a href="#contact" class="btn-amber" style="display:block;text-align:center;width:100%;justify-content:center">Request Access</a>
+    </div>
+  </div>
+  <div class="pricing-note">A school with 200 students on the Pro plan pays ₦200,000 per term — no surprises, no transaction fees.</div>
+</section>
+
+<section class="cta" id="contact">
+  <h2>Ready to see <em>Legitude</em><br>in your school?</h2>
+  <p>We're onboarding our first schools now. Fill in your details and we'll reach out to arrange a demonstration.</p>
+  <div class="contact-form">
+    <div class="form-group">
+      <label>Your Name</label>
+      <input type="text" placeholder="e.g. Mr. Adeyemi">
+    </div>
+    <div class="form-group">
+      <label>School Name</label>
+      <input type="text" placeholder="e.g. Graceland International School">
+    </div>
+    <div class="form-group">
+      <label>Phone Number</label>
+      <input type="tel" placeholder="e.g. 08012345678">
+    </div>
+    <div class="form-group">
+      <label>Number of Students</label>
+      <select>
+        <option value="">Select a range</option>
+        <option>Under 100</option>
+        <option>100 – 200</option>
+        <option>200 – 400</option>
+        <option>Over 400</option>
+      </select>
+    </div>
+    <button class="btn-amber" style="width:100%;margin-top:.5rem;padding:1rem;font-size:1rem;justify-content:center" onclick="this.textContent='Request sent! We will be in touch.';this.style.background='#3B6D11';this.style.color='white'">
+      Request a Demo <i class="fa-solid fa-arrow-right"></i>
+    </button>
+    <div style="text-align:center;font-size:.78rem;color:rgba(255,255,255,.3);margin-top:1rem">No commitment required · We'll reach out within 24 hours</div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="nav-logo">
+        <div class="logo-mark">
+          <svg viewBox="0 0 22 22" fill="none"><path d="M4 4L4 18L18 18" stroke="#E8A020" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 12L10 7L14 11L18 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <span class="logo-name" style="color:white">Legit<span>ude</span></span>
+      </div>
+      <div class="footer-tagline">School finance management built specifically for Nigerian private primary and secondary schools.</div>
+    </div>
+    <div class="footer-links">
+      <h4>Product</h4>
+      <ul>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#roles">Who It's For</a></li>
+      </ul>
+    </div>
+    <div class="footer-links">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="#contact">Request a Demo</a></li>
+        <li><a href="mailto:hello@legitude.com.ng">hello@legitude.com.ng</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2025 Legitude. All rights reserved.</span>
+    <span>Built in Nigeria, for Nigerian Schools.</span>
+  </div>
+</footer>
+
+<script>
+window.addEventListener('scroll',()=>{
+  const nav=document.getElementById('navbar');
+  nav.style.boxShadow=window.scrollY>60?'0 4px 30px rgba(13,27,42,.08)':'none';
+});
+</script>
+</body>
+</html>
