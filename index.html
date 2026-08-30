@@ -222,9 +222,24 @@
     .hamburger.open span:nth-child(2){opacity:0}
     .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
     .mobile-menu{display:none;position:fixed;top:68px;left:0;right:0;background:rgba(15,31,61,0.98);backdrop-filter:blur(20px);padding:1.5rem 5%;border-bottom:1px solid rgba(255,255,255,0.08);z-index:199;flex-direction:column}
-    .mobile-menu a{color:rgba(255,255,255,0.8);text-decoration:none;font-size:1rem;font-weight:500;padding:0.85rem 0;border-bottom:1px solid rgba(255,255,255,0.07);display:block}
+    .mobile-menu a{color:rgba(255,255,255,0.8);text-decoration:none;font-size:1rem;font-weight:500;padding:0.85rem 0;border-bottom:1px solid rgba(255,255,255,0.07);display:block;opacity:0;transform:translateY(12px);transition:opacity 0.28s ease,transform 0.28s ease}
     .mobile-menu .mob-cta{background:var(--white);color:var(--navy);font-weight:700;padding:0.85rem 1.5rem;border-radius:8px;text-align:center;margin-top:1rem;border-bottom:none}
     .mobile-menu.open{display:flex}
+    .mobile-menu.open a{opacity:1;transform:translateY(0)}
+    .mobile-menu.open a:nth-child(1){transition-delay:0.04s}
+    .mobile-menu.open a:nth-child(2){transition-delay:0.08s}
+    .mobile-menu.open a:nth-child(3){transition-delay:0.12s}
+    .mobile-menu.open a:nth-child(4){transition-delay:0.16s}
+    .mobile-menu.open a:nth-child(5){transition-delay:0.20s}
+
+    @keyframes menuSlideDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .mobile-menu.open {
+      animation: menuSlideDown 0.3s ease forwards;
+    }
     @media (max-width: 960px) {
       .nav-links {
         display: none;
@@ -247,7 +262,7 @@
     .hero {
       position: relative;
       background: var(--navy);
-      padding: 140px 0 100px 0;
+      padding: 90px 0 100px 0;
       color: var(--headline-white);
       overflow: hidden;
       min-height: 100svh;
@@ -503,11 +518,73 @@
 
     .badge-icon { font-size: 0.88rem; }
 
+    /* Hero visual show/hide */
+    .hero-visual-desktop { display: flex; }
+    .hero-visual-mobile  { display: none; }
+
+    /* Mobile stat cards */
+    .hero-visual-mobile {
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+      padding: 0 4px;
+    }
+
+    .hero-stat-card {
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 1rem 1.25rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2), 0 0 0 1px rgba(232,160,32,0.05);
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .hero-stat-card-1 { animation-delay: 0s; }
+    .hero-stat-card-2 { animation-delay: 1.4s; }
+    .hero-stat-card-3 { animation-delay: 0.7s; }
+
+    .hero-stat-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.38);
+      margin-bottom: 0.3rem;
+    }
+
+    .hero-stat-value {
+      font-family: var(--font-heading);
+      font-size: 1.75rem;
+      line-height: 1.1;
+      margin-bottom: 0.35rem;
+    }
+
+    .hero-stat-sub {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.32);
+    }
+
+    .hero-stat-bar {
+      height: 4px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 100px;
+      overflow: hidden;
+      margin-top: 0.5rem;
+    }
+
+    .hero-stat-bar-fill {
+      height: 100%;
+      background: var(--amber);
+      border-radius: 100px;
+    }
+
     /* ==========================================================================
-       SECTION 2 — PROBLEM (from Legitude)
+       SECTION 2 — PROBLEM (confession layout)
        ========================================================================== */
     .problem-section {
-      padding: 100px 0;
+      padding: 110px 0 100px;
       background: var(--navy);
       position: relative;
       overflow: hidden;
@@ -516,186 +593,100 @@
     .problem-section::before {
       content: "";
       position: absolute;
-      top: -160px;
-      right: -120px;
-      width: 520px;
-      height: 520px;
+      top: -160px; right: -120px;
+      width: 520px; height: 520px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(232,160,32,0.08) 0%, transparent 68%);
-      pointer-events: none;
-    }
-
-    .problem-section::after {
-      content: "";
-      position: absolute;
-      bottom: -180px;
-      left: -160px;
-      width: 500px;
-      height: 500px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(26,50,96,0.45) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(232,160,32,0.06) 0%, transparent 68%);
       pointer-events: none;
     }
 
     .problem-section .container {
       position: relative;
       z-index: 1;
+      max-width: 780px;
     }
 
-    .problem-section .section-title {
-      color: var(--headline-white);
-      max-width: 760px;
-    }
-
-    .problem-section .section-sub {
-      color: rgba(255,255,255,0.46);
-      max-width: 650px;
-    }
-
-    .problem-grid {
-      display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: 3.5rem;
-      align-items: center;
-      margin-top: 3.5rem;
-    }
-
-    .problem-content .key-line {
+    .problem-headline {
       font-family: var(--font-heading);
-      font-size: clamp(1.5rem, 2.8vw, 2.1rem);
-      font-weight: 400;
-      color: var(--white);
-      margin: 24px 0 12px 0;
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      color: var(--headline-white);
+      line-height: 1.18;
+      letter-spacing: -0.025em;
+      margin-top: 1rem;
+      margin-bottom: 3rem;
     }
 
-    .problem-content .key-line span {
-      color: var(--amber);
+    .problem-headline em {
+      color: var(--amber-light);
       font-style: italic;
     }
 
-    .problem-content p {
-      color: rgba(255,255,255,0.43);
-      font-size: 0.94rem;
-      line-height: 1.8;
-      margin-bottom: 1.5rem;
-    }
-
-    .problem-visual {
-      position: relative;
-      min-height: 360px;
-      padding: 1.2rem;
-    }
-
-    .problem-orbit {
-      position: absolute;
-      inset: 0;
-      border: 1px dashed rgba(255,255,255,0.09);
-      border-radius: 28px;
-      transform: rotate(-2deg);
-    }
-
-    .problem-orbit::after {
-      content: "";
-      position: absolute;
-      inset: 22px;
-      border: 1px solid rgba(255,255,255,0.055);
-      border-radius: 22px;
-    }
-
-    .problem-chaos {
-      position: relative;
-      min-height: 330px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .problem-chip {
-      position: absolute;
-      background: rgba(255,255,255,0.055);
-      border: 1px solid rgba(255,255,255,0.11);
-      border-radius: 13px;
-      padding: 0.9rem 1rem;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.16);
-      backdrop-filter: blur(10px);
-    }
-
-    .problem-chip small {
-      display: block;
-      font-size: 0.58rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.28);
-      margin-bottom: 0.3rem;
-    }
-
-    .problem-chip strong {
-      font-size: 0.82rem;
-      color: rgba(255,255,255,0.78);
-    }
-
-    .problem-chip:nth-child(1) { top: 8%; left: 5%; transform: rotate(-4deg); }
-    .problem-chip:nth-child(2) { top: 2%; right: 4%; transform: rotate(3deg); }
-    .problem-chip:nth-child(3) { bottom: 9%; left: 10%; transform: rotate(3deg); }
-    .problem-chip:nth-child(4) { bottom: 3%; right: 7%; transform: rotate(-4deg); }
-
-    .problem-center {
-      position: relative;
-      z-index: 2;
-      width: 170px;
-      height: 170px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(232,160,32,0.28);
+    .confession-list {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      box-shadow: 0 20px 55px rgba(0,0,0,0.25), 0 0 50px rgba(232,160,32,0.05);
+      gap: 0;
+      border-top: 1px solid rgba(255,255,255,0.07);
     }
 
-    .problem-center-mark {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
+    .confession-item {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(232,160,32,0.12);
-      color: var(--amber);
-      font-weight: 800;
-      margin-bottom: 0.6rem;
+      align-items: baseline;
+      gap: 1.25rem;
+      padding: 1.4rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
     }
 
-    .problem-center strong {
+    .confession-dash {
       font-family: var(--font-heading);
-      font-size: 1.25rem;
-      color: var(--white);
-      line-height: 1.05;
-    }
-
-    .problem-center span {
-      font-size: 0.62rem;
-      color: rgba(255,255,255,0.32);
-      margin-top: 0.35rem;
-    }
-
-    .problem-punchline {
-      margin-top: 3.5rem;
-      text-align: center;
-      max-width: 760px;
-      margin-left: auto;
-      margin-right: auto;
-      font-family: var(--font-heading);
-      font-size: clamp(1.45rem, 2.8vw, 2rem);
-      line-height: 1.35;
-      color: var(--headline-white);
-    }
-
-    .problem-punchline span {
+      font-size: 1.4rem;
       color: var(--amber);
+      flex-shrink: 0;
+      line-height: 1;
+      opacity: 0.7;
+    }
+
+    .confession-item p {
+      font-family: var(--font-heading);
+      font-size: clamp(1.2rem, 2.8vw, 1.6rem);
+      color: rgba(255,255,255,0.55);
+      line-height: 1.3;
+      margin: 0;
+      font-weight: 400;
+    }
+
+    .confession-item p em {
+      color: rgba(255,255,255,0.85);
       font-style: italic;
+    }
+
+    .problem-pivot {
+      margin-top: 3rem;
+      font-size: 1rem;
+      color: rgba(255,255,255,0.38);
+      line-height: 1.7;
+    }
+
+    .problem-pivot span {
+      color: var(--amber);
+      font-weight: 600;
+    }
+
+    @media (max-width: 767px) {
+      .problem-section { padding: 80px 0 72px; }
+
+      .problem-headline {
+        font-size: clamp(1.9rem, 9vw, 2.4rem);
+        margin-bottom: 2rem;
+      }
+
+      .confession-item p {
+        font-size: clamp(1.05rem, 5.5vw, 1.3rem);
+      }
+
+      .problem-pivot {
+        margin-top: 2rem;
+        font-size: 0.92rem;
+      }
     }
 
     /* ==========================================================================
@@ -952,187 +943,163 @@
       margin: 0 auto 48px auto;
     }
 
-    .segmented-control {
-      display: inline-flex;
-      background: rgba(15,31,61,0.07);
-      padding: 4px;
-      border-radius: 100px;
-      border: 1px solid var(--border);
-      margin-bottom: 48px;
-      width: fit-content;
-      margin-left: auto;
-      margin-right: auto;
-      justify-content: center;
-    }
-    
-    .pricing-section .segmented-control {
-      display: flex;
-      justify-content: center;
-      margin-left: auto;
-      margin-right: auto;
+    /* ── Pricing: single card + tier selector ── */
+    .pricing-section {
+      padding: 100px 0;
+      background: var(--apple-white);
     }
 
-    .segment-btn {
-      padding: 10px 20px;
-      border-radius: 99px;
-      border: none;
+    .pricing-section .section-label,
+    .pricing-section .section-title,
+    .pricing-section .section-sub {
+      text-align: center;
+    }
+
+    .pricing-section .section-sub {
+      margin: 0 auto 48px auto;
+    }
+
+    .tier-selector {
+      display: inline-flex;
+      gap: 0;
+      background: rgba(15,31,61,0.06);
+      padding: 4px;
+      border-radius: 10px;
+      margin: 0 auto 40px auto;
+      width: fit-content;
+      display: flex;
+      justify-content: center;
+    }
+
+    .tier-btn {
+      padding: 9px 18px;
+      border-radius: 7px;
+      border: 1.5px solid transparent;
       background: transparent;
-      font-size: 0.85rem;
+      font-size: 0.84rem;
       font-weight: 500;
       color: var(--muted);
       cursor: pointer;
-      transition: all 0.25s ease;
+      transition: border-color 0.2s, color 0.2s;
       white-space: nowrap;
+      font-family: var(--font-body);
     }
 
-    .segment-btn.active {
+    .tier-btn.active {
+      border-color: var(--amber);
+      color: var(--amber);
+      background: transparent;
+    }
+
+    .single-pricing-card {
       background: var(--navy);
-      color: var(--white);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-    }
-
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-      max-width: 820px;
-      margin: 0 auto;
-      align-items: end;
-    }
-
-    .pricing-card {
-      background: var(--white);
-      border: 1.5px solid var(--border);
-      border-radius: 22px;
+      border-radius: 24px;
       padding: 2.5rem;
+      max-width: 480px;
+      margin: 0 auto;
       position: relative;
-      display: flex;
-      flex-direction: column;
+      overflow: hidden;
+      border: 1px solid rgba(232,160,32,0.12);
+      box-shadow: 0 24px 64px rgba(15,31,61,0.22);
     }
 
-    .pricing-card.premium {
-      background: var(--navy);
-      border-color: rgba(232,160,32,0.22);
-      box-shadow: 0 16px 48px rgba(15,31,61,0.25), 0 0 0 1px rgba(232,160,32,0.07);
-      overflow: visible;
-    }
-
-    .popular-badge {
+    .single-pricing-card::before {
+      content: "";
       position: absolute;
-      top: -15px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--amber);
-      color: var(--navy-deep);
-      font-size: 0.68rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      padding: 0.3rem 1.1rem;
-      border-radius: 100px;
-      white-space: nowrap;
-      box-shadow: 0 4px 12px rgba(232,160,32,0.3);
+      top: -80px; right: -80px;
+      width: 240px; height: 240px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(232,160,32,0.07) 0%, transparent 70%);
+      pointer-events: none;
     }
 
-    .plan-name {
-      font-size: 0.8rem;
+    .spc-range {
+      font-size: 0.72rem;
       font-weight: 700;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 0.6rem;
+      color: rgba(255,255,255,0.32);
+      margin-bottom: 0.5rem;
     }
 
-    .premium .plan-name {
-      color: rgba(255,255,255,0.42);
-    }
-
-    .plan-price {
-      font-family: 'Playfair Display', serif;
-      font-size: 3.4rem;
-      color: var(--navy);
-      line-height: 1;
-      margin-bottom: 0.25rem;
-    }
-
-    .premium .plan-price {
+    .spc-price {
+      font-family: var(--font-heading);
+      font-size: 3rem;
       color: var(--white);
+      line-height: 1;
+      margin-bottom: 0.3rem;
+      transition: opacity 0.16s ease;
     }
 
-    .plan-price span {
-      font-size: 1rem;
-      color: var(--muted);
-      font-weight: 400;
+    .spc-period {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.3);
+      margin-bottom: 1.75rem;
     }
 
-    .premium .plan-price span {
-      color: rgba(255,255,255,0.38);
+    .spc-divider {
+      height: 1px;
+      background: rgba(255,255,255,0.07);
+      margin-bottom: 1.5rem;
     }
 
-    .plan-features {
+    .spc-features {
       list-style: none;
-      margin: 1.75rem 0 0 0;
-      flex-grow: 1;
-    }
-
-    .plan-features li {
-      font-size: 0.875rem;
-      color: var(--text);
-      margin-bottom: 12px;
       display: flex;
-      align-items: flex-start;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 1.75rem;
+    }
+
+    .spc-features li {
+      display: flex;
+      align-items: center;
       gap: 10px;
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.65);
     }
 
-    .premium .plan-features li {
-      color: rgba(255,255,255,0.7);
-    }
-
-    .plan-features li::before {
-      content: "✓";
-      color: var(--amber);
-      font-weight: 800;
+    .spc-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--amber);
       flex-shrink: 0;
     }
 
-    .plan-cta-ghost {
+    .spc-cta {
       display: block;
+      width: 100%;
+      padding: 0.9rem;
+      border-radius: 10px;
       text-align: center;
-      padding: 0.875rem;
-      border: 1.5px solid var(--border);
-      border-radius: 9px;
-      color: var(--navy);
-      font-weight: 600;
-      font-size: 0.9rem;
-      text-decoration: none;
-      transition: border-color 0.2s;
-      margin-top: 1.5rem;
-    }
-
-    .plan-cta-ghost:hover {
-      border-color: var(--navy);
-    }
-
-    .plan-cta-solid {
-      display: block;
-      text-align: center;
-      padding: 0.875rem;
-      background: var(--amber);
-      border-radius: 9px;
-      color: var(--navy-deep);
       font-weight: 700;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: opacity 0.2s;
       text-decoration: none;
-      transition: background 0.2s;
-      margin-top: 1.5rem;
+      font-family: var(--font-body);
     }
 
-    .plan-cta-solid:hover {
-      background: var(--amber-light);
+    .spc-cta.paid {
+      background: transparent;
+      color: var(--navy-deep);
+      border: none;
     }
+
+    .spc-cta.paid:hover { opacity: 0.88; }
+
+    .spc-cta.free {
+      background: transparent;
+      color: rgba(255,255,255,0.6);
+      border: 1.5px solid rgba(255,255,255,0.14);
+    }
+
+    .spc-cta.free:hover { border-color: rgba(255,255,255,0.3); color: var(--white); }
 
     .pricing-support-text {
       text-align: center;
-      margin-top: 40px;
+      margin-top: 28px;
       font-size: 0.875rem;
       color: var(--muted);
       font-style: italic;
@@ -1837,41 +1804,7 @@
       .hero-badge-2 { top: 40%; left: 0; }
       .hero-badge-3 { top: 50%; right: 0; }
 
-      .problem-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-        margin-top: 2.5rem;
-      }
 
-      .problem-visual {
-        min-height: 320px;
-      }
-
-      .problem-chaos {
-        min-height: 290px;
-      }
-
-      .problem-chip {
-        padding: 0.72rem 0.78rem;
-      }
-
-      .problem-chip strong {
-        font-size: 0.72rem;
-      }
-
-      .problem-chip:nth-child(1) { left: 0; }
-      .problem-chip:nth-child(2) { right: 0; }
-      .problem-chip:nth-child(3) { left: 2%; }
-      .problem-chip:nth-child(4) { right: 1%; }
-
-      .problem-center {
-        width: 145px;
-        height: 145px;
-      }
-
-      .problem-center strong {
-        font-size: 1.05rem;
-      }
 
       .segmented-control {
   
@@ -1887,14 +1820,22 @@
       }
 
       .segment-btn {
-        width: auto;            /* ← Change from '100%' to 'auto' */
-        padding: 0.4rem 0.6rem; /* Smaller padding on mobile */
-        border-radius: 100px;   /* Keep rounded */
+        width: auto;
+        padding: 0.4rem 0.65rem;
+        border-radius: 100px;
         text-align: center;
-        font-size: 0.7rem;      /* Smaller text */
-        flex: 1;                /* Distribute space evenly */
-        white-space: nowrap;    /* Prevent text from wrapping */
+        font-size: 0.72rem;
+        flex: 1;
+        white-space: nowrap;
       }
+
+      /* Shorten segment button labels on small screens */
+      .segment-btn:nth-child(1) { font-size: 0; }
+      .segment-btn:nth-child(1)::after { content: "≤250"; font-size: 0.72rem; }
+      .segment-btn:nth-child(2) { font-size: 0; }
+      .segment-btn:nth-child(2)::after { content: "251–500"; font-size: 0.72rem; }
+      .segment-btn:nth-child(3) { font-size: 0; }
+      .segment-btn:nth-child(3)::after { content: "500+"; font-size: 0.72rem; }
 
       .features-sticky-phone {
         height: 350px;
@@ -2046,6 +1987,141 @@
       }
     }
 
+    /* Form mobile max-width */
+    @media (max-width: 767px) {
+      .cta-right {
+        max-width: 420px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+      }
+
+      .cta-right .contact-form {
+        width: 100%;
+      }
+    }
+
+    /* ── Custom dropdown ── */
+    .custom-select-wrapper {
+      position: relative;
+    }
+
+    .custom-select-trigger {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      width: 100%;
+      padding: 0.78rem 1rem;
+      background: rgba(255,255,255,0.055);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 0.92rem;
+      cursor: pointer;
+      transition: border-color 0.22s, box-shadow 0.22s;
+      user-select: none;
+    }
+
+    .custom-select-trigger.placeholder {
+      color: rgba(255,255,255,0.2);
+    }
+
+    .custom-select-trigger:focus,
+    .custom-select-trigger.open {
+      border-color: var(--amber);
+      box-shadow: 0 0 0 3px rgba(232,160,32,0.1);
+      outline: none;
+    }
+
+    .custom-select-chevron {
+      flex-shrink: 0;
+      width: 16px;
+      height: 16px;
+      opacity: 0.45;
+      transition: transform 0.22s ease;
+    }
+
+    .custom-select-trigger.open .custom-select-chevron {
+      transform: rotate(180deg);
+      opacity: 0.75;
+    }
+
+    .custom-select-panel {
+      display: none;
+      position: absolute;
+      top: calc(100% + 6px);
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(12,24,48,0.94);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.4), 0 0 0 1px rgba(232,160,32,0.06);
+    }
+
+    .custom-select-panel.open {
+      display: block;
+      animation: dropIn 0.18s ease forwards;
+    }
+
+    @keyframes dropIn {
+      from { opacity: 0; transform: translateY(-6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .custom-select-option {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.78rem 1rem;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.65);
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .custom-select-option:last-child {
+      border-bottom: none;
+    }
+
+    .custom-select-option:hover,
+    .custom-select-option.highlighted {
+      background: rgba(232,160,32,0.08);
+      color: var(--white);
+    }
+
+    .custom-select-option.selected {
+      color: var(--amber);
+      font-weight: 600;
+    }
+
+    .custom-select-option.selected::after {
+      content: "✓";
+      margin-left: auto;
+      font-size: 0.8rem;
+      color: var(--amber);
+    }
+
+    .custom-select-option-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      flex-shrink: 0;
+      transition: background 0.15s;
+    }
+
+    .custom-select-option:hover .custom-select-option-dot,
+    .custom-select-option.selected .custom-select-option-dot {
+      background: var(--amber);
+    }
+
     @media (max-width: 600px) {
       .contact-form-card .form-control {
         padding: 0.75rem 1rem;
@@ -2095,7 +2171,52 @@
       grid-template-columns: 1fr !important;
       max-width: 100% !important;
       padding: 0 20px;
-      gap: 2rem;
+      gap: 1.5rem;
+    }
+
+    .pricing-card {
+      padding: 1.5rem;
+      border-radius: 18px;
+    }
+
+    .plan-price {
+      font-size: 2.6rem;
+      margin-bottom: 0.15rem;
+    }
+
+    .plan-name {
+      margin-bottom: 0.4rem;
+    }
+
+    .plan-features {
+      margin-top: 1.1rem;
+    }
+
+    .plan-features li {
+      margin-bottom: 8px;
+      font-size: 0.84rem;
+    }
+
+    .plan-cta-ghost,
+    .plan-cta-solid {
+      padding: 0.75rem;
+      margin-top: 1.1rem;
+      font-size: 0.875rem;
+    }
+
+    /* Mobile tier selector wrapping */
+    .tier-selector {
+      flex-wrap: wrap;
+      max-width: 320px;
+    }
+
+    .tier-btn {
+      font-size: 0.8rem;
+      padding: 8px 14px;
+    }
+
+    .single-pricing-card {
+      padding: 1.75rem 1.5rem;
     }
   }
   
@@ -2113,11 +2234,15 @@
       .faq-section { padding: 72px 0; }
 
       /* Hero: simplify visual noise and strengthen CTA */
-      .hero { padding: 108px 0 54px; }
+      .hero { padding: 90px 0 54px; }
       .hero-inner { gap: 2.25rem; padding: 0 20px; }
       .hero-headline { font-size: clamp(2.35rem, 11vw, 3.1rem); }
       .hero-buttons { flex-direction: column; align-items: stretch; width: 100%; }
       .hero-buttons .btn { width: 100%; }
+
+      /* Swap visuals on mobile */
+      .hero-visual-desktop { display: none; }
+      .hero-visual-mobile  { display: flex; }
       /* Hero phone: scale the entire mockup proportionally so it remains
          visually believable instead of feeling too tall and narrow. */
       .hero-visual {
@@ -2126,7 +2251,7 @@
       }
 
       .hero-visual .phone-outer {
-        width: clamp(210px, 56vw, 235px);
+        width: clamp(160px, 56vw, 235px);
       }
 
       .hero-visual .phone-frame {
@@ -2157,7 +2282,42 @@
         inset: -24px;
         filter: blur(15px);
       }
+    }
 
+    /* Phone mockup: smaller and fixed on narrow viewports */
+    @media (max-width: 420px) {
+      .hero-visual .phone-outer {
+        width: 160px;
+        flex-shrink: 0;
+      }
+
+      .hero-visual .phone-frame {
+        padding: 8px;
+        border-radius: 38px;
+      }
+
+      .hero-visual .phone-screen {
+        border-radius: 29px;
+      }
+
+      .hero-visual .phone-notch-bar {
+        width: 80px;
+        height: 22px;
+      }
+
+      .hero-visual .phone-inner {
+        min-height: 380px;
+        padding: 14px 11px;
+        gap: 10px;
+      }
+
+      .hero-visual .phone-ground-glow {
+        width: 170px;
+        height: 42px;
+      }
+    }
+
+    @media (max-width: 767px) {
       .hero-badge-2,
       .hero-badge-3 { display: none; }
       .hero-badge-1 { top: 4%; left: 50%; transform: translateX(-50%); }
@@ -2324,42 +2484,7 @@
       }
     }
 
-    @media (max-width: 420px) {
-      /* Extra protection for narrower phones */
-      .hero-visual {
-        min-height: 330px;
-      }
-
-      .hero-visual .phone-outer {
-        width: clamp(195px, 54vw, 220px);
-      }
-
-      .hero-visual .phone-inner {
-        min-height: 410px;
-        padding: 16px 13px;
-      }
-
-      .hero-visual .phone-notch-bar {
-        width: 92px;
-        height: 24px;
-      }
-
-      .features-sticky-phone .phone-outer {
-        width: min(54vw, 220px);
-      }
-
-      .features-sticky-phone .phone-inner {
-        min-height: 390px;
-      }
-
-      .feature-card h3 {
-        font-size: 1.7rem;
-      }
-
-      .feature-card p {
-        font-size: 0.9rem;
-      }
-    }
+    /* (old 420px block removed — see the standalone @media (max-width: 420px) above) */
 
 </style>
 </head>
@@ -2411,7 +2536,8 @@
         </div>
       </div>
 
-      <div class="hero-visual">
+      <!-- Desktop: full phone mockup -->
+      <div class="hero-visual hero-visual-desktop">
         <div class="hero-badge hero-badge-1">
           <span class="badge-icon">📈</span>
           <div><div class="val">₦1.12M profit</div><div class="sub">Net Profit · This Term</div></div>
@@ -2473,6 +2599,25 @@
           <div class="phone-ground-glow"></div>
         </div>
       </div>
+
+      <!-- Mobile: floating stat cards -->
+      <div class="hero-visual-mobile">
+        <div class="hero-stat-card hero-stat-card-1">
+          <div class="hero-stat-label">Net Profit · This Term</div>
+          <div class="hero-stat-value" style="color:#4ade80;">₦1,120,000</div>
+          <div class="hero-stat-sub">Revenue ₦4.85M &nbsp;·&nbsp; Expenses ₦3.73M</div>
+        </div>
+        <div class="hero-stat-card hero-stat-card-2">
+          <div class="hero-stat-label">Collection Rate</div>
+          <div class="hero-stat-value" style="color:var(--amber-light);">87%</div>
+          <div class="hero-stat-bar"><div class="hero-stat-bar-fill" style="width:87%;"></div></div>
+        </div>
+        <div class="hero-stat-card hero-stat-card-3">
+          <div class="hero-stat-label">Outstanding Defaulters</div>
+          <div class="hero-stat-value" style="color:#f87171;">14 students</div>
+          <div class="hero-stat-sub" style="color:rgba(255,255,255,0.35);">₦334,000 uncollected</div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -2480,33 +2625,25 @@
   <section class="problem-section" id="problem">
     <div class="container">
       <span class="section-label">The Real Problem</span>
-      <h2 class="section-title">It's not collecting school fees. It's knowing what you've actually collected.</h2>
-      <p class="section-sub">Payments come through different channels. Some students pay partially. Others fall behind. Expenses keep moving. Records get scattered. When you need to know where the school stands, you are left piecing everything together.</p>
 
-      <div class="problem-grid">
-        <div class="problem-content">
-          <div class="key-line">The money is moving. <span>The picture is not.</span></div>
-          <p>Cash, transfers and POS payments can sit alongside outstanding fees, expenses, receipts and records in different places. The information exists — but it doesn't always come together when you need it.</p>
-          <p>That means a simple question like <strong style="color:rgba(255,255,255,.78)">"Where do we stand this term?"</strong> can take more work than it should.</p>
+      <h2 class="problem-headline">Your bursar has records.<br><em>You have nothing.</em></h2>
+
+      <div class="confession-list">
+        <div class="confession-item">
+          <span class="confession-dash">—</span>
+          <p>You call the bursar to ask how much was collected today.</p>
         </div>
-
-        <div class="problem-visual" aria-hidden="true">
-          <div class="problem-orbit"></div>
-          <div class="problem-chaos">
-            <div class="problem-chip"><small>Payment channel</small><strong>Cash · Transfer · POS</strong></div>
-            <div class="problem-chip"><small>Student accounts</small><strong>Partial & outstanding</strong></div>
-            <div class="problem-chip"><small>School spending</small><strong>Expenses & receipts</strong></div>
-            <div class="problem-chip"><small>Records</small><strong>Notes · Sheets · Messages</strong></div>
-            <div class="problem-center">
-              <div class="problem-center-mark">?</div>
-              <strong>Where<br>do we stand?</strong>
-              <span>The question that takes too much work</span>
-            </div>
-          </div>
+        <div class="confession-item">
+          <span class="confession-dash">—</span>
+          <p>You know roughly how many students haven't paid. <em>Roughly.</em></p>
+        </div>
+        <div class="confession-item">
+          <span class="confession-dash">—</span>
+          <p>Term ends. You guess at the profit.</p>
         </div>
       </div>
 
-      <div class="problem-punchline">When your records are scattered, <span>your financial picture is too.</span></div>
+      <p class="problem-pivot">This is what running a school on instinct looks like.<br><span>Legitude ends it.</span></p>
     </div>
   </section>
 
@@ -2709,49 +2846,29 @@
   <section class="pricing-section" id="pricing">
     <div class="container">
       <span class="section-label">Simple Pricing</span>
-      <h2 class="section-title">Simple pricing that grows with your school.</h2>
-      <p class="section-sub">No confusing per-user charges. No transaction cuts. Choose the plan that fits your school.</p>
+      <h2 class="section-title">One price. Full access. No surprises.</h2>
+      <p class="section-sub">No per-user charges. No transaction cuts. Just your school size.</p>
 
-      <div class="segmented-control">
-        <button class="segment-btn active" onclick="setPricingTier(0)">Up to 250 students</button>
-        <button class="segment-btn" onclick="setPricingTier(1)">251–500 students</button>
-        <button class="segment-btn" onclick="setPricingTier(2)">500+ students</button>
+      <div class="tier-selector">
+        <button class="tier-btn active" onclick="setTier(this,'free','Under 100 students','Free','forever · full access','free','Get started — it\'s free')">Under 100</button>
+        <button class="tier-btn" onclick="setTier(this,'mid','100 – 400 students','₦95,000','per term · full access','paid','Get started')">100 – 400</button>
+        <button class="tier-btn" onclick="setTier(this,'large','400+ students','₦180,000','per term · full access','paid','Get started')">400+</button>
       </div>
 
-      <div class="pricing-grid">
-        <div class="pricing-card">
-          <div class="plan-name">Core</div>
-          <div class="plan-price" id="corePrice">₦ 45,000 <span>per term</span></div>
-          <a href="#contact" class="plan-cta-ghost">Get Started</a>
-
-          <ul class="plan-features">
-            <li>Director, Bursar & Admin roles</li>
-            <li>Fee collection & payment receipts</li>
-            <li>Live defaulters list</li>
-            <li>Basic Director dashboard</li>
-            <li>Expense tracking & approval</li>
-            <li>Printable term summary report</li>
-            <li>Email support</li>
-          </ul>
-        </div>
-
-        <div class="pricing-card premium">
-          <div class="popular-badge">Most Popular</div>
-          <div class="plan-name">Premium</div>
-          <div class="plan-price" id="premiumPrice">₦ 75,000 <span>per term</span></div>
-          <a href="#contact" class="plan-cta-solid">Get Premium Access</a>
-
-          <ul class="plan-features">
-            <li>Everything in Core, plus</li>
-            <li>Full Director analytics dashboard</li>
-            <li>Class-by-class performance view</li>
-            <li>Payment method breakdown</li>
-            <li>Term-over-term history & charts</li>
-            <li>Budget tracking per term</li>
-            <li>Private Director expense tracking</li>
-            <li>Priority WhatsApp support</li>
-          </ul>
-        </div>
+      <div class="single-pricing-card">
+        <div class="spc-range" id="spc-range">Under 100 students</div>
+        <div class="spc-price" id="spc-price">Free</div>
+        <div class="spc-period" id="spc-period">forever · full access</div>
+        <div class="spc-divider"></div>
+        <ul class="spc-features">
+          <li><span class="spc-dot"></span>Live profit &amp; collection rate</li>
+          <li><span class="spc-dot"></span>Every payment recorded with a receipt</li>
+          <li><span class="spc-dot"></span>Defaulters list, always ready</li>
+          <li><span class="spc-dot"></span>Expenses tracked &amp; separated</li>
+          <li><span class="spc-dot"></span>End-of-term financial report</li>
+          <li><span class="spc-dot"></span>Director, Bursar &amp; Admin roles</li>
+        </ul>
+        <a href="#contact" class="spc-cta free" id="spc-cta">Get started — it's free</a>
       </div>
 
       <div class="pricing-support-text">Less than 3 students' term fees. For your entire school.</div>
@@ -2869,12 +2986,27 @@
           </div>
           <div class="form-group">
             <label>Number of Students</label>
-            <select id="students" required>
-              <option value="">Select a range</option>
-              <option value="up-to-250">Up to 250</option>
-              <option value="251-500">251 – 500</option>
-              <option value="500-plus">500+</option>
-            </select>
+            <!-- hidden input carries the value for form submission -->
+            <input type="hidden" id="students" name="students" required />
+            <div class="custom-select-wrapper" id="studentsDropdown">
+              <button type="button" class="custom-select-trigger placeholder" id="studentsTrigger" aria-haspopup="listbox" aria-expanded="false">
+                <span id="studentsTriggerText">Select a range</span>
+                <svg class="custom-select-chevron" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+              <div class="custom-select-panel" id="studentsPanel" role="listbox">
+                <div class="custom-select-option" data-value="up-to-250" role="option" tabindex="0">
+                  <span class="custom-select-option-dot"></span>Up to 250 students
+                </div>
+                <div class="custom-select-option" data-value="251-500" role="option" tabindex="0">
+                  <span class="custom-select-option-dot"></span>251 – 500 students
+                </div>
+                <div class="custom-select-option" data-value="500-plus" role="option" tabindex="0">
+                  <span class="custom-select-option-dot"></span>500+ students
+                </div>
+              </div>
+            </div>
           </div>
           <button type="submit" class="form-submit">Get Started Today →</button>
         </form>
@@ -3010,22 +3142,21 @@
       });
     });
 
-    // 5. Pricing Tier Segment Toggle
-    const pricingData = [
-      { core: '₦ 45,000', premium: '₦ 75,000' },
-      { core: '₦ 65,000', premium: '₦ 105,000' },
-      { core: '₦ 95,000', premium: '₦ 150,000' }
-    ];
-
-    function setPricingTier(tierIndex) {
-      const btns = document.querySelectorAll('.segment-btn');
-      btns.forEach((btn, i) => {
-        if (i === tierIndex) btn.classList.add('active');
-        else btn.classList.remove('active');
-      });
-
-      document.getElementById('corePrice').innerHTML = `${pricingData[tierIndex].core} <span>per term</span>`;
-      document.getElementById('premiumPrice').innerHTML = `${pricingData[tierIndex].premium} <span>per term</span>`;
+    // 5. Single pricing card tier switcher
+    function setTier(btn, tier, range, price, period, ctaStyle, ctaText) {
+      document.querySelectorAll('.tier-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const priceEl = document.getElementById('spc-price');
+      priceEl.style.opacity = '0';
+      setTimeout(() => {
+        document.getElementById('spc-range').textContent = range;
+        priceEl.textContent = price;
+        document.getElementById('spc-period').textContent = period;
+        const cta = document.getElementById('spc-cta');
+        cta.textContent = ctaText;
+        cta.className = 'spc-cta ' + ctaStyle;
+        priceEl.style.opacity = '1';
+      }, 160);
     }
 
     // 6. FAQ Accordion - Smooth toggle
@@ -3048,6 +3179,53 @@
         }
       });
     });
+
+    // 6b. Custom students dropdown
+    (function() {
+      const trigger   = document.getElementById('studentsTrigger');
+      const panel     = document.getElementById('studentsPanel');
+      const triggerTxt = document.getElementById('studentsTriggerText');
+      const hiddenInput = document.getElementById('students');
+      const options   = panel.querySelectorAll('.custom-select-option');
+
+      function openPanel() {
+        trigger.classList.add('open');
+        panel.classList.add('open');
+        trigger.setAttribute('aria-expanded', 'true');
+      }
+
+      function closePanel() {
+        trigger.classList.remove('open');
+        panel.classList.remove('open');
+        trigger.setAttribute('aria-expanded', 'false');
+      }
+
+      trigger.addEventListener('click', function(e) {
+        e.stopPropagation();
+        panel.classList.contains('open') ? closePanel() : openPanel();
+      });
+
+      options.forEach(function(opt) {
+        opt.addEventListener('click', function() {
+          options.forEach(o => o.classList.remove('selected'));
+          opt.classList.add('selected');
+          triggerTxt.textContent = opt.textContent.trim();
+          trigger.classList.remove('placeholder');
+          hiddenInput.value = opt.dataset.value;
+          closePanel();
+        });
+
+        // keyboard support
+        opt.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); opt.click(); }
+        });
+      });
+
+      // Close when clicking outside
+      document.addEventListener('click', function(e) {
+        if (!document.getElementById('studentsDropdown').contains(e.target)) closePanel();
+      });
+    })();
 
     // 7. Contact Form Handling
     function handleSubmit(e) {
