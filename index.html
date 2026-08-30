@@ -2486,6 +2486,117 @@
 
     /* (old 420px block removed — see the standalone @media (max-width: 420px) above) */
 
+
+
+/* ========================================================================== 
+   LEGITUDE PRODUCT PHONE SYSTEM — CUSTOM REBUILD
+   Self-contained: no image files required.
+   ========================================================================== */
+.phone-screen{aspect-ratio:720/1478;height:auto!important;position:relative;container-type:inline-size}
+.phone-inner{height:100%;min-height:0!important;padding:0!important;gap:0!important}
+.phone-screen-viewer,.legitude-screen-viewer{position:relative;width:100%;height:100%;overflow:hidden}
+.features-sticky-phone .phone-outer{width:300px!important}
+.features-sticky-phone .phone-frame{padding:.7px!important;border-radius:48px!important;background:#080e1c!important}
+.features-sticky-phone .phone-notch-bar{display:none!important}
+.features-sticky-phone .phone-screen{border-radius:44px!important;background:#f5f4f0!important}
+.hero-visual-desktop .phone-frame{padding:.7px!important;border-radius:48px!important}
+.hero-visual-desktop .phone-notch-bar{display:none!important}
+.hero-visual-desktop .phone-screen{border-radius:44px!important;background:#f5f4f0!important}
+.hero-visual-desktop .phone-inner{height:auto!important;aspect-ratio:720/1478}
+
+.legitude-screen{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;padding:0!important;margin:0!important;display:block!important;gap:0!important;opacity:0;transform:none!important;pointer-events:none;overflow:hidden}
+.legitude-screen.active{opacity:1!important;pointer-events:auto!important}
+.legitude-phone-app{width:100%;height:100%;background:#f4f3ef;color:#273242;display:flex;flex-direction:column;font-family:var(--font-body);overflow:hidden}
+.legitude-app-topbar{height:15.7cqw;min-height:15.7cqw;padding:0 7.5cqw;display:flex;align-items:center;gap:3.8cqw;background:rgba(250,249,246,.98);border-bottom:.2cqw solid rgba(40,45,55,.08);box-sizing:border-box;white-space:nowrap}
+.legitude-menu-icon{width:4.2cqw;display:flex;flex-direction:column;gap:1.05cqw;flex:none}.legitude-menu-icon i{height:.35cqw;background:#263140;border-radius:9px;width:4.2cqw}
+.legitude-app-title{font-family:var(--font-heading);font-size:4.2cqw;line-height:1;color:#202938;letter-spacing:-.08cqw;flex:none}
+.legitude-term-chip{margin-left:auto;width:24.5cqw;padding:1.55cqw 2.55cqw;border-radius:5.6cqw;border:.2cqw solid rgba(199,157,76,.32);background:linear-gradient(135deg,#fbf8ef,#f5eddd);display:flex;flex-direction:column;gap:.45cqw;box-sizing:border-box;flex:none}.legitude-term-chip span,.legitude-term-chip b{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:#7b5929;letter-spacing:.12cqw;font-size:1.9cqw;line-height:1.15}.legitude-term-chip b{font-weight:800}
+.legitude-mini-toggle{width:7cqw;height:4.2cqw;padding:.65cqw;border-radius:5cqw;background:#e7ebe9;box-shadow:inset 0 0 0 .18cqw rgba(31,44,57,.08);display:flex;align-items:center;box-sizing:border-box;flex:none}.legitude-mini-toggle span{width:2.7cqw;height:2.7cqw;border-radius:50%;background:#75aa9f;box-shadow:0 0 0 1cqw rgba(117,170,159,.12)}
+.legitude-role-chip{padding:1.35cqw 2cqw;border-radius:5cqw;background:#172235;color:#d8dbe0;font-size:1.45cqw;letter-spacing:.16cqw;flex:none}
+.legitude-app-scroll{height:calc(100% - 15.7cqw);overflow-y:auto;padding:4.4cqw 4.4cqw 9cqw;display:flex;flex-direction:column;gap:6.8cqw;box-sizing:border-box;scrollbar-width:none}.legitude-app-scroll::-webkit-scrollbar{display:none}
+.legitude-profit-panel{min-height:40cqw;border-radius:9.5cqw;background:linear-gradient(120deg,#111c30,#172238 55%,#263044);box-shadow:0 3cqw 5cqw rgba(29,24,15,.12);position:relative;overflow:hidden;padding:8.5cqw 8.8cqw;box-sizing:border-box}.legitude-profit-panel:before{content:"";position:absolute;width:52cqw;height:72cqw;left:-10cqw;top:6cqw;border-radius:50%;background:rgba(29,45,72,.42)}.legitude-profit-orb{position:absolute;width:55cqw;height:55cqw;right:-12cqw;top:-15cqw;border-radius:50%;background:rgba(255,255,255,.035)}
+.legitude-profit-top{position:relative;display:flex;align-items:center;justify-content:space-between;gap:2cqw}.legitude-profit-top p{margin:0;color:#aeb5c0;font-size:2.05cqw;font-weight:500;letter-spacing:.52cqw}.legitude-profit-top span{padding:1.5cqw 2.3cqw;border-radius:4cqw;border:.2cqw solid rgba(209,157,55,.35);color:#d8b46e;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:1.75cqw;font-weight:700;white-space:nowrap}.legitude-profit-panel h2{position:relative;margin:4.8cqw 0 1.5cqw;color:#f3f1ec;font-family:var(--font-heading);font-size:8.3cqw;line-height:1}.legitude-profit-sub{position:relative;color:#aab0bb;font-size:2.45cqw}
+.legitude-stat-card,.legitude-expense-summary{position:relative;min-height:32cqw;padding:6.5cqw;border-radius:9cqw;background:linear-gradient(135deg,#f9f9f7,#f1f1ef);box-shadow:0 2.7cqw 5cqw rgba(28,24,18,.1);overflow:hidden;box-sizing:border-box;border:.15cqw solid rgba(30,38,50,.04)}.legitude-stat-card:before,.legitude-expense-summary:before{content:"";position:absolute;left:2.3cqw;right:2.3cqw;top:0;height:.55cqw;border-radius:2cqw 2cqw 0 0}.top-green:before{background:#1d765f}.top-amber:before{background:#e0a11b}.top-red:before{background:#c3493b}.top-navy:before{background:#263449}.legitude-stat-card p,.legitude-expense-summary p{margin:0;color:#687383;font-size:2.05cqw;letter-spacing:.52cqw}.legitude-stat-card h3,.legitude-expense-summary h3{margin:3.9cqw 0 1.7cqw;color:#202a3b;font-family:var(--font-heading);font-size:7cqw;line-height:1}.legitude-stat-card small{display:block;color:#697585;font-size:2.45cqw}.legitude-stat-card.top-amber{min-height:38cqw}.legitude-progress{height:1.8cqw;background:#dedfe1;border-radius:5cqw;overflow:hidden;margin:3cqw 0 2.5cqw}.legitude-progress b{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,#1c293a,#493f2c 32%,#c78718 75%,#e1a11b)}
+
+/* Reports and defaulters */
+.legitude-reports{gap:5cqw}.legitude-expense-summary{min-height:20cqw;padding:5.2cqw 6.5cqw}.legitude-expense-summary h3{margin:2.5cqw 0 0}.legitude-report-grid{display:grid;grid-template-columns:1fr 1fr;gap:4cqw}.legitude-report-card,.legitude-defaulter-preview{background:linear-gradient(135deg,#f9f9f7,#f1f1ef);border:.15cqw solid rgba(30,38,50,.04);border-radius:8cqw;padding:5cqw;box-shadow:0 2.7cqw 5cqw rgba(28,24,18,.08);box-sizing:border-box}.legitude-report-card h3,.legitude-defaulter-preview h3{font-family:var(--font-heading);font-size:3.2cqw;line-height:1.25;margin:0 0 4cqw;color:#263140}.pay-row,.class-rate{display:flex;justify-content:space-between;align-items:center;font-size:2.2cqw;margin-top:2.5cqw}.pay-row b,.class-rate b{font-weight:700}.green-text{color:#1d765f}.amber-text{color:#bd8318}.red-text,.table-row b{color:#a64439}.mini-bar{height:1.65cqw;background:#dde0e3;border-radius:5cqw;overflow:hidden;margin-top:1.4cqw}.mini-bar i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,#1c293a,#493f2c 32%,#c78718 75%,#e1a11b)}.mini-bar .green-bar{background:#1d765f}.mini-bar .red-bar{background:#c3493b}
+.legitude-defaulter-preview{padding:6cqw}.legitude-defaulter-preview.full{min-height:100%}.legitude-defaulter-preview h3{font-size:4.2cqw;margin-bottom:4cqw}.legitude-sort{display:inline-flex;gap:2cqw;align-items:center;padding:2.5cqw 3cqw;background:#f6f6f4;border-radius:4cqw;font-size:2.25cqw;margin-bottom:4cqw}.table-head,.table-row{display:grid;grid-template-columns:1.5fr .8fr 1fr;gap:2cqw;align-items:center}.table-head{padding:2.8cqw 2cqw;background:#efeee9;color:#697585;font-size:1.75cqw;font-weight:800;letter-spacing:.28cqw}.table-row{padding:3.6cqw 2cqw;border-bottom:.15cqw solid #dfdfdb;font-size:2.25cqw}.table-row b{font-size:2.15cqw}.table-row span:nth-child(2){text-align:center}.table-row b{text-align:right}
+
+/* Receipt */
+.legitude-receipt-app{background:#f2f2f1}.legitude-receipt-toolbar{height:12.5cqw;min-height:12.5cqw;background:#050505;color:#f2f2f2;display:flex;align-items:center;gap:4cqw;padding:0 4cqw;font-size:4cqw}.legitude-receipt-toolbar b{font-family:var(--font-body);font-size:3.2cqw;font-weight:500;margin-right:auto}.legitude-receipt-page{margin:5cqw 4cqw;padding:5cqw 6cqw 7cqw;background:#fafafa;border:.2cqw solid #ddd;border-radius:5cqw;box-shadow:0 2cqw 4cqw rgba(0,0,0,.05);color:#2b3542;text-align:center}.receipt-logo{width:10cqw;height:10cqw;margin:0 auto 3cqw;border-radius:3cqw;background:#1d2737;color:#e0a11b;border:.4cqw solid #a27d31;display:flex;align-items:center;justify-content:center;font-family:var(--font-heading);font-size:5cqw}.legitude-receipt-page h2{font-family:var(--font-heading);font-size:4.1cqw;line-height:1.1;margin:0}.receipt-tagline{font-family:ui-monospace,monospace;font-size:1.8cqw;letter-spacing:.12cqw;margin:1.4cqw 0 4cqw}.receipt-rule{border-top:.2cqw dashed #d0d0d0;margin:4cqw 0}.receipt-label{font-size:1.75cqw;letter-spacing:.25cqw;margin:0 0 3cqw}.receipt-info div,.receipt-fees div,.receipt-method{display:flex;justify-content:space-between;gap:2cqw;text-align:left;margin:2.4cqw 0;font-size:2.25cqw}.receipt-info b,.receipt-fees b,.receipt-method b{font-weight:600;text-align:right}.legitude-receipt-page h3{font-family:var(--font-heading);font-size:6cqw;margin:5cqw 0}.receipt-method-label{text-align:left;font-size:1.65cqw}.receipt-verified{margin-top:6cqw;color:#39735f;font-family:ui-monospace,monospace;font-size:1.7cqw}
+
+@media(max-width:767px){.features-sticky-phone .phone-outer{width:min(68vw,300px)!important}.hero-visual-desktop .phone-outer{width:min(68vw,300px)!important}.legitude-app-topbar{padding:0 6.5cqw}.legitude-role-chip{display:none}.legitude-term-chip{width:25.5cqw}.legitude-app-title{font-size:4.5cqw}}
+
+/* ========================================================================== 
+   PRODUCT DEMO REFINEMENT — FRAME, LEGIBILITY & MOBILE FLOW
+   ========================================================================== */
+/* Keep the phone's OUTER size unchanged. The frame is added inward. */
+.phone-frame{
+  padding:7px!important;
+  border-radius:48px!important;
+  background:linear-gradient(145deg,#111827,#050912 48%,#1b2637)!important;
+  box-shadow:0 36px 90px rgba(0,0,0,.52),0 14px 34px rgba(0,0,0,.32),0 0 0 1px rgba(255,255,255,.10),inset 0 0 0 1px rgba(255,255,255,.05)!important;
+}
+.phone-frame::before,.phone-frame::after{background:linear-gradient(#2d3747,#111827)!important;opacity:.9}
+.hero-visual-desktop .phone-frame,.features-sticky-phone .phone-frame{padding:7px!important}
+.phone-screen{border-radius:41px!important}
+.hero-visual-desktop .phone-screen,.features-sticky-phone .phone-screen{border-radius:41px!important}
+.phone-frame::after{box-shadow:0 48px 0 rgba(37,48,64,.95)!important}
+
+/* Remove decorative floating badges completely. */
+.hero-badge{display:none!important}
+
+/* Never replace the product with floating stat cards on mobile. */
+.hero-visual-mobile{display:none!important}
+@media(max-width:767px){
+  .hero-visual-desktop{display:flex!important}
+  .hero-visual{
+    min-height:auto!important;
+    padding:22px 0 4px!important;
+    overflow:visible!important;
+  }
+  .hero-visual-desktop .phone-outer{
+    width:min(82vw,300px)!important;
+  }
+  .hero-visual-desktop .phone-frame{padding:7px!important;border-radius:48px!important}
+  .hero-visual-desktop .phone-screen{border-radius:41px!important}
+  .hero-visual-desktop .phone-inner{aspect-ratio:720/1478!important;height:auto!important}
+}
+
+/* Readability: preserve proportions, but prevent showcase text from becoming microscopic. */
+.legitude-app-title{font-size:clamp(12px,4.2cqw,30px)!important}
+.legitude-term-chip span,.legitude-term-chip b{font-size:clamp(6px,1.9cqw,14px)!important}
+.legitude-role-chip{font-size:clamp(6px,1.45cqw,11px)!important}
+.legitude-profit-top p,.legitude-stat-card p,.legitude-expense-summary p{font-size:clamp(7px,2.05cqw,15px)!important}
+.legitude-profit-top span{font-size:clamp(6px,1.75cqw,13px)!important}
+.legitude-profit-panel h2{font-size:clamp(28px,8.3cqw,60px)!important}
+.legitude-profit-sub,.legitude-stat-card small{font-size:clamp(9px,2.45cqw,18px)!important}
+.legitude-stat-card h3,.legitude-expense-summary h3{font-size:clamp(24px,7cqw,50px)!important}
+.legitude-report-card h3{font-size:clamp(12px,3.2cqw,24px)!important}
+.pay-row,.class-rate,.table-row,.receipt-info div,.receipt-fees div,.receipt-method{font-size:clamp(8px,2.25cqw,16px)!important}
+.table-head{font-size:clamp(6px,1.75cqw,13px)!important}
+.legitude-defaulter-preview h3{font-size:clamp(16px,4.2cqw,30px)!important}
+.legitude-sort{font-size:clamp(8px,2.25cqw,16px)!important}
+
+/* Mobile feature story: first card starts later, so it does not immediately cover the demo. */
+@media(max-width:767px){
+  .features-section{padding-top:72px!important}
+  .features-sticky-phone{
+    height:100svh!important;
+    min-height:100svh!important;
+  }
+  .features-cards-stack{
+    margin-top:calc(-100svh + 18svh)!important;
+    padding-top:0!important;
+  }
+  .feature-card:first-child{min-height:calc(100svh + 18svh)!important;height:calc(100svh + 18svh)!important}
+  @supports(height:100dvh){
+    .features-sticky-phone{height:100dvh!important;min-height:100dvh!important}
+    .features-cards-stack{margin-top:calc(-100dvh + 18dvh)!important}
+    .feature-card:first-child{min-height:calc(100dvh + 18dvh)!important;height:calc(100dvh + 18dvh)!important}
+  }
+}
+
 </style>
 </head>
 <body>
@@ -2538,84 +2649,35 @@
 
       <!-- Desktop: full phone mockup -->
       <div class="hero-visual hero-visual-desktop">
-        <div class="hero-badge hero-badge-1">
-          <span class="badge-icon">📈</span>
-          <div><div class="val">₦1.12M profit</div><div class="sub">Net Profit · This Term</div></div>
-        </div>
-        <div class="hero-badge hero-badge-2">
-          <span class="badge-icon">📊</span>
-          <div><div class="val">78% collected</div><div class="sub">Collection Rate</div></div>
-        </div>
-        <div class="hero-badge hero-badge-3">
-          <span class="badge-icon">⚠️</span>
-          <div><div class="val">₦334K uncollected</div><div class="sub">Still outstanding</div></div>
-        </div>
-
         <div class="phone-outer">
           <div class="phone-halo"></div>
           <div class="phone-frame">
             <div class="phone-notch-bar"><div class="phone-notch-pill"></div></div>
             <div class="phone-screen">
-              <div class="phone-inner">
-                <div class="app-header">
-                  <span>Greenfield Academy</span>
-                  <span style="color: var(--amber); font-weight:700;">LIVE</span>
-                </div>
-
-                <div class="app-card">
-                  <span style="font-size:0.7rem; color: var(--muted);">Net Profit (This Term)</span>
-                  <div style="font-size: 1.3rem; font-weight:800; color:var(--white);">₦1,120,000</div>
-                  <div class="stat-row">
-                    <span style="color:#4ade80;">Revenue: ₦4.85M</span>
-                    <span style="color:#f87171;">Expenses: ₦3.73M</span>
-                  </div>
-                </div>
-
-                <div class="app-card">
-                  <span style="font-size:0.75rem; font-weight:600; color:var(--headline-white);">Collection Status</span>
-                  <div class="bar-bg"><div class="bar-fill" style="width: 78%;"></div></div>
-                  <div class="stat-row">
-                    <span style="color:var(--muted); font-size:0.7rem;">78% Paid</span>
-                    <span style="color:var(--amber); font-size:0.7rem;">22% Owed</span>
-                  </div>
-                </div>
-
-                <div class="app-card" style="flex-grow:1;">
-                  <span style="font-size:0.75rem; font-weight:600; color:var(--headline-white);">Recent Activity</span>
-                  <div style="margin-top:8px; font-size:0.7rem; display:flex; flex-direction:column; gap:8px;">
-                    <div style="display:flex; justify-content:space-between; background:rgba(255,255,255,0.03); padding:6px; border-radius:6px;">
-                      <span>Receipt #1042 (JSS 2)</span>
-                      <span style="color:#4ade80; font-weight:700;">+₦45,000</span>
-                    </div>
-                    <div style="display:flex; justify-content:space-between; background:rgba(255,255,255,0.03); padding:6px; border-radius:6px;">
-                      <span>Fuel for Generator</span>
-                      <span style="color:#f87171; font-weight:700;">-₦18,500</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <div class="phone-inner"><div class="legitude-phone-app legitude-hero-app">
+  <div class="legitude-app-topbar">
+    <div class="legitude-menu-icon"><i></i><i></i><i></i></div>
+    <div class="legitude-app-title">Dashboard</div>
+    <div class="legitude-term-chip"><span>3rd Term</span><b>2026/27</b></div>
+    <div class="legitude-mini-toggle"><span></span></div>
+    <div class="legitude-role-chip">DIRECTOR</div>
+  </div>
+  <div class="legitude-app-scroll">
+    <section class="legitude-profit-panel">
+      <div class="legitude-profit-orb"></div>
+      <div class="legitude-profit-top"><p>NET PROFIT THIS TERM</p><span>3rd Term 2026/27</span></div>
+      <h2>₦1.3M</h2>
+      <div class="legitude-profit-sub">₦ 1.4M revenue&nbsp;&nbsp;·&nbsp;&nbsp;₦ 111.7K expenses</div>
+    </section>
+    <section class="legitude-stat-card top-green"><p>TOTAL REVENUE</p><h3>₦1.4M</h3><small>26 students fully paid</small></section>
+    <section class="legitude-stat-card top-amber"><p>COLLECTION RATE</p><h3>56%</h3><div class="legitude-progress"><b style="width:56%"></b></div><small>Compulsory fees only</small></section>
+    <section class="legitude-stat-card top-red"><p>DEFAULTERS</p><h3>24</h3><small>₦ 941,300 outstanding</small></section>
+    <section class="legitude-stat-card top-navy"><p>EXPENSES</p><h3>₦111.7K</h3><small>Approved only</small></section>
+  </div>
+</div></div>
             </div>
           </div>
           <div class="phone-ground-glow"></div>
-        </div>
-      </div>
-
-      <!-- Mobile: floating stat cards -->
-      <div class="hero-visual-mobile">
-        <div class="hero-stat-card hero-stat-card-1">
-          <div class="hero-stat-label">Net Profit · This Term</div>
-          <div class="hero-stat-value" style="color:#4ade80;">₦1,120,000</div>
-          <div class="hero-stat-sub">Revenue ₦4.85M &nbsp;·&nbsp; Expenses ₦3.73M</div>
-        </div>
-        <div class="hero-stat-card hero-stat-card-2">
-          <div class="hero-stat-label">Collection Rate</div>
-          <div class="hero-stat-value" style="color:var(--amber-light);">87%</div>
-          <div class="hero-stat-bar"><div class="hero-stat-bar-fill" style="width:87%;"></div></div>
-        </div>
-        <div class="hero-stat-card hero-stat-card-3">
-          <div class="hero-stat-label">Outstanding Defaulters</div>
-          <div class="hero-stat-value" style="color:#f87171;">14 students</div>
-          <div class="hero-stat-sub" style="color:rgba(255,255,255,0.35);">₦334,000 uncollected</div>
         </div>
       </div>
     </div>
@@ -2693,101 +2755,84 @@
               <div class="phone-notch-bar"><div class="phone-notch-pill"></div></div>
               <div class="phone-screen">
                 <div class="phone-inner">
-                  <div class="phone-screen-viewer">
-                    <!-- Screen 0: Dashboard -->
-                    <div class="app-screen active" id="screen-0">
-                      <div class="app-header">
-                        <span>Director Dashboard</span>
-                        <span style="color:var(--amber); font-weight:700;">Live</span>
-                      </div>
-                      <div class="app-card">
-                        <span style="font-size:0.7rem; color:var(--muted);">Net Profit</span>
-                        <div style="font-size:1.4rem; font-weight:800; color:#4ade80;">₦1,120,000</div>
-                      </div>
-                      <div class="app-card">
-                        <div style="font-size:0.75rem; color:var(--headline-white);">Total Revenue</div>
-                        <div style="font-size:1rem; font-weight:700;">₦4,850,000</div>
-                        <div class="bar-bg"><div class="bar-fill" style="width: 100%; background:#4ade80;"></div></div>
-                      </div>
-                      <div class="app-card">
-                        <div style="font-size:0.75rem; color:var(--headline-white);">Total Expenses</div>
-                        <div style="font-size:1rem; font-weight:700; color:#f87171;">₦3,730,000</div>
-                        <div class="bar-bg"><div class="bar-fill" style="width: 75%; background:#f87171;"></div></div>
-                      </div>
-                    </div>
+                  <div class="phone-screen-viewer legitude-screen-viewer">
 
-                    <!-- Screen 1: Defaulters -->
-                    <div class="app-screen" id="screen-1">
-                      <div class="app-header">
-                        <span>Defaulters List</span>
-                        <span style="background:var(--amber); color:var(--navy); padding:2px 6px; border-radius:4px; font-size:0.65rem; font-weight:700;">Assembly Mode</span>
-                      </div>
-                      <div class="app-card" style="flex-grow:1;">
-                        <div style="font-size:0.7rem; color:var(--muted); margin-bottom:8px;">Ranked by Amount Owed</div>
-                        <div style="display:flex; flex-direction:column; gap:8px; font-size:0.75rem;">
-                          <div style="display:flex; justify-content:space-between; border-bottom:1px solid rgba(255,255,255,0.05); padding-bottom:4px;">
-                            <span>1. Amina Bello (JSS 2A)</span>
-                            <span style="color:var(--amber);">₦45,000</span>
-                          </div>
-                          <div style="display:flex; justify-content:space-between; border-bottom:1px solid rgba(255,255,255,0.05); padding-bottom:4px;">
-                            <span>2. Chidi Okafor (SSS 1B)</span>
-                            <span style="color:var(--amber);">₦32,500</span>
-                          </div>
-                          <div style="display:flex; justify-content:space-between; border-bottom:1px solid rgba(255,255,255,0.05); padding-bottom:4px;">
-                            <span>3. Tunde Bakare (Pry 4)</span>
-                            <span style="color:var(--amber);">₦18,000</span>
-                          </div>
-                          <div style="display:flex; justify-content:space-between;">
-                            <span>4. Blessing Eze (JSS 3C)</span>
-                            <span style="color:var(--amber);">₦15,000</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+  <!-- SCREEN 0: Dashboard -->
+  <div class="app-screen active legitude-screen" id="screen-0">
+    <div class="legitude-phone-app">
+      <div class="legitude-app-topbar">
+        <div class="legitude-menu-icon"><i></i><i></i><i></i></div>
+        <div class="legitude-app-title">Dashboard</div>
+        <div class="legitude-term-chip"><span>3rd Term</span><b>2026/27</b></div>
+        <div class="legitude-mini-toggle"><span></span></div>
+        <div class="legitude-role-chip">DIRECTOR</div>
+      </div>
+      <div class="legitude-app-scroll">
+        <section class="legitude-profit-panel">
+          <div class="legitude-profit-orb"></div>
+          <div class="legitude-profit-top"><p>NET PROFIT THIS TERM</p><span>3rd Term 2026/27</span></div>
+          <h2>₦1.3M</h2>
+          <div class="legitude-profit-sub">₦ 1.4M revenue&nbsp;&nbsp;·&nbsp;&nbsp;₦ 111.7K expenses</div>
+        </section>
+        <section class="legitude-stat-card top-green"><p>TOTAL REVENUE</p><h3>₦1.4M</h3><small>26 students fully paid</small></section>
+        <section class="legitude-stat-card top-amber"><p>COLLECTION RATE</p><h3>56%</h3><div class="legitude-progress"><b style="width:56%"></b></div><small>Compulsory fees only</small></section>
+        <section class="legitude-stat-card top-red"><p>DEFAULTERS</p><h3>24</h3><small>₦ 941,300 outstanding</small></section>
+        <section class="legitude-stat-card top-navy"><p>EXPENSES</p><h3>₦111.7K</h3><small>Approved only</small></section>
+      </div>
+    </div>
+  </div>
 
-                    <!-- Screen 2: Collection by Class -->
-                    <div class="app-screen" id="screen-2">
-                      <div class="app-header">
-                        <span>Collection by Class</span>
-                        <span>Term 2</span>
-                      </div>
-                      <div class="app-card">
-                        <div class="stat-row"><span>Primary 1 - 5</span><span style="color:var(--amber);">88%</span></div>
-                        <div class="bar-bg"><div class="bar-fill" style="width: 88%;"></div></div>
-                      </div>
-                      <div class="app-card">
-                        <div class="stat-row"><span>JSS 1 - 3</span><span style="color:var(--amber);">74%</span></div>
-                        <div class="bar-bg"><div class="bar-fill" style="width: 74%;"></div></div>
-                      </div>
-                      <div class="app-card">
-                        <div class="stat-row"><span>SSS 1 - 3</span><span style="color:var(--amber);">92%</span></div>
-                        <div class="bar-bg"><div class="bar-fill" style="width: 92%;"></div></div>
-                      </div>
-                    </div>
+  <!-- SCREEN 1: Reports -->
+  <div class="app-screen legitude-screen" id="screen-1">
+    <div class="legitude-phone-app">
+      <div class="legitude-app-topbar">
+        <div class="legitude-menu-icon"><i></i><i></i><i></i></div>
+        <div class="legitude-app-title">Reports</div>
+        <div class="legitude-term-chip"><span>3rd Term</span><b>2026/27</b></div>
+        <div class="legitude-mini-toggle"><span></span></div>
+        <div class="legitude-role-chip">DIRECTOR</div>
+      </div>
+      <div class="legitude-app-scroll legitude-reports">
+        <section class="legitude-expense-summary top-navy"><p>EXPENSES</p><h3>₦111.7K</h3></section>
+        <div class="legitude-report-grid">
+          <section class="legitude-report-card"><h3>Payment Status</h3><div class="pay-row"><span>Fully Paid</span><b class="green-text">26 students</b></div><div class="mini-bar"><i class="green-bar" style="width:52%"></i></div><div class="pay-row"><span>Partial</span><b class="amber-text">4 students</b></div><div class="mini-bar"><i class="amber-bar" style="width:16%"></i></div><div class="pay-row"><span>Unpaid</span><b class="red-text">20 students</b></div><div class="mini-bar"><i class="red-bar" style="width:36%"></i></div></section>
+          <section class="legitude-report-card"><h3>Collection Rate<br>by Class</h3>
+            <div class="class-rate"><span>JSS 1</span><b>100%</b></div><div class="mini-bar"><i class="amber-bar" style="width:100%"></i></div>
+            <div class="class-rate"><span>JSS 2</span><b>67%</b></div><div class="mini-bar"><i class="amber-bar" style="width:67%"></i></div>
+            <div class="class-rate"><span>JSS 3</span><b>37%</b></div><div class="mini-bar"><i class="amber-bar" style="width:37%"></i></div>
+            <div class="class-rate"><span>SSS 1</span><b>62%</b></div><div class="mini-bar"><i class="amber-bar" style="width:62%"></i></div>
+            <div class="class-rate"><span>SSS 2</span><b>40%</b></div><div class="mini-bar"><i class="amber-bar" style="width:40%"></i></div>
+          </section>
+        </div>
+        <section class="legitude-defaulter-preview"><h3>Defaulters (24)</h3><div class="legitude-sort">Sort by: Highest Owing <span>⌄</span></div><div class="table-head"><span>STUDENT</span><span>CLASS</span><span>OWING</span></div><div class="table-row"><span>Adu Alui</span><span>SSS 3</span><b>₦86,000</b></div><div class="table-row"><span>Efe Okpara</span><span>SSS 3</span><b>₦86,000</b></div><div class="table-row"><span>Ejiro Atakpo</span><span>SSS 3</span><b>₦86,000</b></div></section>
+      </div>
+    </div>
+  </div>
 
-                    <!-- Screen 3: Receipt -->
-                    <div class="app-screen" id="screen-3">
-                      <div class="app-header">
-                        <span>Payment Receipt</span>
-                        <span style="color:#4ade80;">Generated</span>
-                      </div>
-                      <div class="app-card" style="background:var(--white); color:var(--navy); text-align:center;">
-                        <div style="font-weight:800; font-size:0.85rem;">GREENFIELD ACADEMY</div>
-                        <div style="font-size:0.65rem; color:var(--muted);">Official Digital Receipt</div>
-                        <hr style="margin:8px 0; border:none; border-top:1px dashed #ccc;">
-                        <div style="font-size:0.75rem; text-align:left; display:flex; flex-direction:column; gap:4px;">
-                          <div><strong>Student:</strong> Emeka Nwosu</div>
-                          <div><strong>Class:</strong> Primary 5B</div>
-                          <div><strong>Type:</strong> School Fees (Part)</div>
-                          <div><strong>Amount:</strong> ₦65,000</div>
-                          <div><strong>Method:</strong> POS</div>
-                        </div>
-                        <div style="margin-top:10px; background:#e6f4ea; color:#137333; font-size:0.65rem; padding:4px; font-weight:700; border-radius:4px;">
-                          VERIFIED & PAID
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+  <!-- SCREEN 2: Defaulters -->
+  <div class="app-screen legitude-screen" id="screen-2">
+    <div class="legitude-phone-app">
+      <div class="legitude-app-topbar"><div class="legitude-menu-icon"><i></i><i></i><i></i></div><div class="legitude-app-title">Reports</div><div class="legitude-term-chip"><span>3rd Term</span><b>2026/27</b></div><div class="legitude-mini-toggle"><span></span></div><div class="legitude-role-chip">DIRECTOR</div></div>
+      <div class="legitude-app-scroll legitude-defaulters-screen">
+        <section class="legitude-defaulter-preview full"><h3>Defaulters (24)</h3><div class="legitude-sort">Sort by: Highest Owing <span>⌄</span></div><div class="table-head"><span>STUDENT</span><span>CLASS</span><span>OWING</span></div>
+          <div class="table-row"><span>Adu Alui</span><span>SSS 3</span><b>₦86,000</b></div><div class="table-row"><span>Efe Okpara</span><span>SSS 3</span><b>₦86,000</b></div><div class="table-row"><span>Ejiro Atakpo</span><span>SSS 3</span><b>₦86,000</b></div><div class="table-row"><span>Elijah Emeka</span><span>SSS 3</span><b>₦86,000</b></div><div class="table-row"><span>Oghenetega Oweh</span><span>SSS 3</span><b>₦86,000</b></div><div class="table-row"><span>Edith Ohio</span><span>SSS 2</span><b>₦44,000</b></div><div class="table-row"><span>Efe Ogbini</span><span>SSS 2</span><b>₦44,000</b></div><div class="table-row"><span>Maro Dennis</span><span>SSS 2</span><b>₦44,000</b></div><div class="table-row"><span>Oghenekevwe Ogbemi</span><span>SSS 2</span><b>₦44,000</b></div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN 3: Receipt -->
+  <div class="app-screen legitude-screen" id="screen-3">
+    <div class="legitude-phone-app legitude-receipt-app">
+      <div class="legitude-receipt-toolbar"><span>←</span><b>Receipt.pdf</b><span>↗</span><span>☆</span><span>⋮</span></div>
+      <div class="legitude-receipt-page">
+        <div class="receipt-logo">G</div><h2>GOPET SECONDARY SCHOOL</h2><p class="receipt-tagline">intelligence and character · 08161848171</p><div class="receipt-rule"></div><p class="receipt-label">OFFICIAL FEE RECEIPT</p>
+        <div class="receipt-info"><div><span>Receipt No.</span><b>RCP-0090</b></div><div><span>Student</span><b>Miracle Adonyi</b></div><div><span>Class</span><b>SSS 1</b></div><div><span>Term</span><b>3rd Term 2026/27</b></div><div><span>Date</span><b>27 August 2026 at 20:05</b></div></div>
+        <div class="receipt-rule"></div><div class="receipt-fees"><div><span>Tuition Fee</span><b>₦ 14,000</b></div><div><span>Book Fee</span><b>₦ 4,500</b></div><div><span>PTA Levy</span><b>₦ 3,400</b></div><div><span>Medical Fee</span><b>₦ 9,000</b></div></div><h3>₦30,900</h3><div class="receipt-rule"></div><p class="receipt-method-label">PAYMENT METHOD</p><div class="receipt-method"><span>Transfer</span><b>₦ 30,900</b></div><p class="receipt-verified">✓ Payment verified · GOPET SECONDARY SCHOOL</p>
+      </div>
+    </div>
+  </div>
+</div>
                 </div>
               </div>
             </div>
