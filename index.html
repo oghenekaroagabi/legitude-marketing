@@ -1,459 +1,3070 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Legitude — Your School's Finances, Finally Clear</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<style>
-:root{--navy:#0D1B2A;--navy-mid:#162235;--navy-light:#1E3050;--amber:#E8A020;--amber-light:#F5C050;--amber-dark:#C07010;--white:#FFFFFF;--off-white:#F8F6F1;--text-muted:#8899AA;--text-body:#3D4F60;--border:rgba(13,27,42,0.1)}
-*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
-body{font-family:'DM Sans',sans-serif;background:var(--off-white);color:var(--navy);overflow-x:hidden}
-h1,h2,h3{font-family:'Playfair Display',serif}
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.2rem 5%;background:rgba(248,246,241,0.93);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);transition:all .3s}
-.nav-logo{display:flex;align-items:center;gap:10px}
-.logo-mark{width:36px;height:36px;background:var(--navy);border-radius:8px;display:flex;align-items:center;justify-content:center}
-.logo-mark svg{width:22px;height:22px}
-.logo-name{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:900;color:var(--navy);letter-spacing:-.02em}
-.logo-name span{color:var(--amber)}
-.nav-links{display:flex;align-items:center;gap:2rem;list-style:none}
-.nav-links a{text-decoration:none;color:var(--text-body);font-size:.9rem;font-weight:500;transition:color .2s}
-.nav-links a:hover{color:var(--navy)}
-.nav-cta{background:var(--navy);color:var(--white)!important;padding:.6rem 1.4rem;border-radius:6px;font-weight:600!important;transition:background .2s!important}
-.nav-cta:hover{background:var(--amber)!important;color:var(--navy)!important}
-.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:8rem 5% 5rem;gap:4rem;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;top:-200px;right:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(232,160,32,.08) 0%,transparent 70%);pointer-events:none}
-.hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(232,160,32,.12);border:1px solid rgba(232,160,32,.3);color:var(--amber-dark);padding:.4rem 1rem;border-radius:100px;font-size:.8rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;margin-bottom:1.5rem}
-.hero-tag::before{content:'';width:6px;height:6px;background:var(--amber);border-radius:50%}
-.hero h1{font-size:clamp(2.5rem,4vw,3.8rem);line-height:1.1;color:var(--navy);margin-bottom:1.5rem;letter-spacing:-.03em}
-.hero h1 em{font-style:italic;color:var(--amber)}
-.hero p{font-size:1.1rem;line-height:1.8;color:var(--text-body);max-width:480px;margin-bottom:2.5rem}
-.hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
-.btn-primary{background:var(--navy);color:var(--white);padding:.9rem 2rem;border-radius:8px;font-weight:600;font-size:.95rem;border:none;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
-.btn-primary:hover{background:var(--amber);color:var(--navy);transform:translateY(-1px)}
-.btn-secondary{background:transparent;color:var(--navy);padding:.9rem 2rem;border-radius:8px;font-weight:600;font-size:.95rem;border:1.5px solid var(--navy);cursor:pointer;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center}
-.btn-secondary:hover{background:var(--navy);color:var(--white)}
-.hero-visual{position:relative;display:flex;align-items:center;justify-content:center}
-.dashboard-card{background:var(--white);border-radius:16px;box-shadow:0 24px 80px rgba(13,27,42,.15);overflow:hidden;width:100%;max-width:460px;animation:float 6s ease-in-out infinite}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
-.dashboard-header{background:var(--navy);padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between}
-.dashboard-header-title{color:var(--white);font-size:.85rem;font-weight:500;opacity:.7}
-.dashboard-dots{display:flex;gap:6px}
-.dashboard-dots span{width:10px;height:10px;border-radius:50%}
-.dashboard-body{padding:1.5rem}
-.stats-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1.2rem}
-.stat-card{padding:1rem;border-radius:10px}
-.stat-card.collected{background:rgba(13,27,42,.05)}
-.stat-card.outstanding{background:rgba(232,160,32,.08)}
-.stat-label{font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);margin-bottom:4px}
-.stat-value{font-size:1.4rem;font-weight:700;color:var(--navy);font-family:'Playfair Display',serif}
-.stat-sub{font-size:.7rem;color:var(--text-muted);margin-top:2px}
-.progress-section{margin-bottom:1.2rem}
-.progress-label{display:flex;justify-content:space-between;font-size:.8rem;font-weight:500;margin-bottom:8px;color:var(--text-body)}
-.progress-bar{height:8px;background:rgba(13,27,42,.08);border-radius:100px;overflow:hidden}
-.progress-fill{height:100%;border-radius:100px;background:linear-gradient(90deg,var(--navy),var(--amber));width:78%}
-.recent-label{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);margin-bottom:10px}
-.payment-row{display:flex;align-items:center;justify-content:space-between;padding:.7rem 0;border-bottom:1px solid rgba(13,27,42,.06)}
-.payment-row:last-child{border-bottom:none}
-.payment-avatar{width:32px;height:32px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;color:var(--white);font-size:.7rem;font-weight:700;flex-shrink:0}
-.payment-info{flex:1;padding:0 10px}
-.payment-name{font-size:.85rem;font-weight:600;color:var(--navy)}
-.payment-class{font-size:.7rem;color:var(--text-muted)}
-.payment-amount{font-size:.9rem;font-weight:700;color:var(--navy)}
-.floating-badge{position:absolute;background:var(--white);border-radius:12px;padding:10px 14px;box-shadow:0 8px 30px rgba(13,27,42,.12);display:flex;align-items:center;gap:10px;font-size:.78rem;font-weight:600;white-space:nowrap}
-.floating-badge.top{top:-20px;right:-20px;animation:float 5s ease-in-out infinite 1s}
-.floating-badge.bottom{bottom:-20px;left:-20px;animation:float 5s ease-in-out infinite 2s}
-.badge-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px}
-.problem{background:var(--navy);padding:6rem 5%;text-align:center}
-.section-tag{display:inline-block;font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);margin-bottom:1rem}
-.problem h2{font-size:clamp(1.8rem,3vw,2.8rem);color:var(--white);max-width:700px;margin:0 auto 1.5rem;line-height:1.2}
-.problem>p{color:rgba(255,255,255,.6);max-width:560px;margin:0 auto 4rem;line-height:1.7;font-size:1rem}
-.problem-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:900px;margin:0 auto}
-.problem-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:2rem;text-align:left;transition:border-color .2s}
-.problem-card:hover{border-color:rgba(232,160,32,.3)}
-.problem-icon{width:44px;height:44px;background:rgba(232,160,32,.1);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--amber);font-size:1.1rem;margin-bottom:1.2rem}
-.problem-card h3{font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:700;color:var(--white);margin-bottom:.6rem}
-.problem-card p{font-size:.88rem;line-height:1.6;color:rgba(255,255,255,.5)}
-.features{padding:7rem 5%;background:var(--off-white)}
-.section-header{max-width:600px;margin:0 auto 5rem;text-align:center}
-.section-header h2{font-size:clamp(1.8rem,3vw,2.6rem);color:var(--navy);margin-bottom:1rem;line-height:1.2}
-.section-header p{color:var(--text-body);line-height:1.7;font-size:1rem}
-.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:1100px;margin:0 auto}
-.feature-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:2rem;transition:all .3s}
-.feature-card:hover{border-color:var(--amber);transform:translateY(-4px);box-shadow:0 12px 40px rgba(13,27,42,.08)}
-.feature-card .f-icon{width:48px;height:48px;background:rgba(13,27,42,.05);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:var(--navy);margin-bottom:1.2rem}
-.feature-card h3{font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:.6rem}
-.feature-card p{font-size:.88rem;line-height:1.65;color:var(--text-body)}
-.roles{background:var(--white);padding:7rem 5%}
-.roles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;max-width:1100px;margin:0 auto}
-.role-card{border-radius:16px;padding:2.5rem;position:relative;overflow:hidden}
-.role-card.bursar{background:var(--off-white);border:1px solid var(--border)}
-.role-card.director{background:var(--navy);color:var(--white)}
-.role-card.admin{background:var(--off-white);border:1px solid var(--border)}
-.role-pill{display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 12px;border-radius:100px;margin-bottom:1.5rem}
-.bursar .role-pill{background:rgba(13,27,42,.08);color:var(--navy)}
-.director .role-pill{background:rgba(232,160,32,.2);color:var(--amber)}
-.admin .role-pill{background:rgba(13,27,42,.08);color:var(--navy)}
-.role-card h3{font-size:1.5rem;margin-bottom:.8rem;line-height:1.2}
-.director h3{color:var(--white)}
-.role-card>p{font-size:.88rem;line-height:1.65;margin-bottom:1.8rem}
-.director>p{color:rgba(255,255,255,.65)}
-.role-features{list-style:none}
-.role-features li{display:flex;align-items:flex-start;gap:10px;font-size:.85rem;margin-bottom:.7rem;line-height:1.4}
-.director .role-features li{color:rgba(255,255,255,.8)}
-.check-icon{width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.6rem;flex-shrink:0;margin-top:1px}
-.bursar .check-icon,.admin .check-icon{background:rgba(13,27,42,.1);color:var(--navy)}
-.director .check-icon{background:rgba(232,160,32,.2);color:var(--amber)}
-.pricing{background:var(--off-white);padding:7rem 5%}
-.pricing-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;max-width:800px;margin:0 auto}
-.pricing-card{border-radius:16px;padding:2.5rem;position:relative}
-.pricing-card.basic{background:var(--white);border:1px solid var(--border)}
-.pricing-card.pro{background:var(--navy);color:var(--white)}
-.pricing-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--amber);color:var(--navy);font-size:.7rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:4px 14px;border-radius:100px}
-.plan-name{font-family:'DM Sans',sans-serif;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--text-muted);margin-bottom:.5rem}
-.pro .plan-name{color:rgba(255,255,255,.5)}
-.plan-price{font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:900;color:var(--navy);line-height:1;margin-bottom:.3rem}
-.pro .plan-price{color:var(--amber)}
-.plan-per{font-size:.85rem;color:var(--text-muted);margin-bottom:.4rem}
-.pro .plan-per{color:rgba(255,255,255,.5)}
-.plan-desc{font-size:.85rem;color:var(--text-body);margin-bottom:2rem;line-height:1.5}
-.pro .plan-desc{color:rgba(255,255,255,.6)}
-.plan-features{list-style:none;margin-bottom:2rem}
-.plan-features li{display:flex;align-items:center;gap:10px;font-size:.88rem;padding:.5rem 0;border-bottom:1px solid rgba(13,27,42,.05);color:var(--text-body)}
-.pro .plan-features li{color:rgba(255,255,255,.75);border-bottom-color:rgba(255,255,255,.06)}
-.plan-features li i{color:var(--amber);font-size:.75rem}
-.pricing-note{text-align:center;font-size:.85rem;color:var(--text-muted);margin-top:2rem}
-.cta{background:var(--navy);padding:7rem 5%;text-align:center;position:relative;overflow:hidden}
-.cta::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(232,160,32,.08) 0%,transparent 70%);pointer-events:none}
-.cta h2{font-size:clamp(2rem,4vw,3.2rem);color:var(--white);max-width:650px;margin:0 auto 1.2rem;line-height:1.15}
-.cta h2 em{color:var(--amber);font-style:italic}
-.cta>p{color:rgba(255,255,255,.6);max-width:500px;margin:0 auto 3rem;line-height:1.7}
-.btn-amber{background:var(--amber);color:var(--navy);padding:.9rem 2.2rem;border-radius:8px;font-weight:700;font-size:.95rem;border:none;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
-.btn-amber:hover{background:var(--amber-light);transform:translateY(-1px)}
-.contact-form{max-width:480px;margin:0 auto;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:2rem;position:relative;z-index:1}
-.form-group{margin-bottom:1rem}
-.form-group label{display:block;font-size:.8rem;font-weight:600;color:rgba(255,255,255,.6);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.06em}
-.form-group input,.form-group select{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:.8rem 1rem;font-size:.9rem;color:var(--white);font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s}
-.form-group input:focus,.form-group select:focus{border-color:var(--amber)}
-.form-group input::placeholder{color:rgba(255,255,255,.25)}
-.form-group select option{background:var(--navy);color:var(--white)}
-footer{background:#080F17;padding:4rem 5% 2rem;color:rgba(255,255,255,.4)}
-.footer-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:3rem;gap:2rem}
-.footer-tagline{font-size:.85rem;line-height:1.6;max-width:260px;margin-top:.8rem}
-.footer-links h4{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.6);margin-bottom:1rem}
-.footer-links ul{list-style:none}
-.footer-links li{margin-bottom:.6rem}
-.footer-links a{text-decoration:none;font-size:.88rem;color:rgba(255,255,255,.35);transition:color .2s}
-.footer-links a:hover{color:var(--amber)}
-.footer-bottom{border-top:1px solid rgba(255,255,255,.06);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;font-size:.8rem}
-@media(max-width:768px){.hero{grid-template-columns:1fr;padding-top:6rem}.hero-visual{display:none}.problem-grid,.features-grid,.roles-grid,.pricing-grid{grid-template-columns:1fr}.nav-links{display:none}.footer-top{flex-direction:column}}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Legitude — School Finance Management for Nigerian Private Schools</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ==========================================================================
+       1. EXACT COLOUR TOKENS & RESET (from Legitude)
+       ========================================================================== */
+    :root {
+      --navy: #0f1f3d;
+      --navy-deep: #080f1e;
+      --amber: #e8a020;
+      --amber-light: #f4b940;
+      --white: #ffffff;
+      --apple-white: #F5F5F7;
+      --muted: #6e7f99;
+      --text: #1a2535;
+      --border: #e2e4e9;
+      --headline-white: #E8EDF5;
+      --font-heading: 'DM Serif Display', Georgia, serif;
+      --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    .ude {
+      color: var(--amber);
+    }
+    .nav-logo {
+      color: var(--white);
+      text-decoration: none;
+    }
+    .nav-logo .ude {
+      color: var(--amber);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--text);
+      background-color: var(--white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, .serif {
+      font-family: var(--font-heading);
+      font-weight: 400;
+      line-height: 1.15;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button, input, select {
+      font-family: inherit;
+      font-size: inherit;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section-label {
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.13em;
+      color: var(--amber);
+      margin-bottom: 12px;
+      display: inline-block;
+    }
+
+    .section-title {
+      font-size: clamp(1.9rem, 3.5vw, 2.7rem);
+      color: var(--navy);
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    .section-sub {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 640px;
+      line-height: 1.75;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 28px;
+      border-radius: 9px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.25s ease;
+      cursor: pointer;
+      border: 1px solid transparent;
+      text-align: center;
+    }
+
+    .btn-solid-amber {
+      background: var(--amber);
+      color: var(--navy-deep);
+      box-shadow: 0 4px 14px rgba(232, 160, 32, 0.3);
+    }
+    .btn-solid-amber:hover {
+      background: var(--amber-light);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(232, 160, 32, 0.4);
+    }
+
+    .btn-ghost-white {
+      background: transparent;
+      color: var(--headline-white);
+      border-color: rgba(232, 237, 245, 0.3);
+    }
+    .btn-ghost-white:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--headline-white);
+      transform: translateY(-2px);
+    }
+
+    .btn-white-pill {
+      background: var(--white);
+      color: var(--navy);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .btn-white-pill:hover {
+      background: var(--headline-white);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .thankyou-state {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    .ty-circle {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      background: rgba(232, 160, 32, 0.12);
+      border: 2px solid rgba(232, 160, 32, 0.26);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      font-size: 1.6rem;
+      color: var(--amber);
+    }
+
+    .ty-name {
+      font-family: "DM Serif Display", serif;
+      font-size: 1.9rem;
+      color: var(--headline-white);
+      margin-bottom: 0.6rem;
+    }
+
+    .ty-msg {
+      color: rgba(255, 255, 255, 0.48);
+      font-size: 0.92rem;
+      line-height: 1.75;
+      margin-bottom: 1.5rem;
+      max-width: 300px;
+    }
+
+    @keyframes slideInRight {
+      from { opacity: 0; transform: translateX(28px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .thankyou-state.visible {
+      animation: slideInRight 0.42s ease forwards;
+    }
+
+ /* ==========================================================================
+   GLOBAL NAVIGATION (from Legitude - fixed colours)
+   ========================================================================== */
+    /* NAV */
+    nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(15,31,61,0.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:0 5%;height:68px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.06);transition:box-shadow 0.3s,border-color 0.3s}
+    nav.scrolled{box-shadow:0 4px 24px rgba(0,0,0,0.3);border-bottom-color:rgba(232,160,32,0.12)}
+    .nav-logo{font-family:"DM Serif Display",serif;font-size:1.5rem;color:var(--white);text-decoration:none;letter-spacing:-0.02em;display:inline-flex;align-items:center;gap:0.45rem}
+    .nav-logo-mark{width:28px;height:28px;border-radius:7px;background:linear-gradient(135deg,var(--amber) 0%,var(--amber-light) 100%);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .nav-logo-mark svg{width:14px;height:14px;stroke:var(--navy);stroke-width:2.5;fill:none}
+    .nav-logo-text{display:inline;white-space:nowrap}
+    .nav-logo-text .ude{color:var(--amber)}
+    .nav-links{display:flex;gap:0.2rem;align-items:center;position:relative}
+    .nav-pill{position:absolute;background:rgba(232,160,32,0.1);border:1px solid rgba(232,160,32,0.18);border-radius:6px;height:32px;transition:left 0.28s cubic-bezier(0.34,1.56,0.64,1),width 0.28s cubic-bezier(0.34,1.56,0.64,1),opacity 0.2s;opacity:0;pointer-events:none;top:50%;transform:translateY(-50%)}
+    .nav-links:hover .nav-pill{opacity:1}
+    .nav-links a{color:rgba(255,255,255,0.62);text-decoration:none;font-size:0.91rem;font-weight:500;padding:0.4rem 0.85rem;border-radius:6px;position:relative;z-index:1;transition:color 0.2s;white-space:nowrap}
+    .nav-links a:hover,.nav-links a.active{color:var(--white)}
+    .nav-cta{background:var(--white) !important;color:var(--navy) !important;font-weight:700 !important;padding:0.5rem 1.25rem;border-radius:6px;transition:background 0.2s,transform 0.15s !important;box-shadow:0 2px 12px rgba(0,0,0,0.15)}
+    .nav-cta:hover{background:var(--headline-white) !important;transform:translateY(-1px) !important}
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+    .hamburger span{display:block;width:24px;height:2px;background:var(--white);border-radius:2px;transition:all 0.3s}
+    .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+    .hamburger.open span:nth-child(2){opacity:0}
+    .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+    .mobile-menu{display:none;position:fixed;top:68px;left:0;right:0;background:rgba(15,31,61,0.98);backdrop-filter:blur(20px);padding:1.5rem 5%;border-bottom:1px solid rgba(255,255,255,0.08);z-index:199;flex-direction:column}
+    .mobile-menu a{color:rgba(255,255,255,0.8);text-decoration:none;font-size:1rem;font-weight:500;padding:0.85rem 0;border-bottom:1px solid rgba(255,255,255,0.07);display:block}
+    .mobile-menu .mob-cta{background:var(--white);color:var(--navy);font-weight:700;padding:0.85rem 1.5rem;border-radius:8px;text-align:center;margin-top:1rem;border-bottom:none}
+    .mobile-menu.open{display:flex}
+    @media (max-width: 960px) {
+      .nav-links {
+        display: none;
+      }
+      .hamburger {
+        display: flex;
+      }
+      .mobile-menu {
+        display: none;
+      }
+      .mobile-menu.open {
+        display: flex;
+      }
+  }
+
+
+    /* ==========================================================================
+       SECTION 1 — HERO (from Legitude)
+       ========================================================================== */
+    .hero {
+      position: relative;
+      background: var(--navy);
+      padding: 140px 0 100px 0;
+      color: var(--headline-white);
+      overflow: hidden;
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-mesh {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: 
+        radial-gradient(ellipse 60% 70% at 80% 50%, rgba(232, 160, 32, 0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 45% 55% at 15% 25%, rgba(26, 50, 96, 0.55) 0%, transparent 68%),
+        radial-gradient(ellipse 80% 50% at 50% 110%, rgba(8, 15, 30, 0.5) 0%, transparent 58%);
+    }
+
+    .hero-grid-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse at 40% 50%, black 20%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse at 40% 50%, black 20%, transparent 70%);
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: center;
+      padding: 0 24px;
+      min-height: calc(100svh - 68px);
+    }
+
+    .hero-text {
+      padding-bottom: 60px;
+    }
+
+    .eyebrow-pill {
+      display: inline-block;
+      background: rgba(232, 160, 32, 0.1);
+      border: 1px solid rgba(232, 160, 32, 0.18);
+      color: var(--amber);
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.9rem;
+      border-radius: 100px;
+      margin-bottom: 1.3rem;
+    }
+
+    .hero-headline {
+      font-size: clamp(2.4rem, 4.8vw, 3.6rem);
+      color: var(--white);
+      margin-bottom: 1.25rem;
+      letter-spacing: -0.025em;
+      line-height: 1.16;
+    }
+
+    .hero-headline span {
+      display: block;
+      color: var(--amber-light);
+      font-style: italic;
+    }
+
+    .hero-subtext {
+      font-size: 1.02rem;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 2rem;
+      max-width: 460px;
+      line-height: 1.8;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-trust {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.32);
+    }
+    .hero-trust::before {
+      content: "🇳🇬";
+    }
+
+    /* Hero Right - Phone & Badges */
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      padding-bottom: 40px;
+      min-height: 650px;
+      overflow: visible;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-14px); }
+    }
+
+    .phone-outer {
+      position: relative;
+      z-index: 1;
+      width: 250px;
+      flex-shrink: 0;
+    }
+
+    .phone-halo {
+      position: absolute;
+      inset: -30px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+      background: conic-gradient(from 0deg, rgba(232,160,32,0) 0%, rgba(232,160,32,0.12) 25%, rgba(232,160,32,0) 50%, rgba(232,160,32,0.08) 75%, rgba(232,160,32,0) 100%);
+      animation: haloSpin 12s linear infinite;
+      filter: blur(18px);
+    }
+
+    @keyframes haloSpin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .phone-frame {
+      background: #080e1c;
+      border-radius: 48px;
+      padding: 12px;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 70px 140px rgba(0,0,0,0.65), 0 30px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.09), inset 0 0 0 1px rgba(255,255,255,0.03);
+    }
+
+    .phone-frame::before {
+      content: "";
+      position: absolute;
+      right: -3.5px;
+      top: 95px;
+      width: 3.5px;
+      height: 55px;
+      background: rgba(255,255,255,0.07);
+      border-radius: 0 3px 3px 0;
+    }
+
+    .phone-frame::after {
+      content: "";
+      position: absolute;
+      left: -3.5px;
+      top: 85px;
+      width: 3.5px;
+      height: 38px;
+      background: rgba(255,255,255,0.07);
+      border-radius: 3px 0 0 3px;
+      box-shadow: 0 48px 0 rgba(255,255,255,0.07);
+    }
+
+    .phone-notch-bar {
+      width: 110px;
+      height: 30px;
+      background: #080e1c;
+      border-radius: 0 0 22px 22px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .phone-notch-pill {
+      width: 72px;
+      height: 9px;
+      background: #151d2e;
+      border-radius: 100px;
+    }
+
+    .phone-screen {
+      border-radius: 36px;
+      overflow: hidden;
+      background: #0b1528;
+    }
+
+    .phone-inner {
+      padding: 20px 16px 20px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      color: var(--white);
+      min-height: 480px;
+    }
+
+    .phone-ground-glow {
+      position: absolute;
+      bottom: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 240px;
+      height: 60px;
+      background: radial-gradient(ellipse, rgba(232,160,32,0.28) 0%, transparent 70%);
+      pointer-events: none;
+      filter: blur(12px);
+      z-index: 0;
+    }
+
+    /* Hero Badges */
+    .hero-badge {
+      position: absolute;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 12px;
+      padding: 0.55rem 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+      white-space: nowrap;
+      z-index: 10;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .hero-badge .val {
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+    .hero-badge .sub {
+      font-size: 0.62rem;
+      color: rgba(255,255,255,0.55);
+      display: block;
+    }
+
+    .hero-badge-1 { top: 10%; left: calc(42% - 210px); animation-delay: 0s; }
+    .hero-badge-2 { top: 44%; left: calc(43% - 235px); transform: translateY(-50%); animation-delay: 1.5s; }
+    .hero-badge-3 { top: 55%; right: calc(50% - 225px); bottom: auto; animation-delay: 0.7s; }
+
+    .badge-icon { font-size: 0.88rem; }
+
+    /* ==========================================================================
+       SECTION 2 — PROBLEM (from Legitude)
+       ========================================================================== */
+    .problem-section {
+      padding: 100px 0;
+      background: var(--navy);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .problem-section::before {
+      content: "";
+      position: absolute;
+      top: -160px;
+      right: -120px;
+      width: 520px;
+      height: 520px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(232,160,32,0.08) 0%, transparent 68%);
+      pointer-events: none;
+    }
+
+    .problem-section::after {
+      content: "";
+      position: absolute;
+      bottom: -180px;
+      left: -160px;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(26,50,96,0.45) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .problem-section .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .problem-section .section-title {
+      color: var(--headline-white);
+      max-width: 760px;
+    }
+
+    .problem-section .section-sub {
+      color: rgba(255,255,255,0.46);
+      max-width: 650px;
+    }
+
+    .problem-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 3.5rem;
+      align-items: center;
+      margin-top: 3.5rem;
+    }
+
+    .problem-content .key-line {
+      font-family: var(--font-heading);
+      font-size: clamp(1.5rem, 2.8vw, 2.1rem);
+      font-weight: 400;
+      color: var(--white);
+      margin: 24px 0 12px 0;
+    }
+
+    .problem-content .key-line span {
+      color: var(--amber);
+      font-style: italic;
+    }
+
+    .problem-content p {
+      color: rgba(255,255,255,0.43);
+      font-size: 0.94rem;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .problem-visual {
+      position: relative;
+      min-height: 360px;
+      padding: 1.2rem;
+    }
+
+    .problem-orbit {
+      position: absolute;
+      inset: 0;
+      border: 1px dashed rgba(255,255,255,0.09);
+      border-radius: 28px;
+      transform: rotate(-2deg);
+    }
+
+    .problem-orbit::after {
+      content: "";
+      position: absolute;
+      inset: 22px;
+      border: 1px solid rgba(255,255,255,0.055);
+      border-radius: 22px;
+    }
+
+    .problem-chaos {
+      position: relative;
+      min-height: 330px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .problem-chip {
+      position: absolute;
+      background: rgba(255,255,255,0.055);
+      border: 1px solid rgba(255,255,255,0.11);
+      border-radius: 13px;
+      padding: 0.9rem 1rem;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.16);
+      backdrop-filter: blur(10px);
+    }
+
+    .problem-chip small {
+      display: block;
+      font-size: 0.58rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.28);
+      margin-bottom: 0.3rem;
+    }
+
+    .problem-chip strong {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.78);
+    }
+
+    .problem-chip:nth-child(1) { top: 8%; left: 5%; transform: rotate(-4deg); }
+    .problem-chip:nth-child(2) { top: 2%; right: 4%; transform: rotate(3deg); }
+    .problem-chip:nth-child(3) { bottom: 9%; left: 10%; transform: rotate(3deg); }
+    .problem-chip:nth-child(4) { bottom: 3%; right: 7%; transform: rotate(-4deg); }
+
+    .problem-center {
+      position: relative;
+      z-index: 2;
+      width: 170px;
+      height: 170px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(232,160,32,0.28);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      box-shadow: 0 20px 55px rgba(0,0,0,0.25), 0 0 50px rgba(232,160,32,0.05);
+    }
+
+    .problem-center-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(232,160,32,0.12);
+      color: var(--amber);
+      font-weight: 800;
+      margin-bottom: 0.6rem;
+    }
+
+    .problem-center strong {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      color: var(--white);
+      line-height: 1.05;
+    }
+
+    .problem-center span {
+      font-size: 0.62rem;
+      color: rgba(255,255,255,0.32);
+      margin-top: 0.35rem;
+    }
+
+    .problem-punchline {
+      margin-top: 3.5rem;
+      text-align: center;
+      max-width: 760px;
+      margin-left: auto;
+      margin-right: auto;
+      font-family: var(--font-heading);
+      font-size: clamp(1.45rem, 2.8vw, 2rem);
+      line-height: 1.35;
+      color: var(--headline-white);
+    }
+
+    .problem-punchline span {
+      color: var(--amber);
+      font-style: italic;
+    }
+
+    /* ==========================================================================
+       SECTION 3 — HOW IT WORKS (from Legitude)
+       ========================================================================== */
+    .how-section {
+      padding: 100px 0;
+      background: var(--apple-white);
+    }
+
+    .how-section .section-title,
+    .how-section .section-sub {
+      text-align: center;
+    }
+
+    .how-section .section-sub {
+      margin: 0 auto 48px auto;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.5rem;
+      margin-top: 1rem;
+      position: relative;
+    }
+
+    .steps-grid::before {
+      content: "";
+      position: absolute;
+      top: 32px;
+      left: calc(16.6% + 1.5rem);
+      right: calc(16.6% + 1.5rem);
+      height: 1px;
+      background: linear-gradient(90deg, var(--amber), var(--amber-light));
+      opacity: 0.2;
+    }
+
+    .step-card {
+      text-align: center;
+    }
+
+    .step-number {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: var(--amber);
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 6px 24px rgba(15,31,61,0.2);
+    }
+
+    .step-card h3 {
+      font-family: var(--font-heading);
+      font-size: 1.22rem;
+      color: var(--navy);
+      margin-bottom: 0.75rem;
+    }
+
+    .step-card p {
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.72;
+      max-width: 260px;
+      margin: 0 auto;
+    }
+
+    /* ==========================================================================
+       SECTION 4 — WHAT YOU GET / FEATURES (GEMINI BEHAVIOR - UNTOUCHED)
+       ========================================================================== */
+    .features-section {
+      padding: 100px 0 50px 0;
+      background: var(--white);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .features-layout {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .features-sticky-phone {
+      position: sticky;
+      top: 100px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .features-cards-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 70px;
+      padding-top: 30vh;
+      
+    }
+    
+    .feature-card {
+      background: var(--white);
+      border: 2px solid var(--border);
+      border-radius: 22px;
+      padding: 40px;
+      box-shadow: 0 10px 30px rgba(15, 31, 61, 0.04);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+      position: relative;
+    }
+
+    .feature-card.active {
+      border-color: var(--amber);
+      box-shadow: 0 15px 40px rgba(232, 160, 32, 0.12);
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    .feature-card:not(.active) {
+      opacity: 0.65;
+      transform: scale(0.97);
+    }
+
+    .card-chrome {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .card-num {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+
+    .dot-indicator {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--border);
+      transition: background 0.3s ease;
+    }
+
+    .feature-card.active .dot-indicator {
+      background: var(--amber);
+      box-shadow: 0 0 10px var(--amber);
+    }
+
+    .feature-eyebrow {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--amber);
+      margin-bottom: 6px;
+    }
+
+    .feature-card h3 {
+      font-size: 1.6rem;
+      color: var(--navy);
+      margin-bottom: 14px;
+      font-family: var(--font-heading);
+    }
+
+    .feature-card p {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    /* Dynamic Screens inside Feature Phone Mockup */
+    .phone-screen-viewer {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .app-screen {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      opacity: 0;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      transform: translateY(10px);
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .app-screen.active {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .app-header {
+      background: #152238;
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-size: 0.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .app-card {
+      background: #152238;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 12px;
+    }
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      margin-top: 6px;
+    }
+    .bar-bg {
+      height: 6px;
+      background: #203252;
+      border-radius: 99px;
+      overflow: hidden;
+      margin-top: 4px;
+    }
+    .bar-fill {
+      height: 100%;
+      background: var(--amber);
+    }
+
+    /* ==========================================================================
+       SECTION 5 — PRICING (from Legitude - with navy premium card)
+       ========================================================================== */
+    .pricing-section {
+      padding: 100px 0;
+      background: var(--apple-white);
+    }
+
+    .pricing-section .section-label,
+    .pricing-section .section-title,
+    .pricing-section .section-sub {
+      text-align: center;
+    }
+
+    .pricing-section .section-sub {
+      margin: 0 auto 48px auto;
+    }
+
+    .segmented-control {
+      display: inline-flex;
+      background: rgba(15,31,61,0.07);
+      padding: 4px;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      margin-bottom: 48px;
+      width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+      justify-content: center;
+    }
+    
+    .pricing-section .segmented-control {
+      display: flex;
+      justify-content: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .segment-btn {
+      padding: 10px 20px;
+      border-radius: 99px;
+      border: none;
+      background: transparent;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.25s ease;
+      white-space: nowrap;
+    }
+
+    .segment-btn.active {
+      background: var(--navy);
+      color: var(--white);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      max-width: 820px;
+      margin: 0 auto;
+      align-items: end;
+    }
+
+    .pricing-card {
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: 22px;
+      padding: 2.5rem;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .pricing-card.premium {
+      background: var(--navy);
+      border-color: rgba(232,160,32,0.22);
+      box-shadow: 0 16px 48px rgba(15,31,61,0.25), 0 0 0 1px rgba(232,160,32,0.07);
+      overflow: visible;
+    }
+
+    .popular-badge {
+      position: absolute;
+      top: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--amber);
+      color: var(--navy-deep);
+      font-size: 0.68rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 0.3rem 1.1rem;
+      border-radius: 100px;
+      white-space: nowrap;
+      box-shadow: 0 4px 12px rgba(232,160,32,0.3);
+    }
+
+    .plan-name {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.6rem;
+    }
+
+    .premium .plan-name {
+      color: rgba(255,255,255,0.42);
+    }
+
+    .plan-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.4rem;
+      color: var(--navy);
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+
+    .premium .plan-price {
+      color: var(--white);
+    }
+
+    .plan-price span {
+      font-size: 1rem;
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    .premium .plan-price span {
+      color: rgba(255,255,255,0.38);
+    }
+
+    .plan-features {
+      list-style: none;
+      margin: 1.75rem 0 0 0;
+      flex-grow: 1;
+    }
+
+    .plan-features li {
+      font-size: 0.875rem;
+      color: var(--text);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .premium .plan-features li {
+      color: rgba(255,255,255,0.7);
+    }
+
+    .plan-features li::before {
+      content: "✓";
+      color: var(--amber);
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    .plan-cta-ghost {
+      display: block;
+      text-align: center;
+      padding: 0.875rem;
+      border: 1.5px solid var(--border);
+      border-radius: 9px;
+      color: var(--navy);
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: border-color 0.2s;
+      margin-top: 1.5rem;
+    }
+
+    .plan-cta-ghost:hover {
+      border-color: var(--navy);
+    }
+
+    .plan-cta-solid {
+      display: block;
+      text-align: center;
+      padding: 0.875rem;
+      background: var(--amber);
+      border-radius: 9px;
+      color: var(--navy-deep);
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: background 0.2s;
+      margin-top: 1.5rem;
+    }
+
+    .plan-cta-solid:hover {
+      background: var(--amber-light);
+    }
+
+    .pricing-support-text {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 0.875rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+    /* Center the How It Works section label */
+    .how-section {
+      text-align: center;
+    }
+
+    .how-section .section-label {
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Keep the steps left-aligned inside */
+    .steps-grid {
+      text-align: left;
+    }
+    /* ==========================================================================
+       SECTION 6 — FAQ (from Legitude - fixed click and icon)
+       ========================================================================== */
+    .faq-section {
+      padding: 100px 0;
+      background: var(--white);
+      border-top: 1px solid var(--border);
+    }
+
+    .faq-section .section-label,
+    .faq-section .section-title {
+      text-align: center;
+    }
+
+    .faq-container {
+      max-width: 1300px;
+      margin: 40px auto 0;
+      padding: 0 5%;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .faq-item:first-child {
+      border-top: 1px solid var(--border);
+    }
+
+    .faq-question {
+      width: 100%;
+      padding: 1.35rem 0;
+      text-align: left;
+      background: transparent;
+      border: none;
+      font-family: var(--font-heading);
+      font-size: 1.02rem;
+      color: var(--navy);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      transition: color 0.2s;
+    }
+
+    .faq-question:hover {
+      color: var(--amber);
+    }
+
+    .faq-icon {
+      font-size: 1rem;
+      color: var(--navy);
+      transition: all 0.25s ease;
+      font-weight: 800;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: rgba(15,31,61,0.05);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+
+    .faq-item.open .faq-icon {
+      background: var(--navy);
+      color: var(--white);
+      border-color: var(--navy);
+      transform: rotate(45deg);
+    }
+
+    .faq-answer {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .faq-answer p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.72;
+      padding: 0 0 1.3rem 0;
+      margin: 0;
+    }
+
+    .faq-item.open .faq-answer {
+      max-height: 300px;
+    }
+
+    .faq-wa {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-top: 2rem;
+      color: var(--navy);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.88rem;
+      padding: 0.62rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+
+    .faq-wa:hover {
+      border-color: var(--amber);
+      transform: translateY(-1px);
+    }
+    /* Center Simple Pricing label */
+    .pricing-section .section-label {
+      text-align: center;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Move FAQ title to the left */
+    .faq-section .section-title {
+      text-align: left;
+    }
+
+    /* ==========================================================================
+       SECTION 7 — FINAL CTA / CONTACT (from Legitude)
+       ========================================================================== */
+    /* Replace CTA/CONTACT section styles */
+    .cta-section {
+      background: var(--navy);
+      position: relative;
+      overflow: hidden;
+      padding: 88px 5%;
+    }
+
+    .cta-section::before {
+      content: "";
+      position: absolute;
+      top: -140px;
+      right: -120px;
+      width: 520px;
+      height: 520px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(232,160,32,0.06) 0%, transparent 62%);
+      pointer-events: none;
+    }
+
+    .cta-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 2px 1fr;
+      gap: 0;
+      align-items: stretch;
+    }
+
+    .cta-left {
+      padding-right: 4rem;
+    }
+
+    .cta-left h2 {
+      font-family: var(--font-heading);
+      font-size: clamp(1.9rem, 3.2vw, 2.7rem);
+      color: var(--headline-white);
+      line-height: 1.22;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+
+    .cta-left p {
+      color: rgba(255,255,255,0.45);
+      font-size: 0.95rem;
+      line-height: 1.78;
+      max-width: 480px;
+    }
+
+    .cta-divider-line {
+      background: linear-gradient(to bottom, transparent 0%, rgba(232,160,32,0.18) 15%, rgba(232,160,32,0.22) 50%, rgba(232,160,32,0.18) 85%, transparent 100%);
+      border-radius: 2px;
+    }
+
+    .cta-right {
+      padding-left: 4rem;
+    }
+
+    .cta-right .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .cta-right .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .cta-right .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .cta-right .form-group label {
+      font-size: 0.77rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.48);
+      letter-spacing: 0.05em;
+    }
+
+    .cta-right .form-group input,
+    .cta-right .form-group select {
+      background: rgba(255,255,255,0.055);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 0.78rem 1rem;
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 0.92rem;
+      outline: none;
+      transition: border-color 0.22s, box-shadow 0.22s;
+      width: 100%;
+    }
+
+    .cta-right .form-group input::placeholder {
+      color: rgba(255,255,255,0.2);
+    }
+
+    .cta-right .form-group input:focus,
+    .cta-right .form-group select:focus {
+      border-color: var(--amber);
+      box-shadow: 0 0 0 3px rgba(232,160,32,0.1);
+    }
+
+    .cta-right .form-group select option {
+      background: var(--navy);
+      color: var(--white);
+    }
+
+    .cta-right .form-submit {
+      background: var(--white);
+      color: var(--navy);
+      font-weight: 700;
+      font-size: 0.95rem;
+      font-family: var(--font-body);
+      border: none;
+      border-radius: 8px;
+      padding: 0.95rem;
+      cursor: pointer;
+      margin-top: 0.25rem;
+      transition: background 0.2s, transform 0.15s;
+      width: 100%;
+    }
+
+    .cta-right .form-submit:hover {
+      background: var(--headline-white);
+      transform: translateY(-1px);
+    }
+
+    /* Thank you state */
+    .cta-right .thankyou-state {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    .cta-right .ty-circle {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      background: rgba(232,160,32,0.12);
+      border: 2px solid rgba(232,160,32,0.26);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      font-size: 1.6rem;
+      color: var(--amber);
+    }
+
+    .cta-right .ty-name {
+      font-family: "DM Serif Display", serif;
+      font-size: 1.9rem;
+      color: var(--headline-white);
+      margin-bottom: 0.6rem;
+    }
+
+    .cta-right .ty-msg {
+      color: rgba(255,255,255,0.48);
+      font-size: 0.92rem;
+      line-height: 1.75;
+      margin-bottom: 1.5rem;
+      max-width: 300px;
+    }
+
+    /* Footer styles - replace existing footer */
+    footer {
+      background: var(--navy-deep);
+      padding: 3.5rem 5% 0;
+    }
+
+    .footer-top {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .footer-top .footer-brand .nav-logo {
+      display: inline-flex;
+      margin-bottom: 1rem;
+    }
+
+    .footer-top .footer-tagline {
+      color: rgba(255,255,255,0.32);
+      font-size: 0.875rem;
+      line-height: 1.65;
+      max-width: 240px;
+    }
+
+    .footer-top .footer-col-title {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.28);
+      margin-bottom: 1.25rem;
+    }
+
+    .footer-top .footer-col a {
+      display: block;
+      color: rgba(255,255,255,0.42);
+      text-decoration: none;
+      font-size: 0.875rem;
+      margin-bottom: 0.65rem;
+      transition: color 0.2s;
+    }
+
+    .footer-top .footer-col a:hover {
+      color: rgba(255,255,255,0.82);
+    }
+
+    .footer-wa {
+      width: 56px;
+      height: 56px;
+      padding: 15px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.72) !important;
+      text-decoration: none;
+      font-size: 0;
+      border: 1px solid rgba(255,255,255,0.11);
+      border-radius: 12px;
+      background: rgba(255,255,255,0.035);
+      transition: all 0.2s;
+    }
+
+    .footer-wa:hover {
+      background: rgba(255,255,255,0.07);
+      border-color: rgba(232,160,32,0.28);
+      color: var(--white) !important;
+      transform: translateY(-1px);
+    }
+
+    .footer-wa svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .footer-bottom {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 0;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .footer-copy,
+    .footer-made {
+      color: rgba(255,255,255,0.2);
+      font-size: 0.8rem;
+    }
+
+    /* Mobile responsive */
+    @media (max-width: 960px) {
+      .cta-inner {
+        grid-template-columns: 1fr;
+      }
+      .cta-left {
+        padding-right: 0;
+        margin-bottom: 3rem;
+      }
+      .cta-divider-line {
+        display: none;
+      }
+      .cta-right {
+        padding-left: 0;
+      }
+      .cta-right .form-row {
+        grid-template-columns: 1fr;
+      }
+      .footer-top {
+        grid-template-columns: 1fr 1fr;
+      }
+      .footer-top .footer-brand {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .footer-top {
+        grid-template-columns: 1fr;
+      }
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+
+    /* ==========================================================================
+       SECTION 8 — FOOTER (from Legitude)
+       ========================================================================== */
+    .footer {
+      background: var(--navy-deep);
+      padding: 3.5rem 0 0 0;
+      color: var(--muted);
+      border-top: 1px solid rgba(255,255,255,0.05);
+      font-size: 0.9rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .footer-tagline {
+      margin-top: 0.85rem;
+      max-width: 240px;
+      line-height: 1.65;
+      color: rgba(255,255,255,0.32);
+      font-size: 0.875rem;
+    }
+
+    .footer-col-title {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.28);
+      margin-bottom: 1.25rem;
+    }
+
+    .footer-col a {
+      display: block;
+      color: rgba(255,255,255,0.42);
+      text-decoration: none;
+      font-size: 0.875rem;
+      margin-bottom: 0.65rem;
+      transition: color 0.2s;
+    }
+
+    .footer-col a:hover {
+      color: rgba(255,255,255,0.82);
+    }
+
+    .footer-wa {
+      width: 56px;
+      height: 56px;
+      padding: 15px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.72) !important;
+      text-decoration: none;
+      font-size: 0;
+      border: 1px solid rgba(255,255,255,0.11);
+      border-radius: 12px;
+      background: rgba(255,255,255,0.035);
+      transition: all 0.2s;
+    }
+
+    .footer-wa:hover {
+      background: rgba(255,255,255,0.07);
+      border-color: rgba(232,160,32,0.28);
+      color: var(--white) !important;
+      transform: translateY(-1px);
+    }
+
+    .footer-wa svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 0;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .footer-copy,
+    .footer-made {
+      color: rgba(255,255,255,0.2);
+      font-size: 0.8rem;
+    }
+
+    /* ==========================================================================
+       RESPONSIVE BEHAVIOUR (from Legitude)
+       ========================================================================== */
+    @media (max-width: 960px) {
+      .hamburger {
+        display: flex;
+      }
+
+      .nav-links-desktop {
+        display: none;
+      }
+
+      .hero {
+        padding: 120px 0 60px 0;
+        min-height: auto;
+        align-items: flex-start;
+      }
+
+      .hero-inner {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 3rem;
+        min-height: auto;
+      }
+
+      .hero-text {
+        padding-bottom: 0;
+      }
+
+      .hero-subtext {
+        margin: 0 auto 2rem;
+      }
+
+      .hero-buttons {
+        justify-content: center;
+      }
+
+      .hero-trust {
+        justify-content: center;
+      }
+
+      .hero-visual {
+        min-height: 500px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .hero-badge-1 { top: 10%; left: 5%; }
+      .hero-badge-2 { top: 45%; left: 5%; }
+      .hero-badge-3 { top: 55%; right: 5%; }
+
+      .steps-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .steps-grid::before {
+        display: none;
+      }
+
+      .features-layout {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .features-sticky-phone {
+        position: sticky;
+        top: 76px;
+        z-index: 50;
+        background: rgba(255,255,255,0.95);
+        backdrop-filter: blur(8px);
+        padding: 16px 0;
+        margin-bottom: 24px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .phone-outer {
+        width: 220px;
+      }
+
+      .pricing-grid {
+        grid-template-columns: 1fr;   /* Keep this - it stacks them */
+        max-width: 500px;            /* Change from 400px to 500px */
+        gap: 2rem;                   /* Add more space between cards */
+      }
+
+      .pricing-card.premium {
+
+        transform: translateY(0);
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-info {
+        padding-right: 0;
+        margin-bottom: 3rem;
+      }
+
+      .contact-divider {
+        display: none;
+      }
+
+      .contact-form-card {
+        padding-left: 0;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+      
+      
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .footer-brand {
+        grid-column: 1 / -1;
+      }
+
+      .segmented-control {
+        flex-wrap: wrap;
+        border-radius: 16px;
+        max-width: 320px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+        text-align: center;
+      }
+
+      .hero-visual {
+        min-height: 420px;
+      }
+
+      .phone-outer {
+        width: 200px;
+      }
+
+      .hero-badge {
+        padding: 8px 12px;
+      }
+
+      .hero-badge .val {
+        font-size: 0.65rem;
+      }
+      .hero-badge .sub {
+        font-size: 0.55rem;
+      }
+
+      .hero-badge-1 { top: 5%; left: 0; }
+      .hero-badge-2 { top: 40%; left: 0; }
+      .hero-badge-3 { top: 50%; right: 0; }
+
+      .problem-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        margin-top: 2.5rem;
+      }
+
+      .problem-visual {
+        min-height: 320px;
+      }
+
+      .problem-chaos {
+        min-height: 290px;
+      }
+
+      .problem-chip {
+        padding: 0.72rem 0.78rem;
+      }
+
+      .problem-chip strong {
+        font-size: 0.72rem;
+      }
+
+      .problem-chip:nth-child(1) { left: 0; }
+      .problem-chip:nth-child(2) { right: 0; }
+      .problem-chip:nth-child(3) { left: 2%; }
+      .problem-chip:nth-child(4) { right: 1%; }
+
+      .problem-center {
+        width: 145px;
+        height: 145px;
+      }
+
+      .problem-center strong {
+        font-size: 1.05rem;
+      }
+
+      .segmented-control {
+  
+        width: 100%;
+        max-width: 400px;
+        display: flex;
+        flex-direction: row;    /* ← Change from 'column' to 'row' */
+        gap: 4px;               /* Smaller gap between buttons */
+        padding: 4px;
+        border-radius: 100px;   /* Keep it rounded like desktop */
+        margin: 2rem auto;
+        flex-wrap: nowrap;      /* Force them to stay in one line */
+      }
+
+      .segment-btn {
+        width: auto;            /* ← Change from '100%' to 'auto' */
+        padding: 0.4rem 0.6rem; /* Smaller padding on mobile */
+        border-radius: 100px;   /* Keep rounded */
+        text-align: center;
+        font-size: 0.7rem;      /* Smaller text */
+        flex: 1;                /* Distribute space evenly */
+        white-space: nowrap;    /* Prevent text from wrapping */
+      }
+
+      .features-sticky-phone {
+        height: 350px;
+        top: 62px;
+        padding-top: 8px;
+      }
+
+      .phone-mockup {
+        width: 240px;
+        height: 400px;
+      }
+
+      .feature-card {
+        padding: 1.5rem;
+      }
+
+      .feature-card h3 {
+        font-size: 1.35rem;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+    /* Add these to your CSS */
+    .contact-form-card {
+      padding-left: 4rem;
+    }
+
+    .contact-form-card .form-group {
+      margin-bottom: 1.2rem;
+    }
+
+    .contact-form-card .form-group label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.7);
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .contact-form-card .form-control {
+      background: rgba(255,255,255,0.055);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 0.9rem 1rem;
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.22s, box-shadow 0.22s;
+      width: 100%;
+    }
+
+    .contact-form-card .form-control::placeholder {
+      color: rgba(255,255,255,0.25);
+    }
+
+    .contact-form-card .form-control:focus {
+      border-color: var(--amber);
+      box-shadow: 0 0 0 3px rgba(232,160,32,0.1);
+    }
+
+    .contact-form-card .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 0;
+    }
+
+    .contact-form-card .form-submit-btn {
+      width: 100%;
+      padding: 1.1rem;
+      margin-top: 0.5rem;
+      background: var(--white);
+      color: var(--navy);
+      font-weight: 700;
+      font-size: 1rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    }
+
+    .contact-form-card .form-submit-btn:hover {
+      background: var(--headline-white);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(0,0,0,0.2);
+    }
+
+    .contact-form-card .form-submit-btn:active {
+      transform: translateY(0px);
+    }
+
+    /* Thank you state spacing */
+    .contact-form-card .thankyou-state {
+      padding: 2rem 1rem;
+    }
+
+    .contact-form-card .thankyou-state .ty-circle {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: rgba(232, 160, 32, 0.12);
+      border: 2px solid rgba(232, 160, 32, 0.26);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      font-size: 2rem;
+      color: var(--amber);
+    }
+
+    .contact-form-card .thankyou-state .ty-name {
+      font-family: "DM Serif Display", serif;
+      font-size: 2.2rem;
+      color: var(--headline-white);
+      margin-bottom: 0.75rem;
+      text-align: center;
+    }
+
+    .contact-form-card .thankyou-state .ty-msg {
+      color: rgba(255,255,255,0.55);
+      font-size: 1rem;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
+
+    /* Mobile responsive */
+    @media (max-width: 960px) {
+      .contact-form-card {
+        padding-left: 0;
+      }
+      
+      .contact-form-card .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .contact-form-card .form-control {
+        padding: 0.75rem 1rem;
+        font-size: 0.9rem;
+      }
+      
+      .contact-form-card .form-submit-btn {
+        padding: 0.95rem;
+        font-size: 0.95rem;
+      }
+    }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      max-width: 820px;
+      margin: 0 auto;
+      align-items: stretch; /* Change from 'end' to 'stretch' */
+    }
+
+  .pricing-card {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 22px;
+    padding: 2.5rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Add this */
+  }
+
+  .plan-features {
+    list-style: none;
+    margin: 1.75rem 0 0 0;
+    flex-grow: 1; /* Makes features take up remaining space */
+  }
+
+  /* Ensure buttons stay at bottom */
+  .plan-cta-ghost,
+  .plan-cta-solid {
+    margin-top: auto;
+    margin-bottom: 0;
+  }
+  /* Force pricing cards to stack on mobile */
+  @media (max-width: 960px) {
+    .pricing-grid {
+      grid-template-columns: 1fr !important;
+      max-width: 100% !important;
+      padding: 0 20px;
+      gap: 2rem;
+    }
+  }
+  
+  
+  
+    /* ==========================================================================
+       MOBILE REFINEMENT — PRODUCT-LED FEATURE STORY
+       ========================================================================== */
+    @media (max-width: 767px) {
+      /* General mobile rhythm */
+      .container { padding-left: 20px; padding-right: 20px; }
+      .problem-section,
+      .how-section,
+      .pricing-section,
+      .faq-section { padding: 72px 0; }
+
+      /* Hero: simplify visual noise and strengthen CTA */
+      .hero { padding: 108px 0 54px; }
+      .hero-inner { gap: 2.25rem; padding: 0 20px; }
+      .hero-headline { font-size: clamp(2.35rem, 11vw, 3.1rem); }
+      .hero-buttons { flex-direction: column; align-items: stretch; width: 100%; }
+      .hero-buttons .btn { width: 100%; }
+      /* Hero phone: scale the entire mockup proportionally so it remains
+         visually believable instead of feeling too tall and narrow. */
+      .hero-visual {
+        min-height: 350px;
+        padding-bottom: 14px;
+      }
+
+      .hero-visual .phone-outer {
+        width: clamp(210px, 56vw, 235px);
+      }
+
+      .hero-visual .phone-frame {
+        padding: 10px;
+        border-radius: 44px;
+      }
+
+      .hero-visual .phone-notch-bar {
+        width: 100px;
+        height: 26px;
+      }
+
+      .hero-visual .phone-screen {
+        border-radius: 33px;
+      }
+
+      .hero-visual .phone-inner {
+        min-height: 440px;
+        padding: 18px 14px;
+      }
+
+      .hero-visual .phone-ground-glow {
+        width: 210px;
+        height: 52px;
+      }
+
+      .hero-visual .phone-halo {
+        inset: -24px;
+        filter: blur(15px);
+      }
+
+      .hero-badge-2,
+      .hero-badge-3 { display: none; }
+      .hero-badge-1 { top: 4%; left: 50%; transform: translateX(-50%); }
+      .hero-badge-1 { animation-name: mobileFloat; }
+      @keyframes mobileFloat {
+        0%, 100% { transform: translateX(-50%) translateY(0); }
+        50% { transform: translateX(-50%) translateY(-8px); }
+      }
+
+      /* Features: one pinned product-demo scene, not a long card stack */
+      .features-section {
+        padding: 72px 0 0;
+        border-bottom: none;
+      }
+
+      .features-section > .container {
+        padding-left: 0;
+        padding-right: 0;
+        max-width: none;
+      }
+
+      .features-section > .container > div:first-child {
+        padding: 0 20px;
+        margin-bottom: 28px !important;
+      }
+
+      .features-layout {
+        display: block;
+        position: relative;
+      }
+
+      .features-sticky-phone {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        height: 100svh;
+        min-height: 100svh;
+        margin: 0;
+        padding: calc(68px + env(safe-area-inset-top, 0px)) 20px 18px;
+        background: rgba(255,255,255,0.98);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+
+      .features-sticky-phone .phone-outer {
+        width: min(56vw, 245px);
+        margin: 0 auto;
+      }
+
+      .features-sticky-phone .phone-frame {
+        border-radius: 42px;
+        padding: 9px;
+      }
+
+      .features-sticky-phone .phone-notch-bar {
+        width: 94px;
+        height: 24px;
+      }
+
+      .features-sticky-phone .phone-screen {
+        border-radius: 31px;
+      }
+
+      .features-sticky-phone .phone-inner {
+        min-height: 430px;
+        padding: 16px 13px;
+      }
+
+      .features-sticky-phone .phone-ground-glow {
+        width: 190px;
+      }
+
+      .features-cards-stack {
+        position: relative;
+        z-index: 30;
+        margin-top: -100svh;
+        padding-top: 0;
+        display: block;
+        gap: 0;
+        pointer-events: none;
+      }
+
+      .feature-card {
+        min-height: 100svh;
+        height: 100svh;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 0 20px max(30px, env(safe-area-inset-bottom, 20px));
+        background: transparent;
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+        opacity: 1 !important;
+        transform: none !important;
+        pointer-events: none;
+      }
+
+      .feature-card::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 44%;
+        pointer-events: none;
+        background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0.92) 30%, #ffffff 62%);
+      }
+
+      .feature-card > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      .feature-card .card-chrome {
+        margin-bottom: 10px;
+      }
+
+      .feature-card h3 {
+        font-size: clamp(1.65rem, 7.8vw, 2.1rem);
+        line-height: 1.08;
+        margin-bottom: 10px;
+        max-width: 560px;
+      }
+
+      .feature-card p {
+        font-size: 0.94rem;
+        line-height: 1.65;
+        max-width: 560px;
+      }
+
+      .feature-card .feature-eyebrow {
+        font-size: 0.78rem;
+      }
+
+      .features-cards-stack > div:last-child {
+        display: none;
+      }
+
+      /* Make the active state visible without dimming the story */
+      .feature-card .dot-indicator {
+        background: var(--border);
+      }
+      .feature-card.active .dot-indicator {
+        background: var(--amber);
+        box-shadow: 0 0 10px rgba(232,160,32,0.65);
+      }
+
+      /* Keep the story comfortably above tiny mobile browser chrome */
+      @supports (height: 100dvh) {
+        .features-sticky-phone,
+        .feature-card {
+          height: 100dvh;
+          min-height: 100dvh;
+        }
+        .features-cards-stack {
+          margin-top: -100dvh;
+        }
+      }
+    }
+
+    @media (max-width: 420px) {
+      /* Extra protection for narrower phones */
+      .hero-visual {
+        min-height: 330px;
+      }
+
+      .hero-visual .phone-outer {
+        width: clamp(195px, 54vw, 220px);
+      }
+
+      .hero-visual .phone-inner {
+        min-height: 410px;
+        padding: 16px 13px;
+      }
+
+      .hero-visual .phone-notch-bar {
+        width: 92px;
+        height: 24px;
+      }
+
+      .features-sticky-phone .phone-outer {
+        width: min(54vw, 220px);
+      }
+
+      .features-sticky-phone .phone-inner {
+        min-height: 390px;
+      }
+
+      .feature-card h3 {
+        font-size: 1.7rem;
+      }
+
+      .feature-card p {
+        font-size: 0.9rem;
+      }
+    }
+
 </style>
 </head>
 <body>
 
-<nav id="navbar">
-  <div class="nav-logo">
-    <div class="logo-mark">
-      <svg viewBox="0 0 22 22" fill="none"><path d="M4 4L4 18L18 18" stroke="#E8A020" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 12L10 7L14 11L18 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <nav id="mainNav">
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-mark"><svg viewBox="0 0 24 24"><polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/></svg></div>
+      <span class="nav-logo-text">Legit<span class="ude">ude</span></span>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <div class="nav-pill" id="navPill"></div>
+      <a href="#features" data-section="features">Features</a>
+      <a href="#pricing" data-section="pricing">Pricing</a>
+      <a href="#faq" data-section="faq">FAQ</a>
+      <a href="#contact" class="nav-cta">Get Started Today</a>
     </div>
-    <span class="logo-name">Legit<span>ude</span></span>
-  </div>
-  <ul class="nav-links">
-    <li><a href="#features">Features</a></li>
-    <li><a href="#roles">Who It's For</a></li>
-    <li><a href="#pricing">Pricing</a></li>
-    <li><a href="#contact" class="nav-cta">Request a Demo</a></li>
-  </ul>
-</nav>
-
-<section class="hero">
-  <div class="hero-content">
-    <div class="hero-tag">Built for Nigerian Private Schools</div>
-    <h1>Your school's finances,<br><em>finally clear.</em></h1>
-    <p>Legitude replaces the physical journal with a simple digital system. The bursar records payments the same way she always has — Legitude makes sure the director can see everything, in real time.</p>
-    <div class="hero-btns">
-      <a href="#contact" class="btn-primary">Request Early Access <i class="fa-solid fa-arrow-right"></i></a>
-      <a href="#features" class="btn-secondary">See How It Works</a>
-    </div>
-  </div>
-  <div class="hero-visual">
-    <div style="position:relative">
-      <div class="dashboard-card">
-        <div class="dashboard-header">
-          <div class="dashboard-dots">
-            <span style="background:#E24B4A"></span>
-            <span style="background:#E8A020"></span>
-            <span style="background:#3B6D11"></span>
-          </div>
-          <div class="dashboard-header-title">Director Dashboard</div>
-          <div style="font-size:.75rem;color:rgba(255,255,255,.4)">Second Term · 2024/25</div>
-        </div>
-        <div class="dashboard-body">
-          <div class="stats-row">
-            <div class="stat-card collected">
-              <div class="stat-label">Collected</div>
-              <div class="stat-value">₦3.8M</div>
-              <div class="stat-sub">This term</div>
-            </div>
-            <div class="stat-card outstanding">
-              <div class="stat-label">Outstanding</div>
-              <div class="stat-value">₦640K</div>
-              <div class="stat-sub">19 students</div>
-            </div>
-          </div>
-          <div class="progress-section">
-            <div class="progress-label"><span>Collection Rate</span><span style="font-weight:700">78%</span></div>
-            <div class="progress-bar"><div class="progress-fill"></div></div>
-          </div>
-          <div class="recent-label">Recent Payments</div>
-          <div class="payment-row">
-            <div class="payment-avatar">EO</div>
-            <div class="payment-info"><div class="payment-name">Emeka Obi</div><div class="payment-class">JSS2 · Bank Transfer</div></div>
-            <div class="payment-amount">₦45,000</div>
-          </div>
-          <div class="payment-row">
-            <div class="payment-avatar" style="background:var(--amber);color:var(--navy)">AF</div>
-            <div class="payment-info"><div class="payment-name">Amaka Festus</div><div class="payment-class">SS1 · Cash</div></div>
-            <div class="payment-amount">₦52,000</div>
-          </div>
-          <div class="payment-row">
-            <div class="payment-avatar" style="background:#162235">TI</div>
-            <div class="payment-info"><div class="payment-name">Tunde Ibrahim</div><div class="payment-class">SS3 · Bank Transfer</div></div>
-            <div class="payment-amount">₦38,500</div>
-          </div>
-        </div>
-      </div>
-      <div class="floating-badge top">
-        <div class="badge-icon" style="background:rgba(59,109,17,.1);color:#3B6D11"><i class="fa-solid fa-check"></i></div>
-        <div><div style="font-size:.65rem;color:var(--text-muted);font-weight:400">Payment recorded</div><div style="color:var(--navy)">₦45,000 · JSS2</div></div>
-      </div>
-      <div class="floating-badge bottom">
-        <div class="badge-icon" style="background:rgba(232,160,32,.1);color:var(--amber)"><i class="fa-solid fa-file-export"></i></div>
-        <div><div style="font-size:.65rem;color:var(--text-muted);font-weight:400">Data exported</div><div style="color:var(--navy)">Saved to flash drive</div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="problem">
-  <div class="section-tag">The Problem</div>
-  <h2>The journal isn't working anymore</h2>
-  <p>Nigerian private school bursars are doing their best with physical books and WhatsApp screenshots. But directors are flying blind — and mistakes are costing schools money every term.</p>
-  <div class="problem-grid">
-    <div class="problem-card">
-      <div class="problem-icon"><i class="fa-solid fa-eye-slash"></i></div>
-      <h3>No visibility for directors</h3>
-      <p>The director has to ask the bursar and wait. By the time he gets a number, it's already outdated.</p>
-    </div>
-    <div class="problem-card">
-      <div class="problem-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
-      <h3>Defaulters slip through</h3>
-      <p>Tracking who hasn't paid across hundreds of students in a physical book takes hours — and things still get missed.</p>
-    </div>
-    <div class="problem-card">
-      <div class="problem-icon"><i class="fa-solid fa-receipt"></i></div>
-      <h3>Receipt disputes</h3>
-      <p>Parents claim they paid. The bursar can't find the record. Nobody has proof. It becomes a conversation nobody wants.</p>
-    </div>
-  </div>
-</section>
-
-<section class="features" id="features">
-  <div class="section-header">
-    <div class="section-tag" style="color:var(--amber-dark)">Features</div>
-    <h2>Everything you need.<br>Nothing you don't.</h2>
-    <p>Finance-only focus. No attendance tracking, no report cards, no virtual classrooms. Just school fee management done properly — built around how Nigerian schools actually work.</p>
-  </div>
-  <div class="features-grid">
-    <div class="feature-card">
-      <div class="f-icon"><i class="fa-solid fa-book-open"></i></div>
-      <h3>Journal-style payment recording</h3>
-      <p>The bursar records payments the same way she always has. Student, amount, fee type, payment method. No retraining required.</p>
-    </div>
-    <div class="feature-card">
-      <div class="f-icon"><i class="fa-solid fa-chart-pie"></i></div>
-      <h3>Director dashboard</h3>
-      <p>The director sees how much has been collected, what's outstanding, and who hasn't paid — updated every time a payment is recorded.</p>
-    </div>
-    <div class="feature-card">
-      <div class="f-icon"><i class="fa-solid fa-users-slash"></i></div>
-      <h3>Defaulter tracking</h3>
-      <p>Instantly see which students owe fees, how much, and for which fee type. No manual cross-checking at end of term.</p>
-    </div>
-    <div class="feature-card">
-      <div class="f-icon"><i class="fa-solid fa-layer-group"></i></div>
-      <h3>Class-based fee structures</h3>
-      <p>Different fees for different classes. School fees, book fees, uniform fees — each handled separately with the right logic per item.</p>
-    </div>
-    <div class="feature-card">
-      <div class="f-icon"><i class="fa-solid fa-floppy-disk"></i></div>
-      <h3>Flash drive data export</h3>
-      <p>Export all payment records to CSV at any time. Save to a flash drive, keep a backup, share with anyone. Your data is always yours.</p>
-    </div>
-    <div class="feature-card">
-      <div class="f-icon"><i class="fa-solid fa-wifi-slash"></i></div>
-      <h3>Works offline</h3>
-      <p>No internet? No problem. Legitude runs on any school laptop without needing a constant connection. Built for Nigerian reality.</p>
-    </div>
-  </div>
-</section>
-
-<section class="roles" id="roles">
-  <div class="section-header">
-    <div class="section-tag" style="color:var(--amber-dark)">Who It's For</div>
-    <h2>Built for your whole team</h2>
-    <p>Three roles, each with exactly the view they need — no more, no less.</p>
-  </div>
-  <div class="roles-grid">
-    <div class="role-card bursar">
-      <div class="role-pill">Bursar</div>
-      <h3>Daily operations</h3>
-      <p>Records payments, tracks collections, manages the digital ledger — just like the physical journal, just faster and searchable.</p>
-      <ul class="role-features">
-        <li><div class="check-icon"><i class="fa-solid fa-check"></i></div>Quick payment entry per student</li>
-        <li><div class="check-icon"><i class="fa-solid fa-check"></i></div>Multiple payment methods per transaction</li>
-        <li><div class="check-icon"><i class="fa-solid fa-check"></i></div>Daily and term-end summaries</li>
-        <li><div class="check-icon"><i class="fa-solid fa-check"></i></div>Instant defaulter list generation</li>
-      </ul>
-    </div>
-    <div class="role-card director">
-      <div class="role-pill">Director / Proprietor</div>
-      <h3>Financial clarity</h3>
-      <p>See exactly how much money the school has collected at any point — without having to ask anyone or wait for a report.</p>
-      <ul class="role-features">
-        <li><div class="check-icon"><i class="fa-solid fa-check"></i></div>Real-time collection dashboard</li>
-        <li><div class="check-icon"><i class="fa-solid fa-check"></i></div>Outstanding fees by class and student</li>
-        <li><div class="check-icon"><i class="fa-solid fa-check"></i></div>Term-over-term visibility</li>
-        <li><div class="check-icon"><i class="fa-solid fa-check"></i></div>Exportable financial reports</li>
-      </ul>
-    </div>
-    <div class="role-card admin">
-      <div class="role-pill">Admin</div>
-      <h3>School setup</h3>
-      <p>Sets up students, classes, and fee structures for each term and session. Keeps the system organised from day one.</p>
-      <ul class="role-features">
-        <li><div class="check-icon"><i class="fa-solid fa-check"></i></div>Student enrolment and class assignment</li>
-        <li><div class="check-icon"><i class="fa-solid fa-check"></i></div>Fee configuration per class</li>
-        <li><div class="check-icon"><i class="fa-solid fa-check"></i></div>Term and session management</li>
-        <li><div class="check-icon"><i class="fa-solid fa-check"></i></div>New session setup with carry-forward</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<section class="pricing" id="pricing">
-  <div class="section-header">
-    <div class="section-tag" style="color:var(--amber-dark)">Pricing</div>
-    <h2>Simple. Per student. Per term.</h2>
-    <p>No setup fees. No hidden charges. No transaction cuts. You pay based on how many students are in the system — billed per term.</p>
-  </div>
-  <div class="pricing-grid">
-    <div class="pricing-card basic">
-      <div class="plan-name">Basic</div>
-      <div class="plan-price">₦500</div>
-      <div class="plan-per">per student · per term</div>
-      <div class="plan-desc">For smaller schools that need clean, reliable fee tracking without complexity.</div>
-      <ul class="plan-features">
-        <li><i class="fa-solid fa-check"></i>Up to 150 students</li>
-        <li><i class="fa-solid fa-check"></i>Bursar + Director roles</li>
-        <li><i class="fa-solid fa-check"></i>Payment recording & defaulter tracking</li>
-        <li><i class="fa-solid fa-check"></i>Flash drive data export</li>
-        <li><i class="fa-solid fa-check"></i>Works fully offline</li>
-      </ul>
-      <a href="#contact" class="btn-secondary" style="display:block;text-align:center;width:100%;justify-content:center">Get Started</a>
-    </div>
-    <div class="pricing-card pro">
-      <div class="pricing-badge">Most Popular</div>
-      <div class="plan-name">Pro</div>
-      <div class="plan-price">₦1,000</div>
-      <div class="plan-per">per student · per term</div>
-      <div class="plan-desc">For schools that want full visibility — all roles, advanced reports, and priority support.</div>
-      <ul class="plan-features">
-        <li><i class="fa-solid fa-check"></i>Unlimited students</li>
-        <li><i class="fa-solid fa-check"></i>All three roles (Bursar, Admin, Director)</li>
-        <li><i class="fa-solid fa-check"></i>Advanced director dashboard</li>
-        <li><i class="fa-solid fa-check"></i>Term-over-term analytics</li>
-        <li><i class="fa-solid fa-check"></i>Flash drive export + printed summaries</li>
-        <li><i class="fa-solid fa-check"></i>Priority WhatsApp support</li>
-      </ul>
-      <a href="#contact" class="btn-amber" style="display:block;text-align:center;width:100%;justify-content:center">Request Access</a>
-    </div>
-  </div>
-  <div class="pricing-note">A school with 200 students on the Pro plan pays ₦200,000 per term — no surprises, no transaction fees.</div>
-</section>
-
-<section class="cta" id="contact">
-  <h2>Ready to see <em>Legitude</em><br>in your school?</h2>
-  <p>We're onboarding our first schools now. Fill in your details and we'll reach out to arrange a demonstration.</p>
-  <div class="contact-form">
-    <div class="form-group">
-      <label>Your Name</label>
-      <input type="text" placeholder="e.g. Mr. Adeyemi">
-    </div>
-    <div class="form-group">
-      <label>School Name</label>
-      <input type="text" placeholder="e.g. Graceland International School">
-    </div>
-    <div class="form-group">
-      <label>Phone Number</label>
-      <input type="tel" placeholder="e.g. 08012345678">
-    </div>
-    <div class="form-group">
-      <label>Number of Students</label>
-      <select>
-        <option value="">Select a range</option>
-        <option>Under 100</option>
-        <option>100 – 200</option>
-        <option>200 – 400</option>
-        <option>Over 400</option>
-      </select>
-    </div>
-    <button class="btn-amber" style="width:100%;margin-top:.5rem;padding:1rem;font-size:1rem;justify-content:center" onclick="this.textContent='Request sent! We will be in touch.';this.style.background='#3B6D11';this.style.color='white'">
-      Request a Demo <i class="fa-solid fa-arrow-right"></i>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
     </button>
-    <div style="text-align:center;font-size:.78rem;color:rgba(255,255,255,.3);margin-top:1rem">No commitment required · We'll reach out within 24 hours</div>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#features" onclick="closeMenu()">Features</a>
+    <a href="#pricing" onclick="closeMenu()">Pricing</a>
+    <a href="#faq" onclick="closeMenu()">FAQ</a>
+    <a href="#contact" class="mob-cta" onclick="closeMenu()">Get Started Today</a>
   </div>
-</section>
 
-<footer>
-  <div class="footer-top">
-    <div>
-      <div class="nav-logo">
-        <div class="logo-mark">
-          <svg viewBox="0 0 22 22" fill="none"><path d="M4 4L4 18L18 18" stroke="#E8A020" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 12L10 7L14 11L18 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-mesh"></div>
+    <div class="hero-grid-bg"></div>
+    <div class="hero-inner">
+      <div class="hero-text">
+        <span class="eyebrow-pill">School Finance Management</span>
+        <h1 class="hero-headline">
+          Your bursar knows your school's finances.<br />
+          <span>Do you?</span>
+        </h1>
+        <p class="hero-subtext">
+          Legitude gives Nigerian private school proprietors one clear view of every naira — profit, defaulters, and expenses — updated live the moment your bursar records a payment.
+        </p>
+        <div class="hero-buttons">
+          <a href="#contact" class="btn btn-solid-amber">Get Started Today</a>
+          <a href="#how" class="btn btn-ghost-white">See How It Works</a>
         </div>
-        <span class="logo-name" style="color:white">Legit<span>ude</span></span>
+        <div class="hero-trust">
+          Built in Nigeria, for Nigerian private schools
+        </div>
       </div>
-      <div class="footer-tagline">School finance management built specifically for Nigerian private primary and secondary schools.</div>
-    </div>
-    <div class="footer-links">
-      <h4>Product</h4>
-      <ul>
-        <li><a href="#features">Features</a></li>
-        <li><a href="#pricing">Pricing</a></li>
-        <li><a href="#roles">Who It's For</a></li>
-      </ul>
-    </div>
-    <div class="footer-links">
-      <h4>Contact</h4>
-      <ul>
-        <li><a href="#contact">Request a Demo</a></li>
-        <li><a href="mailto:hello@legitude.com.ng">hello@legitude.com.ng</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span>&copy; 2025 Legitude. All rights reserved.</span>
-    <span>Built in Nigeria, for Nigerian Schools.</span>
-  </div>
-</footer>
 
-<script>
-window.addEventListener('scroll',()=>{
-  const nav=document.getElementById('navbar');
-  nav.style.boxShadow=window.scrollY>60?'0 4px 30px rgba(13,27,42,.08)':'none';
-});
-</script>
+      <div class="hero-visual">
+        <div class="hero-badge hero-badge-1">
+          <span class="badge-icon">📈</span>
+          <div><div class="val">₦1.12M profit</div><div class="sub">Net Profit · This Term</div></div>
+        </div>
+        <div class="hero-badge hero-badge-2">
+          <span class="badge-icon">📊</span>
+          <div><div class="val">78% collected</div><div class="sub">Collection Rate</div></div>
+        </div>
+        <div class="hero-badge hero-badge-3">
+          <span class="badge-icon">⚠️</span>
+          <div><div class="val">₦334K uncollected</div><div class="sub">Still outstanding</div></div>
+        </div>
+
+        <div class="phone-outer">
+          <div class="phone-halo"></div>
+          <div class="phone-frame">
+            <div class="phone-notch-bar"><div class="phone-notch-pill"></div></div>
+            <div class="phone-screen">
+              <div class="phone-inner">
+                <div class="app-header">
+                  <span>Greenfield Academy</span>
+                  <span style="color: var(--amber); font-weight:700;">LIVE</span>
+                </div>
+
+                <div class="app-card">
+                  <span style="font-size:0.7rem; color: var(--muted);">Net Profit (This Term)</span>
+                  <div style="font-size: 1.3rem; font-weight:800; color:var(--white);">₦1,120,000</div>
+                  <div class="stat-row">
+                    <span style="color:#4ade80;">Revenue: ₦4.85M</span>
+                    <span style="color:#f87171;">Expenses: ₦3.73M</span>
+                  </div>
+                </div>
+
+                <div class="app-card">
+                  <span style="font-size:0.75rem; font-weight:600; color:var(--headline-white);">Collection Status</span>
+                  <div class="bar-bg"><div class="bar-fill" style="width: 78%;"></div></div>
+                  <div class="stat-row">
+                    <span style="color:var(--muted); font-size:0.7rem;">78% Paid</span>
+                    <span style="color:var(--amber); font-size:0.7rem;">22% Owed</span>
+                  </div>
+                </div>
+
+                <div class="app-card" style="flex-grow:1;">
+                  <span style="font-size:0.75rem; font-weight:600; color:var(--headline-white);">Recent Activity</span>
+                  <div style="margin-top:8px; font-size:0.7rem; display:flex; flex-direction:column; gap:8px;">
+                    <div style="display:flex; justify-content:space-between; background:rgba(255,255,255,0.03); padding:6px; border-radius:6px;">
+                      <span>Receipt #1042 (JSS 2)</span>
+                      <span style="color:#4ade80; font-weight:700;">+₦45,000</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; background:rgba(255,255,255,0.03); padding:6px; border-radius:6px;">
+                      <span>Fuel for Generator</span>
+                      <span style="color:#f87171; font-weight:700;">-₦18,500</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="phone-ground-glow"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM -->
+  <section class="problem-section" id="problem">
+    <div class="container">
+      <span class="section-label">The Real Problem</span>
+      <h2 class="section-title">It's not collecting school fees. It's knowing what you've actually collected.</h2>
+      <p class="section-sub">Payments come through different channels. Some students pay partially. Others fall behind. Expenses keep moving. Records get scattered. When you need to know where the school stands, you are left piecing everything together.</p>
+
+      <div class="problem-grid">
+        <div class="problem-content">
+          <div class="key-line">The money is moving. <span>The picture is not.</span></div>
+          <p>Cash, transfers and POS payments can sit alongside outstanding fees, expenses, receipts and records in different places. The information exists — but it doesn't always come together when you need it.</p>
+          <p>That means a simple question like <strong style="color:rgba(255,255,255,.78)">"Where do we stand this term?"</strong> can take more work than it should.</p>
+        </div>
+
+        <div class="problem-visual" aria-hidden="true">
+          <div class="problem-orbit"></div>
+          <div class="problem-chaos">
+            <div class="problem-chip"><small>Payment channel</small><strong>Cash · Transfer · POS</strong></div>
+            <div class="problem-chip"><small>Student accounts</small><strong>Partial & outstanding</strong></div>
+            <div class="problem-chip"><small>School spending</small><strong>Expenses & receipts</strong></div>
+            <div class="problem-chip"><small>Records</small><strong>Notes · Sheets · Messages</strong></div>
+            <div class="problem-center">
+              <div class="problem-center-mark">?</div>
+              <strong>Where<br>do we stand?</strong>
+              <span>The question that takes too much work</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="problem-punchline">When your records are scattered, <span>your financial picture is too.</span></div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how-section" id="how">
+    <div class="container">
+      <span class="section-label">How It Works</span>
+      <h2 class="section-title">Three steps to complete clarity</h2>
+      <p class="section-sub">No training courses. No complicated setup. Your bursar can start using it the same day.</p>
+
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h3>Set up your school once</h3>
+          <p>Enter your fee structure — school fees per class, books, uniforms. Takes less than 30 minutes. We help you through it.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h3>Your bursar records payments</h3>
+          <p>Every time a parent pays — cash, bank transfer, or POS — your bursar records it in seconds. A receipt prints automatically.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h3>You see everything, live</h3>
+          <p>Open your phone anywhere. Profit, collection rate, defaulters, expenses — updated the moment your bursar records a payment.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES — PRODUCT-LED SCROLL DEMO -->
+  <section class="features-section" id="features">
+    <div class="container">
+      <div style="margin-bottom: 40px;">
+        <span class="section-label">What You Get</span>
+        <h2 class="section-title">Built for how your school actually works</h2>
+        <p class="section-sub">Every screen built specifically for Nigerian private school operations. Real data, real decisions.</p>
+      </div>
+
+      <div class="features-layout">
+        <div class="features-sticky-phone">
+          <div class="phone-outer">
+            <div class="phone-halo"></div>
+            <div class="phone-frame">
+              <div class="phone-notch-bar"><div class="phone-notch-pill"></div></div>
+              <div class="phone-screen">
+                <div class="phone-inner">
+                  <div class="phone-screen-viewer">
+                    <!-- Screen 0: Dashboard -->
+                    <div class="app-screen active" id="screen-0">
+                      <div class="app-header">
+                        <span>Director Dashboard</span>
+                        <span style="color:var(--amber); font-weight:700;">Live</span>
+                      </div>
+                      <div class="app-card">
+                        <span style="font-size:0.7rem; color:var(--muted);">Net Profit</span>
+                        <div style="font-size:1.4rem; font-weight:800; color:#4ade80;">₦1,120,000</div>
+                      </div>
+                      <div class="app-card">
+                        <div style="font-size:0.75rem; color:var(--headline-white);">Total Revenue</div>
+                        <div style="font-size:1rem; font-weight:700;">₦4,850,000</div>
+                        <div class="bar-bg"><div class="bar-fill" style="width: 100%; background:#4ade80;"></div></div>
+                      </div>
+                      <div class="app-card">
+                        <div style="font-size:0.75rem; color:var(--headline-white);">Total Expenses</div>
+                        <div style="font-size:1rem; font-weight:700; color:#f87171;">₦3,730,000</div>
+                        <div class="bar-bg"><div class="bar-fill" style="width: 75%; background:#f87171;"></div></div>
+                      </div>
+                    </div>
+
+                    <!-- Screen 1: Defaulters -->
+                    <div class="app-screen" id="screen-1">
+                      <div class="app-header">
+                        <span>Defaulters List</span>
+                        <span style="background:var(--amber); color:var(--navy); padding:2px 6px; border-radius:4px; font-size:0.65rem; font-weight:700;">Assembly Mode</span>
+                      </div>
+                      <div class="app-card" style="flex-grow:1;">
+                        <div style="font-size:0.7rem; color:var(--muted); margin-bottom:8px;">Ranked by Amount Owed</div>
+                        <div style="display:flex; flex-direction:column; gap:8px; font-size:0.75rem;">
+                          <div style="display:flex; justify-content:space-between; border-bottom:1px solid rgba(255,255,255,0.05); padding-bottom:4px;">
+                            <span>1. Amina Bello (JSS 2A)</span>
+                            <span style="color:var(--amber);">₦45,000</span>
+                          </div>
+                          <div style="display:flex; justify-content:space-between; border-bottom:1px solid rgba(255,255,255,0.05); padding-bottom:4px;">
+                            <span>2. Chidi Okafor (SSS 1B)</span>
+                            <span style="color:var(--amber);">₦32,500</span>
+                          </div>
+                          <div style="display:flex; justify-content:space-between; border-bottom:1px solid rgba(255,255,255,0.05); padding-bottom:4px;">
+                            <span>3. Tunde Bakare (Pry 4)</span>
+                            <span style="color:var(--amber);">₦18,000</span>
+                          </div>
+                          <div style="display:flex; justify-content:space-between;">
+                            <span>4. Blessing Eze (JSS 3C)</span>
+                            <span style="color:var(--amber);">₦15,000</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Screen 2: Collection by Class -->
+                    <div class="app-screen" id="screen-2">
+                      <div class="app-header">
+                        <span>Collection by Class</span>
+                        <span>Term 2</span>
+                      </div>
+                      <div class="app-card">
+                        <div class="stat-row"><span>Primary 1 - 5</span><span style="color:var(--amber);">88%</span></div>
+                        <div class="bar-bg"><div class="bar-fill" style="width: 88%;"></div></div>
+                      </div>
+                      <div class="app-card">
+                        <div class="stat-row"><span>JSS 1 - 3</span><span style="color:var(--amber);">74%</span></div>
+                        <div class="bar-bg"><div class="bar-fill" style="width: 74%;"></div></div>
+                      </div>
+                      <div class="app-card">
+                        <div class="stat-row"><span>SSS 1 - 3</span><span style="color:var(--amber);">92%</span></div>
+                        <div class="bar-bg"><div class="bar-fill" style="width: 92%;"></div></div>
+                      </div>
+                    </div>
+
+                    <!-- Screen 3: Receipt -->
+                    <div class="app-screen" id="screen-3">
+                      <div class="app-header">
+                        <span>Payment Receipt</span>
+                        <span style="color:#4ade80;">Generated</span>
+                      </div>
+                      <div class="app-card" style="background:var(--white); color:var(--navy); text-align:center;">
+                        <div style="font-weight:800; font-size:0.85rem;">GREENFIELD ACADEMY</div>
+                        <div style="font-size:0.65rem; color:var(--muted);">Official Digital Receipt</div>
+                        <hr style="margin:8px 0; border:none; border-top:1px dashed #ccc;">
+                        <div style="font-size:0.75rem; text-align:left; display:flex; flex-direction:column; gap:4px;">
+                          <div><strong>Student:</strong> Emeka Nwosu</div>
+                          <div><strong>Class:</strong> Primary 5B</div>
+                          <div><strong>Type:</strong> School Fees (Part)</div>
+                          <div><strong>Amount:</strong> ₦65,000</div>
+                          <div><strong>Method:</strong> POS</div>
+                        </div>
+                        <div style="margin-top:10px; background:#e6f4ea; color:#137333; font-size:0.65rem; padding:4px; font-weight:700; border-radius:4px;">
+                          VERIFIED & PAID
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="phone-ground-glow"></div>
+          </div>
+        </div>
+
+        <div class="features-cards-stack">
+          <div class="feature-card active" data-index="0">
+            <div class="card-chrome">
+              <span class="card-num">FEATURE 01</span>
+              <div class="dot-indicator"></div>
+            </div>
+            <div class="feature-eyebrow">For the Director</div>
+            <h3>Your profit. Live. On your phone.</h3>
+            <p>The moment your bursar records a payment, your dashboard updates. Net profit, total revenue, expenses — the complete financial picture of your school, in your pocket, at all times. No phone calls. No waiting. No guessing.</p>
+          </div>
+
+          <div class="feature-card" data-index="1">
+            <div class="card-chrome">
+              <span class="card-num">FEATURE 02</span>
+              <div class="dot-indicator"></div>
+            </div>
+            <div class="feature-eyebrow">For the Director</div>
+            <h3>Defaulters list, always current</h3>
+            <p>See who owes, how much, and which class — instantly. Every student ranked by amount owed. Filter by class. Use privacy mode for assembly — names only, no amounts showing.</p>
+          </div>
+
+          <div class="feature-card" data-index="2">
+            <div class="card-chrome">
+              <span class="card-num">FEATURE 03</span>
+              <div class="dot-indicator"></div>
+            </div>
+            <div class="feature-eyebrow">For the Director</div>
+            <h3>Collection rate by class</h3>
+            <p>Know exactly which classes are performing and which are lagging. Payment status, partial payers, full collection percentages — class by class. Target your follow-up where it's needed most.</p>
+          </div>
+
+          <div class="feature-card" data-index="3">
+            <div class="card-chrome">
+              <span class="card-num">FEATURE 04</span>
+              <div class="dot-indicator"></div>
+            </div>
+            <div class="feature-eyebrow">For the Bursar</div>
+            <h3>Instant receipts, every payment</h3>
+            <p>Cash, transfer, or POS — recorded in seconds. A branded receipt with your school logo, student name, class, term, and payment breakdown generates automatically. Professional every time.</p>
+          </div>
+          <div style="height: 29vh; pointer-events: none; opacity: 0;"></div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="pricing-section" id="pricing">
+    <div class="container">
+      <span class="section-label">Simple Pricing</span>
+      <h2 class="section-title">Simple pricing that grows with your school.</h2>
+      <p class="section-sub">No confusing per-user charges. No transaction cuts. Choose the plan that fits your school.</p>
+
+      <div class="segmented-control">
+        <button class="segment-btn active" onclick="setPricingTier(0)">Up to 250 students</button>
+        <button class="segment-btn" onclick="setPricingTier(1)">251–500 students</button>
+        <button class="segment-btn" onclick="setPricingTier(2)">500+ students</button>
+      </div>
+
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <div class="plan-name">Core</div>
+          <div class="plan-price" id="corePrice">₦ 45,000 <span>per term</span></div>
+          <a href="#contact" class="plan-cta-ghost">Get Started</a>
+
+          <ul class="plan-features">
+            <li>Director, Bursar & Admin roles</li>
+            <li>Fee collection & payment receipts</li>
+            <li>Live defaulters list</li>
+            <li>Basic Director dashboard</li>
+            <li>Expense tracking & approval</li>
+            <li>Printable term summary report</li>
+            <li>Email support</li>
+          </ul>
+        </div>
+
+        <div class="pricing-card premium">
+          <div class="popular-badge">Most Popular</div>
+          <div class="plan-name">Premium</div>
+          <div class="plan-price" id="premiumPrice">₦ 75,000 <span>per term</span></div>
+          <a href="#contact" class="plan-cta-solid">Get Premium Access</a>
+
+          <ul class="plan-features">
+            <li>Everything in Core, plus</li>
+            <li>Full Director analytics dashboard</li>
+            <li>Class-by-class performance view</li>
+            <li>Payment method breakdown</li>
+            <li>Term-over-term history & charts</li>
+            <li>Budget tracking per term</li>
+            <li>Private Director expense tracking</li>
+            <li>Priority WhatsApp support</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pricing-support-text">Less than 3 students' term fees. For your entire school.</div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section" id="faq">
+    <div class="container">
+      <span class="section-label">Common Questions</span>
+      <h2 class="section-title">What directors ask us most</h2>
+
+      <div class="faq-container">
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>My bursar already keeps records. Why do I need Legitude?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Your bursar's records are for the bursar. Legitude is for you — the Director. It gives you your own independent view of your school's finances, live, without having to ask anyone. You see the profit, the defaulters, the expenses — on your own phone, any time.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Who in my school uses Legitude?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Three roles — each with their own login and access. The Director sees everything: profit, defaulters, expenses, collection rate. The Bursar records payments and manages daily collections. The Admin handles student enrolment and records, with no access to financial data. Each person sees only what is relevant to them.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Can my Bursar see my financial summary?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>No. The Bursar can record payments and view outstanding student balances — but they cannot see your profit summary, your personal expenses, or the Director dashboard. What you see is yours only.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>What if our internet connection is unreliable?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Legitude works offline. Your bursar can record payments without internet — everything syncs automatically the moment connection returns. No data is ever lost.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Does my bursar need technical training?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>No. The bursar screen mirrors how payment recording already works — just faster and without the paper. Most bursars are comfortable within the first session.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Is our school's financial data safe and private?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Each school has its own completely separate database. Your data is not shared with any other school, and only the roles you grant access to can see it.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Can I try it before committing to a full term?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Yes. We offer a hands-on demo where we walk through your school's setup with you — using your actual fee structure. You see the real product before paying anything.</p>
+          </div>
+        </div>
+      </div>
+
+      <a href="https://wa.me/2348161848171" target="_blank" class="faq-wa">
+        <svg width="18" height="18" viewBox="0 0 32 32" fill="currentColor"><path d="M16.002 2.667C8.638 2.667 2.667 8.638 2.667 16c0 2.347.634 4.545 1.738 6.438L2.667 29.333l7.104-1.72A13.267 13.267 0 0 0 16.002 29.333C23.365 29.333 29.333 23.362 29.333 16S23.365 2.667 16.002 2.667Zm0 24a10.598 10.598 0 0 1-5.408-1.482l-.388-.23-4.016.972.997-3.91-.253-.4A10.584 10.584 0 0 1 5.333 16c0-5.88 4.788-10.667 10.669-10.667S26.667 10.12 26.667 16 21.882 26.667 16.002 26.667Zm5.852-7.97c-.32-.16-1.893-.933-2.185-1.04-.292-.107-.505-.16-.717.16-.213.32-.824 1.04-.984 1.12-.24.107-.44.053-.64-.107-.213-.16-1.84-1.24-2.72-2.507-.693-1.013-.987-1.413-.48-2.08.293-.373.747-.907.8-1.12.054-.213.027-.4-.053-.56-.08-.16-.717-1.733-.984-2.373-.26-.627-.52-.533-.72-.533-.185-.013-.4-.013-.613-.013s-.56.08-.853.4c-.293.32-1.12 1.093-1.12 2.667s1.147 3.093 1.307 3.307c.16.213 2.253 3.44 5.467 4.827.76.32 1.36.52 1.827.666.765.24 1.466.206 2.013.133.613-.08 1.893-.773 2.16-1.52.267-.747.267-1.387.187-1.52-.08-.133-.293-.213-.614-.373Z"/></svg>
+        Have more questions? Message us on WhatsApp
+      </a>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="cta-section" id="contact">
+    <div class="cta-inner">
+      <div class="cta-left">
+        <h2>Ready to see your school's finances clearly?</h2>
+        <p>Request a free demo. We walk through the product with you using your actual school setup — no pitch decks, no pressure. Just the real thing.</p>
+      </div>
+      <div class="cta-divider-line"></div>
+      <div class="cta-right">
+        <form class="contact-form" id="contactForm" onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Your Name</label>
+              <input type="text" id="name" placeholder="e.g. Mrs. Adeyemi" required />
+            </div>
+            <div class="form-group">
+              <label>School Name</label>
+              <input type="text" id="school" placeholder="e.g. Greenfield Academy" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>WhatsApp / Phone Number</label>
+            <input type="tel" id="phone" placeholder="e.g. 08012345678" required />
+          </div>
+          <div class="form-group">
+            <label>Number of Students</label>
+            <select id="students" required>
+              <option value="">Select a range</option>
+              <option value="up-to-250">Up to 250</option>
+              <option value="251-500">251 – 500</option>
+              <option value="500-plus">500+</option>
+            </select>
+          </div>
+          <button type="submit" class="form-submit">Get Started Today →</button>
+        </form>
+        <div class="thankyou-state" id="thankyouState">
+          <div class="ty-circle">✓</div>
+          <div class="ty-name" id="tyName">Thank you!</div>
+          <p class="ty-msg">We'll reach out on WhatsApp within 24 hours to set up your demo. Looking forward to showing you what Legitude can do for your school.</p>
+          <a href="https://wa.me/2348161848171" target="_blank" class="btn btn-solid-amber" style="font-size: 0.9rem;">Message us on WhatsApp →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#" class="nav-logo">
+          <div class="nav-logo-mark"><svg viewBox="0 0 24 24"><polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/></svg></div>
+          <span class="nav-logo-text">Legit<span class="ude">ude</span></span>
+        </a>
+        <p class="footer-tagline">School finance management built specifically for Nigerian private primary and secondary schools.</p>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Navigate</div>
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Get Started</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Contact</div>
+        <a href="https://wa.me/2348161848171" target="_blank" class="footer-wa" aria-label="Message us on WhatsApp" title="Message us on WhatsApp">
+          <svg width="15" height="15" viewBox="0 0 32 32" fill="currentColor"><path d="M16.002 2.667C8.638 2.667 2.667 8.638 2.667 16c0 2.347.634 4.545 1.738 6.438L2.667 29.333l7.104-1.72A13.267 13.267 0 0 0 16.002 29.333C23.365 29.333 29.333 23.362 29.333 16S23.365 2.667 16.002 2.667Zm0 24a10.598 10.598 0 0 1-5.408-1.482l-.388-.23-4.016.972.997-3.91-.253-.4A10.584 10.584 0 0 1 5.333 16c0-5.88 4.788-10.667 10.669-10.667S26.667 10.12 26.667 16 21.882 26.667 16.002 26.667Zm5.852-7.97c-.32-.16-1.893-.933-2.185-1.04-.292-.107-.505-.16-.717.16-.213.32-.824 1.04-.984 1.12-.24.107-.44.053-.64-.107-.213-.16-1.84-1.24-2.72-2.507-.693-1.013-.987-1.413-.48-2.08.293-.373.747-.907.8-1.12.054-.213.027-.4-.053-.56-.08-.16-.717-1.733-.984-2.373-.26-.627-.52-.533-.72-.533-.185-.013-.4-.013-.613-.013s-.56.08-.853.4c-.293.32-1.12 1.093-1.12 2.667s1.147 3.093 1.307 3.307c.16.213 2.253 3.44 5.467 4.827.76.32 1.36.52 1.827.666.765.24 1.466.206 2.013.133.613-.08 1.893-.773 2.16-1.52.267-.747.267-1.387.187-1.52-.08-.133-.293-.213-.614-.373Z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Legitude. All rights reserved.</span>
+      <span class="footer-made">Built in Nigeria, for Nigeria 🇳🇬</span>
+    </div>
+  </footer>
+
+  <script>
+        // NAV SCROLL
+    window.addEventListener("scroll",()=>{
+      document.getElementById("mainNav").classList.toggle("scrolled",window.scrollY>40);
+    });
+
+    // NAV PILL
+    var pill=document.getElementById("navPill");
+    var navLinksEl=document.getElementById("navLinks");
+    document.querySelectorAll(".nav-links a:not(.nav-cta)").forEach(l=>{
+      l.addEventListener("mouseenter",()=>{
+        const nlR=navLinksEl.getBoundingClientRect();
+        const lR=l.getBoundingClientRect();
+        pill.style.left=(lR.left-nlR.left)+"px";
+        pill.style.width=lR.width+"px";
+      });
+    });
+    navLinksEl.addEventListener("mouseleave",()=>{pill.style.opacity="0"});
+    navLinksEl.addEventListener("mouseenter",()=>{pill.style.opacity="1"});
+
+    // NAV ACTIVE
+    ["features","pricing","faq","contact"].forEach(id=>{
+      const el=document.getElementById(id);
+      if(el)new IntersectionObserver((e)=>{
+        if(e[0].isIntersecting){
+          document.querySelectorAll(".nav-links a[data-section]").forEach(l=>l.classList.remove("active"));
+          const m=document.querySelector(".nav-links a[data-section=\""+id+"\"]");
+          if(m)m.classList.add("active");
+        }
+      },{threshold:0.35}).observe(el);
+    });
+
+    // MOBILE MENU
+    function toggleMenu(){
+      document.getElementById("mobileMenu").classList.toggle("open");
+      document.getElementById("hamburger").classList.toggle("open");
+    }
+    function closeMenu(){
+      document.getElementById("mobileMenu").classList.remove("open");
+      document.getElementById("hamburger").classList.remove("open");
+    }
+    // 4. Feature Story: card triggers synchronise the product screen
+    const featureCards = document.querySelectorAll('.feature-card');
+    const appScreens = document.querySelectorAll('.app-screen');
+
+    function setActiveFeature(index) {
+      featureCards.forEach((card, i) => {
+        if (i == index) {
+          card.classList.add('active');
+        } else {
+          card.classList.remove('active');
+        }
+      });
+
+      appScreens.forEach((screen, i) => {
+        if (i == index) {
+          screen.classList.add('active');
+        } else {
+          screen.classList.remove('active');
+        }
+      });
+    }
+
+// Scroll Observer for Feature Cards
+    // Mobile uses full-viewport "product story" scenes; desktop keeps the card-led behavior.
+    const isMobileFeatureStory = () => window.matchMedia('(max-width: 767px)').matches;
+
+    const observerOptions = {
+      root: null,
+      rootMargin: isMobileFeatureStory() ? '-42% 0px -42% 0px' : '-5% 0px -30% 0px',
+      threshold: isMobileFeatureStory() ? 0 : 0.2
+    };
+
+    const featureObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const index = entry.target.getAttribute('data-index');
+          // Instant, deliberate transitions on mobile; slightly softer on desktop.
+          const delay = isMobileFeatureStory() ? 0 : 180;
+          setTimeout(() => setActiveFeature(index), delay);
+        }
+      });
+    }, observerOptions);
+
+    featureCards.forEach(card => {
+      featureObserver.observe(card);
+      card.addEventListener('click', () => {
+        const index = card.getAttribute('data-index');
+        setActiveFeature(index);
+      });
+    });
+
+    // 5. Pricing Tier Segment Toggle
+    const pricingData = [
+      { core: '₦ 45,000', premium: '₦ 75,000' },
+      { core: '₦ 65,000', premium: '₦ 105,000' },
+      { core: '₦ 95,000', premium: '₦ 150,000' }
+    ];
+
+    function setPricingTier(tierIndex) {
+      const btns = document.querySelectorAll('.segment-btn');
+      btns.forEach((btn, i) => {
+        if (i === tierIndex) btn.classList.add('active');
+        else btn.classList.remove('active');
+      });
+
+      document.getElementById('corePrice').innerHTML = `${pricingData[tierIndex].core} <span>per term</span>`;
+      document.getElementById('premiumPrice').innerHTML = `${pricingData[tierIndex].premium} <span>per term</span>`;
+    }
+
+    // 6. FAQ Accordion - Smooth toggle
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const item = this.closest('.faq-item');
+        const body = item.querySelector('.faq-answer');
+        const isOpen = item.classList.contains('open');
+        
+        // Close all others
+        document.querySelectorAll('.faq-item.open').forEach(el => {
+          el.classList.remove('open');
+          el.querySelector('.faq-answer').style.maxHeight = '0';
+        });
+        
+        // Open this one if it was closed
+        if (!isOpen) {
+          item.classList.add('open');
+          body.style.maxHeight = body.scrollHeight + 'px';
+        }
+      });
+    });
+
+    // 7. Contact Form Handling
+    function handleSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById("name").value.trim().split(" ")[0];
+      const form = document.getElementById("contactForm");
+      const ty = document.getElementById("thankyouState");
+      document.getElementById("tyName").textContent = name ? "Thank you, " + name + "." : "Thank you!";
+      form.style.transition = "opacity 0.38s ease";
+      form.style.opacity = "0";
+      setTimeout(() => {
+        form.style.display = "none";
+        ty.style.display = "flex";
+        ty.classList.add("visible");
+      }, 380);
+    }
+
+  </script>
 </body>
 </html>
