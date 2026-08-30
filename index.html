@@ -2774,27 +2774,59 @@
   }
 }
 
-/* FINAL SURGICAL FIX — desktop Hero microcopy + mobile feature phone pass-through */
+/* FINAL SURGICAL REFINEMENTS — HERO DESKTOP + FEATURE 2 MOBILE */
 @media (min-width: 768px){
-  .hero-visual-desktop .legitude-profit-sub{
-    transform:translateY(-3px)!important;
+  .hero-visual-desktop .legitude-profit-sub{transform:translateY(-2px)!important;}
+  .hero-visual-desktop .legitude-stat-card h3{transform:translateY(-2px)!important;}
+  .hero-visual-desktop .legitude-stat-card small{transform:translateY(-3px)!important;}
+}
+@media (max-width: 767px){
+  /* Feature 2 / UI 2: visual-only product mockup, matching fixed Dashboard behavior. */
+  .features-sticky-phone .app-screen#screen-1 .legitude-app-scroll{
+    overflow:hidden!important;
+    -webkit-overflow-scrolling:auto!important;
+    overscroll-behavior:none!important;
+    touch-action:none!important;
+    scrollbar-width:none!important;
+    pointer-events:none!important;
   }
-  .hero-visual-desktop .legitude-stat-card small{
-    transform:translateY(-3px)!important;
+  .features-sticky-phone .app-screen#screen-1 .legitude-app-scroll::-webkit-scrollbar{
+    display:none!important; width:0!important; height:0!important;
+  }
+  .features-sticky-phone .app-screen#screen-1 .legitude-phone-app,
+  .features-sticky-phone .app-screen#screen-1 .phone-screen-viewer{
+    pointer-events:none!important;
   }
 }
 
+/* FINAL MICRO-REFINEMENT — HERO DESKTOP + DEFAULTERS FIXED WINDOW */
+@media (min-width: 768px){
+  .hero-visual-desktop .legitude-profit-sub{transform:translateY(-4px)!important;}
+  .hero-visual-desktop .legitude-stat-card h3{transform:translateY(-3px)!important;}
+  .hero-visual-desktop .legitude-stat-card small{transform:translateY(-4px)!important;}
+}
+
 @media (max-width: 767px){
-  /* Dashboard + Defaulters are purely visual on mobile.
-     They must never capture the user's touch/pointer gesture. */
+  /* Defaulters: a fixed visual window, like the Receipt document.
+     The content is clipped, never becomes a scroll container, and the
+     active screen does not capture touch so the Features page owns the swipe. */
   .features-sticky-phone .app-screen#screen-0,
-  .features-sticky-phone .app-screen#screen-2,
-  .features-sticky-phone .app-screen#screen-0 .legitude-phone-app,
-  .features-sticky-phone .app-screen#screen-2 .legitude-phone-app,
-  .features-sticky-phone .app-screen#screen-0 .legitude-app-scroll,
-  .features-sticky-phone .app-screen#screen-2 .legitude-app-scroll{
+  .features-sticky-phone .app-screen#screen-2{
     pointer-events:none!important;
+  }
+  .features-sticky-phone .app-screen#screen-2 .legitude-app-scroll{
+    overflow:clip!important;
+    overflow-y:clip!important;
+    overflow-x:clip!important;
+    -webkit-overflow-scrolling:auto!important;
+    overscroll-behavior:none!important;
     touch-action:auto!important;
+    scrollbar-width:none!important;
+  }
+  .features-sticky-phone .app-screen#screen-2 .legitude-app-scroll::-webkit-scrollbar{
+    display:none!important;
+    width:0!important;
+    height:0!important;
   }
 }
 </style>
