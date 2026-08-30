@@ -2597,6 +2597,206 @@
   }
 }
 
+
+
+/* ==========================================================================
+   V3 REFINEMENT — FIXED FEATURE PRODUCT VIEWPORT + HERO SCROLL AFFORDANCE
+   ========================================================================== */
+
+/* Keep the Hero and Feature dashboard geometry consistent. The app itself is
+   left-aligned in both places; only the surrounding marketing layout changes. */
+.hero-visual-desktop .phone-inner,
+.features-sticky-phone .phone-inner{
+  padding:0!important;
+  display:block!important;
+  position:relative!important;
+  aspect-ratio:720/1478!important;
+  min-height:0!important;
+}
+.hero-visual-desktop .legitude-phone-app,
+.features-sticky-phone .legitude-phone-app{
+  position:absolute!important;
+  inset:0!important;
+}
+.hero-visual-desktop .legitude-app-scroll,
+.features-sticky-phone .legitude-app-scroll{
+  text-align:left!important;
+  align-items:stretch!important;
+}
+
+/* Desktop-only interaction cue: the phone visibly invites scrolling on hover. */
+.hero-scroll-hint{
+  position:absolute;
+  left:50%; top:50%;
+  transform:translate(-50%,-50%) scale(.92);
+  z-index:20;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:4px;
+  padding:10px 12px;
+  border-radius:14px;
+  background:rgba(7,14,28,.76);
+  color:#fff;
+  border:1px solid rgba(255,255,255,.14);
+  box-shadow:0 10px 30px rgba(0,0,0,.28);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .18s ease,transform .18s ease;
+  backdrop-filter:blur(8px);
+}
+.hero-scroll-hint span{font-size:22px;line-height:1}
+.hero-scroll-hint small{font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.82)}
+@media (hover:hover) and (min-width:768px){
+  .hero-visual-desktop .phone-screen:hover .hero-scroll-hint{opacity:1;transform:translate(-50%,-50%) scale(1)}
+}
+
+/* On mobile, the FEATURE phone is intentionally NOT responsive internally.
+   We keep one stable device width so the dashboard does not reflow from card to card.
+   This is different from the Hero, which is allowed to scale with the viewport. */
+@media(max-width:767px){
+  .features-sticky-phone .phone-outer{
+    width:250px!important;
+    flex:0 0 250px!important;
+    max-width:none!important;
+  }
+  .features-sticky-phone .phone-frame{padding:7px!important}
+  .features-sticky-phone .phone-inner{width:100%!important}
+  .features-sticky-phone .legitude-app-topbar{padding:0 7.5cqw!important}
+  .features-sticky-phone .legitude-role-chip{display:block!important}
+
+  /* The first card's copy was sitting visually too low. Pull its content up
+     without changing the deliberate extra scroll space before the card begins. */
+  .features-cards-stack .feature-card{padding:1.45rem 1.35rem!important}
+  .features-cards-stack .feature-card:first-child{padding-top:1.15rem!important}
+  .features-cards-stack .feature-card:first-child .card-chrome{margin-bottom:.7rem!important}
+  .features-cards-stack .feature-card:first-child .feature-eyebrow{margin-top:0!important}
+
+  /* Reports screen: preserve the original window density and stop ₦111.7K
+     from sitting too deep/cropping at the right edge. */
+  .features-sticky-phone .legitude-expense-summary{padding:5cqw 5.5cqw!important}
+  .features-sticky-phone .legitude-expense-summary h3{font-size:6.2cqw!important;white-space:nowrap!important;letter-spacing:-.08cqw!important}
+  .features-sticky-phone .legitude-report-grid{grid-template-columns:1fr 1fr!important;gap:4cqw!important}
+  .features-sticky-phone .legitude-report-card{min-width:0!important}
+}
+
+/* Receipt branding: credible fictional school, not a generic single-letter logo. */
+.receipt-logo{
+  position:relative!important;
+  background:linear-gradient(145deg,#14233a,#0b1424)!important;
+  border-color:#b58b35!important;
+  overflow:hidden!important;
+}
+.receipt-logo::before{
+  content:"";
+  position:absolute;
+  width:7cqw;height:5.6cqw;
+  border:0.35cqw solid rgba(224,161,27,.88);
+  border-top:0;
+  border-radius:0 0 3cqw 3cqw;
+  left:50%;top:1.25cqw;transform:translateX(-50%);
+}
+.receipt-logo::after{
+  content:"✦";
+  position:absolute;
+  top:.1cqw;left:50%;transform:translateX(-50%);
+  font-size:2.6cqw;color:#e0a11b;
+}
+.receipt-logo-mark{position:relative;z-index:2;font-family:var(--font-heading);font-size:3.1cqw;font-weight:700;letter-spacing:.15cqw;color:#f2e7c7;margin-top:2.3cqw}
+
+
+/* ========================================================================== 
+   SURGICAL FEATURE DEMO FIXES — 2026-08-30
+   Only affects the Features product mockup + Feature 1 positioning.
+   ========================================================================== */
+
+/* 1) No floating hand/scroll overlay. Let the actual pointer communicate hover. */
+.hero-scroll-hint{display:none!important}
+@media (hover:hover){
+  .hero-visual-desktop .phone-screen{cursor:pointer}
+}
+
+/* 2) Dashboard + Defaulters are fixed product views: no internal scrolling
+      or overscroll/bounce. On mobile, allow the page itself to receive
+      vertical swipes even when the finger starts over the phone. */
+.features-sticky-phone .app-screen#screen-0 .legitude-app-scroll,
+.features-sticky-phone .app-screen#screen-2 .legitude-app-scroll{
+  overflow:hidden!important;
+  -webkit-overflow-scrolling:auto!important;
+  overscroll-behavior:none!important;
+  scrollbar-width:none!important;
+}
+@media(max-width:767px){
+  .features-sticky-phone .app-screen#screen-0 .legitude-app-scroll,
+  .features-sticky-phone .app-screen#screen-2 .legitude-app-scroll{
+    touch-action:pan-y!important;
+  }
+}
+.features-sticky-phone .app-screen#screen-0 .legitude-app-scroll::-webkit-scrollbar,
+.features-sticky-phone .app-screen#screen-2 .legitude-app-scroll::-webkit-scrollbar{
+  display:none!important;
+  width:0!important;
+  height:0!important;
+}
+
+/* 3) Keep the Feature phone physically the same size as the Hero phone. */
+.features-sticky-phone .phone-outer{
+  width:300px!important;
+  flex:0 0 300px!important;
+  max-width:300px!important;
+}
+@media(max-width:767px){
+  .features-sticky-phone .phone-outer{
+    width:min(82vw,300px)!important;
+    flex:0 0 min(82vw,300px)!important;
+    max-width:min(82vw,300px)!important;
+  }
+}
+
+/* 4) Feature 1 copy: lift it vertically without changing its left/right
+      alignment or the surrounding feature-story mechanics. */
+.feature-card:first-child{
+  padding-bottom:52px!important;
+}
+@media(max-width:767px){
+  .features-cards-stack .feature-card:first-child{
+    padding-bottom:52px!important;
+  }
+}
+/* 3) Hero supporting copy: lift only the small secondary lines on desktop.
+      Mobile remains unchanged. */
+@media(min-width:768px){
+  .hero-visual-desktop .legitude-profit-sub{
+    transform:translateY(-2px);
+  }
+  .hero-visual-desktop .legitude-stat-card small{
+    transform:translateY(-2px);
+  }
+}
+
+/* FINAL SURGICAL FIX — desktop Hero microcopy + mobile feature phone pass-through */
+@media (min-width: 768px){
+  .hero-visual-desktop .legitude-profit-sub{
+    transform:translateY(-3px)!important;
+  }
+  .hero-visual-desktop .legitude-stat-card small{
+    transform:translateY(-3px)!important;
+  }
+}
+
+@media (max-width: 767px){
+  /* Dashboard + Defaulters are purely visual on mobile.
+     They must never capture the user's touch/pointer gesture. */
+  .features-sticky-phone .app-screen#screen-0,
+  .features-sticky-phone .app-screen#screen-2,
+  .features-sticky-phone .app-screen#screen-0 .legitude-phone-app,
+  .features-sticky-phone .app-screen#screen-2 .legitude-phone-app,
+  .features-sticky-phone .app-screen#screen-0 .legitude-app-scroll,
+  .features-sticky-phone .app-screen#screen-2 .legitude-app-scroll{
+    pointer-events:none!important;
+    touch-action:auto!important;
+  }
+}
 </style>
 </head>
 <body>
@@ -2654,7 +2854,7 @@
           <div class="phone-frame">
             <div class="phone-notch-bar"><div class="phone-notch-pill"></div></div>
             <div class="phone-screen">
-              <div class="phone-inner"><div class="legitude-phone-app legitude-hero-app">
+              <div class="phone-inner"><div class="hero-scroll-hint" aria-hidden="true"><span>☝</span><small>Scroll</small></div><div class="legitude-phone-app legitude-hero-app">
   <div class="legitude-app-topbar">
     <div class="legitude-menu-icon"><i></i><i></i><i></i></div>
     <div class="legitude-app-title">Dashboard</div>
@@ -2826,9 +3026,9 @@
     <div class="legitude-phone-app legitude-receipt-app">
       <div class="legitude-receipt-toolbar"><span>←</span><b>Receipt.pdf</b><span>↗</span><span>☆</span><span>⋮</span></div>
       <div class="legitude-receipt-page">
-        <div class="receipt-logo">G</div><h2>GOPET SECONDARY SCHOOL</h2><p class="receipt-tagline">intelligence and character · 08161848171</p><div class="receipt-rule"></div><p class="receipt-label">OFFICIAL FEE RECEIPT</p>
+        <div class="receipt-logo"><span class="receipt-logo-mark">CA</span></div><h2>CRESTVIEW ACADEMY</h2><p class="receipt-tagline">knowledge · character · purpose · 0803 456 7890</p><div class="receipt-rule"></div><p class="receipt-label">OFFICIAL FEE RECEIPT</p>
         <div class="receipt-info"><div><span>Receipt No.</span><b>RCP-0090</b></div><div><span>Student</span><b>Miracle Adonyi</b></div><div><span>Class</span><b>SSS 1</b></div><div><span>Term</span><b>3rd Term 2026/27</b></div><div><span>Date</span><b>27 August 2026 at 20:05</b></div></div>
-        <div class="receipt-rule"></div><div class="receipt-fees"><div><span>Tuition Fee</span><b>₦ 14,000</b></div><div><span>Book Fee</span><b>₦ 4,500</b></div><div><span>PTA Levy</span><b>₦ 3,400</b></div><div><span>Medical Fee</span><b>₦ 9,000</b></div></div><h3>₦30,900</h3><div class="receipt-rule"></div><p class="receipt-method-label">PAYMENT METHOD</p><div class="receipt-method"><span>Transfer</span><b>₦ 30,900</b></div><p class="receipt-verified">✓ Payment verified · GOPET SECONDARY SCHOOL</p>
+        <div class="receipt-rule"></div><div class="receipt-fees"><div><span>Tuition Fee</span><b>₦ 14,000</b></div><div><span>Book Fee</span><b>₦ 4,500</b></div><div><span>PTA Levy</span><b>₦ 3,400</b></div><div><span>Medical Fee</span><b>₦ 9,000</b></div></div><h3>₦30,900</h3><div class="receipt-rule"></div><p class="receipt-method-label">PAYMENT METHOD</p><div class="receipt-method"><span>Transfer</span><b>₦ 30,900</b></div><p class="receipt-verified">✓ Payment verified · CRESTVIEW ACADEMY</p>
       </div>
     </div>
   </div>
